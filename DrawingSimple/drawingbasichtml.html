@@ -9,82 +9,56 @@
     body, html {
       margin: 0;
       padding: 0;
-      display: flex;
       height: 100vh;
       font-family: 'MS Sans Serif', sans-serif;
       box-sizing: border-box;
+      overflow: hidden;
+      position: relative;
     }
 
-    /* Left box for live stream */
-    #left-box {
-      width: 80vh;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      border-right: 2px lightgrey;
-      padding: 10px;
-      box-sizing: border-box;
+    /* Video container */
+    #video-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
     }
 
-    /* Group live stream header and video */
-    #live-stream-container {
-      background-color: darkgrey;
-      padding: 10px;
-      border: 3px solid dimgrey;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #live-stream-header {
-      font-weight: bold;
-      color: white;
-      padding: 10px;
-      border: 2px solid dimgrey;
-      background-color: black;
-      margin-top: -10px;
-      margin-left: -10px;
-      margin-right: -10px;
-      margin-bottom: 10px;
-    }
-
-    /* Embedded video */
     #video-container iframe {
       width: 100%;
-      height: 400px;
+      height: 100%;
       border: 0;
     }
 
-    /* Right box for drawing and controls */
-    #right-box {
-      background-image: url('GRID-orange.jpg');
-      background-repeat: repeat; /* Ensure the image repeats */
-      background-size: 50% auto; /* Ensure the image repeats twice (50% width of the box) */
-      width: 120vh;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 10px;
-      position: relative;
-      box-sizing: border-box;
-      background-color: white;
+    /* Overlay canvas to draw on video */
+    #drawing-board {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: transparent;
     }
 
-    /* Draggable, resizable canvas window */
-    #canvas-window {
+    /* Draggable drawing tools window */
+    #tools-window {
       position: absolute;
       top: 10px;
-      left: 10px;
-      width: 800px;
-      height: 600px;
+      right: 10px;
+      width: 180px;
       border: 2px solid dimgrey;
-      background-color: transparent;
-      resize: both;
-      overflow: hidden;
+      background-color: lightgrey;
+      z-index: 2;
+      padding: 10px;
+      background-image: url('dots.png'); /* Set dots.png as background */
+      box-sizing: border-box;
     }
 
-    #canvas-header {
+    /* Draggable only from the header */
+    #tools-header {
       background-color: #005baa;
       color: white;
       padding: 5px;
@@ -92,45 +66,15 @@
       text-align: center;
       font-family: 'MS Sans Serif', sans-serif;
       font-weight: bold;
-    }
-
-    /* Bottom interface for patterns and controls */
-    #interface-box {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: stretch;
-      background-color: lightgrey;
-      padding: 20px;
-      border: 2px solid black;
-      box-sizing: border-box;
-      width: 100%;
-      height: 30vh;
-      position: static;
-      margin-top: 50px;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 30vh;
-    }
-
-    #interface-header {
-      font-weight: bold;
-      color: white;
-      padding: 10px;
-      border: 2px solid darkslategrey;
-      background-color: black;
-      margin-top: -20px;
-      margin-left: -20px;
-      margin-right: -20px;
       margin-bottom: 10px;
     }
 
     /* Patterns styling */
     #pattern-container {
       display: flex;
-      flex-wrap: nowrap;
+      flex-direction: column;
       gap: 5px;
+      margin-bottom: 10px;
     }
 
     .pattern {
@@ -145,14 +89,15 @@
     }
 
     #pattern-container img {
-      width: 35px;
-      height: 35px;
+      width: 30px;
+      height: 30px;
     }
 
     /* Controls */
     #size-slider-container {
       display: flex;
       align-items: center;
+      margin-bottom: 10px;
     }
 
     #size-slider {
@@ -171,7 +116,7 @@
       width: 15px;
       height: 15px;
       border-radius: 50%;
-      background: orange; /* Orange slider thumb */
+      background: orange;
       cursor: pointer;
     }
 
@@ -179,7 +124,7 @@
       width: 15px;
       height: 15px;
       border-radius: 50%;
-      background: orange; /* Orange slider thumb for Firefox */
+      background: orange;
       cursor: pointer;
     }
 
@@ -194,47 +139,39 @@
 
     /* Responsive scaling */
     @media screen and (max-width: 768px) {
-      #left-box, #right-box {
+      #tools-window {
         width: 100%;
-        height: auto;
-        flex-direction: column;
+        right: 0;
       }
     }
+
   </style>
 </head>
 <body>
 
-  <!-- Left Box for Live Stream and Video -->
-  <div id="left-box">
-    <div id="live-stream-container">
-      <div id="live-stream-header">Live Stream</div>
-      <div id="video-container">
-        <iframe src="https://www.youtube.com/embed/IIqtuupvdWg?si=BGUbSKgNnkutDRIH" title="YouTube video player"></iframe>
-      </div>
-      <!-- Bottom interface for patterns and controls inside the left-box -->
-      <div id="interface-box">
-        <div id="interface-header">Drawing Tools</div>
-        <div id="pattern-container">
-          <!-- Pattern thumbnails will be dynamically added here -->
-        </div>
-
-        <div id="size-slider-container">
-          <label for="size-slider">Brush Size: </label>
-          <input type="range" id="size-slider" min="1" max="50" value="10" onchange="updateBrushSize()">
-        </div>
-
-        <button id="eraser-button" onclick="setEraser()">Eraser</button>
-      </div>
-    </div>
+  <!-- Video Background -->
+  <div id="video-container">
+    <!-- YouTube video autoplay with no overlay text -->
+    <iframe src="https://www.youtube.com/embed/IIqtuupvdWg?autoplay=1&controls=0&modestbranding=1&showinfo=0&rel=0"
+      allow="autoplay; encrypted-media" allowfullscreen title="YouTube video player"></iframe>
   </div>
 
-  <!-- Right Box for Drawing and Controls -->
-  <div id="right-box">
-    <!-- Draggable and resizable canvas window -->
-    <div id="canvas-window">
-      <div id="canvas-header">Drawing Board - drag here</div>
-      <canvas id="drawing-board" style="border:1px solid #000; background-color: transparent;"></canvas>
+  <!-- Canvas for drawing -->
+  <canvas id="drawing-board"></canvas>
+
+  <!-- Draggable Tools Window -->
+  <div id="tools-window">
+    <div id="tools-header">Drawing Tools</div>
+    <div id="pattern-container">
+      <!-- Pattern thumbnails will be dynamically added here -->
     </div>
+
+    <div id="size-slider-container">
+      <label for="size-slider">Brush Size: </label>
+      <input type="range" id="size-slider" min="1" max="50" value="10" onchange="updateBrushSize()">
+    </div>
+
+    <button id="eraser-button" onclick="setEraser()">Eraser</button>
   </div>
 
   <script>
@@ -246,71 +183,14 @@
 
     // Set canvas transparent background
     canvas.style.backgroundColor = 'transparent';
-// Resize canvas based on parent window size and preserve drawings
-function resizeCanvas() {
-  const canvas = document.getElementById('drawing-board');
-  const parent = document.getElementById('canvas-window');
 
-  // Save the current content of the canvas
-  const savedDrawing = canvas.toDataURL();
-
-  // Resize the canvas to match the parent window size
-  canvas.width = parent.clientWidth;
-  canvas.height = parent.clientHeight;
-
-  // Redraw the saved drawing
-  const ctx = canvas.getContext('2d');
-  const img = new Image();
-  img.src = savedDrawing;
-  img.onload = () => {
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  };
-}
-
-// Call this once initially to set up the canvas
-resizeCanvas();
-
-// Add ResizeObserver to update the canvas size and keep the drawing when resized
-const canvasWindow = document.getElementById('canvas-window');
-const resizeObserver = new ResizeObserver(() => {
-  resizeCanvas();
-});
-resizeObserver.observe(canvasWindow);
-
-// Make the canvas window draggable and resizable
-const canvasHeader = document.getElementById('canvas-header');
-let offsetX = 0, offsetY = 0, isDragging = false;
-
-canvasHeader.addEventListener('mousedown', (e) => {
-  isDragging = true;
-  offsetX = e.clientX - canvasWindow.offsetLeft;
-  offsetY = e.clientY - canvasWindow.offsetTop;
-});
-
-document.addEventListener('mouseup', () => isDragging = false);
-document.addEventListener('mousemove', (e) => {
-  if (isDragging) {
-    const rightBoxWidth = document.getElementById('right-box').offsetWidth;
-    const rightBoxHeight = document.getElementById('right-box').offsetHeight;
-
-    let newX = e.clientX - offsetX;
-    let newY = e.clientY - offsetY;
-
-    // Prevent moving outside the parent container
-    newX = Math.max(0, Math.min(newX, rightBoxWidth - canvasWindow.offsetWidth));
-    newY = Math.max(0, Math.min(newY, rightBoxHeight - canvasWindow.offsetHeight));
-
-    canvasWindow.style.left = `${newX}px`;
-    canvasWindow.style.top = `${newY}px`;
-  }
-});
-
-// Optional: Reset button to clear the canvas
-function resetCanvas() {
-  const canvas = document.getElementById('drawing-board');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-}
+    // Resize canvas to fill the entire screen
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
     // Pattern data (8 total choices)
     const patterns = [
@@ -355,8 +235,6 @@ function resetCanvas() {
     function selectPattern(index) {
       selectedPattern = patterns[index].pattern;
       ctx.strokeStyle = selectedPattern;
-      
-        // Reset to normal drawing mode when switching from the eraser
       ctx.globalCompositeOperation = 'source-over'; 
 
       // Update selected pattern visually
@@ -376,6 +254,7 @@ function resetCanvas() {
       brushSize = document.getElementById('size-slider').value;
     }
 
+    // Drawing logic
     canvas.addEventListener('mousedown', () => drawing = true);
     canvas.addEventListener('mouseup', () => {
       drawing = false;
@@ -393,6 +272,26 @@ function resetCanvas() {
         ctx.stroke();
       }
     });
+
+    // Make the tools window draggable (only from the header)
+    const toolsWindow = document.getElementById('tools-window');
+    const toolsHeader = document.getElementById('tools-header');
+    let offsetX = 0, offsetY = 0, isDragging = false;
+
+    toolsHeader.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      offsetX = e.clientX - toolsWindow.offsetLeft;
+      offsetY = e.clientY - toolsWindow.offsetTop;
+    });
+
+    document.addEventListener('mouseup', () => isDragging = false);
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        toolsWindow.style.left = `${e.clientX - offsetX}px`;
+        toolsWindow.style.top = `${e.clientY - offsetY}px`;
+      }
+    });
+
   </script>
 
 </body>
