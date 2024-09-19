@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pattern Drawing App</title>
+  <style>
+    /* Styling */
+    #canvasWindow {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      border: 2px solid black;
+      background-color: #01aef0;
+      cursor: crosshair;
+      display: inline-block;
+      padding: 10px;
+    }
+
+    #patternContainer {
+      margin-top: 20px;
+      display: inline-flex;
+      justify-content: space-around;
+    }
+
+    .pattern {
+      cursor: pointer;
+      border: 2px solid transparent;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .pattern.selected {
+      border: 2px solid black;
+    }
+
+    #sizeSliderContainer {
+      cursor: pointer;
+      display: block;
+      margin-top: 10px;
+      background: #fff600;
+      padding: 10px;
+      text-align: center;
+      text-emphasis-color: #005baa;
+    }
+
+    #sizeSlider {
+      writing-mode: bt-lr; /* Vertical slider */
+    }
+
+    #eraserButton {
+      background-color:#fff600;
+      text-emphasis-color: #005baa;
+      margin-top: 10px;
+      padding: 5px 10px;
+    }
+
+    #header {
+      background-color: #005baa;
+      padding: 10px;
+      cursor: move;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Draggable window with canvas and all elements -->
+  <div id="canvasWindow">
+    <div id="header">Drawing Board - drag here</div>
+    
+    <!-- Canvas for drawing -->
+    <canvas id="DrawingBoard" width="800" height="600" style="border:1px solid #000;"></canvas>
+
+    <!-- Pattern thumbnails and selection -->
+    <div id="patternContainer">
+      <!-- Pattern thumbnails will be dynamically added here -->
+    </div>
+
+    <!-- Slider for brush size -->
+    <div id="sizeSliderContainer">
+      <label for="sizeSlider">Brush Size: </label>
+      <input type="range" id="sizeSlider" min="1" max="50" value="10" onchange="updateBrushSize()">
+    </div>
+
+    <!-- Eraser button -->
+    <button id="eraserButton" onclick="setEraser()">Eraser</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('DrawingBoard');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+    let brushSize = 10;
+    let selectedPattern = null;
+
+    // Set canvas background color
+    let canvasBgColor = 'white';
+    ctx.fillStyle = canvasBgColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Make the canvas window draggable
+    const canvasWindow = document.getElementById('canvasWindow');
+    const header = document.getElementById('header');
+    let offsetX = 0, offsetY = 0, isDragging = false;
+
+    header.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      offsetX = e.clientX - canvasWindow.offsetLeft;
+      offsetY = e.clientY - canvasWindow.offsetTop;
+    });
+
+    document.addEventListener('mouseup', () => isDragging = false);
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        canvasWindow.style.left = `${e.clientX - offsetX}px`;
+        canvasWindow.style.top = `${e.clientY - offsetY}px`;
+      }
+    });
+
+    // Pattern data
+    const patterns = [
+      { src: 'wood1.png', name: 'Wood' },
+      { src: 'bamboo.png', name: 'Bamboo' },
+      { src: 'fiberhemp.png', name: 'Fiberhemp' }
+    ];
+
+    // Preload patterns and create thumbnails
+    patterns.forEach((patternData, index) => {
+      const img = new Image();
+      img.src = patternData.src;
+      img.onload = () => {
+        patterns[index].pattern = ctx.createPattern(img, 'repeat');
+
+        // Set 'Wood' as the default selected pattern
+        if (patternData.name === 'Wood') {
+          selectedPattern = patterns[index].pattern;
+          ctx.strokeStyle = selectedPattern;
+
+          // Highlight 'Wood' visually as selected
+          document.querySelectorAll('.pattern').forEach((el, i) => {
+            el.classList.toggle('selected', i === index);
+          });
+        }
+      };
+
+      // Add pattern thumbnails to the UI
+      const patternDiv = document.createElement('div');
+      patternDiv.classList.add('pattern');
+      patternDiv.innerHTML = `<img src="${patternData.src}" width="50" height="50"><p>${patternData.name}</p>`;
+      patternDiv.onclick = () => selectPattern(index);
+      document.getElementById('patternContainer').appendChild(patternDiv);
+    });
+
+    // Select a pattern
+    function selectPattern(index) {
+      selectedPattern = patterns[index].pattern;
+      ctx.strokeStyle = selectedPattern;
+      
+      // Update selected pattern visually
+      document.querySelectorAll('.pattern').forEach((el, i) => {
+        el.classList.toggle('selected', i === index);
+      });
+    }
+
+    // Set eraser (matches the canvas background color)
+    function setEraser() {
+      ctx.strokeStyle = canvasBgColor;
+      ctx.globalCompositeOperation = 'source-over';  // Set to normal mode but stroke matches background
+    }
+
+    // Update brush size
+    function updateBrushSize() {
+      brushSize = document.getElementById('sizeSlider').value;
+    }
+
+    canvas.addEventListener('mousedown', () => drawing = true);
+    canvas.addEventListener('mouseup', () => {
+      drawing = false;
+      ctx.beginPath();
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (drawing) {
+        const rect = canvas.getBoundingClientRect();  // Get canvas position relative to viewport
+        const x = e.clientX - rect.left;              // Adjust X
+        const y = e.clientY - rect.top;               // Adjust Y
+        ctx.lineWidth = brushSize;
+        ctx.lineCap = 'round';
+        ctx.lineTo(x, y);                             // Use the adjusted x and y values
+        ctx.stroke();
+      }
+    });
+  </script>
+
+</body>
+</html>

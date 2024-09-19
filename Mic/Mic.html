@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Audio Chat</title>
+    <style>
+        .signal-circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red; /* Default is red (no signal) */
+        }
+    </style>
+</head>
+<body>
+    <h1>Audio Chat</h1>
+    <div class="signal-circle" id="signalCircle"></div> <!-- Signal indicator -->
+
+    <script src="/socket.io/socket.io.js"></script> <!-- Make sure this path is correct for Socket.IO -->
+    <script src="app.js"></script> <!-- Your app.js file -->
+</body>
+</html>
