@@ -5,28 +5,113 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pattern Drawing App</title>
   <style>
-    /* Styling */
-    #canvasWindow {
-      position: absolute;
-      top: 100px;
-      left: 100px;
-      border: 2px solid black;
-      background-color: #01aef0;
-      cursor: crosshair;
-      display: inline-block;
-      padding: 10px;
+    /* Full-page layout */
+    body, html {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+      font-family: 'MS Sans Serif', sans-serif;
+      box-sizing: border-box;
     }
 
-    #patternContainer {
-      margin-top: 20px;
-      display: inline-flex;
-      justify-content: space-around;
+    /* Left box for live stream */
+    #left-box {
+      width: 70vh;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-right: 2px solid black;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    /* Group live stream header and video */
+    #live-stream-container {
+      background-color: white;
+      padding: 10px;
+      border: 2px solid black;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #live-stream-header {
+      font-weight: bold;
+      padding: 10px;
+      border: 2px solid black;
+      background-color: #fff600;
+      margin-bottom: 10px;
+    }
+
+    /* Embedded video */
+    #video-container iframe {
+      width: 100%;
+      height: 315px;
+      border: 0;
+    }
+
+    /* Right box for drawing and controls */
+    #right-box {
+      width: 130vh;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px;
+      position: relative;
+      box-sizing: border-box;
+      background-color: white;
+    }
+
+    /* Draggable, resizable canvas window */
+    #canvas-window {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 400px;
+      height: 300px;
+      border: 2px solid black;
+      background-color: transparent;
+      resize: both;
+      overflow: hidden;
+    }
+
+    #canvas-header {
+      background-color: #005baa;
+      padding: 5px;
+      cursor: move;
+      text-align: center;
+      font-family: 'MS Sans Serif', sans-serif;
+      font-weight: bold;
+    }
+
+    /* Bottom interface for patterns and controls */
+    #interface-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-top: 2px solid black;
+      box-sizing: border-box;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    /* Patterns styling */
+    #pattern-container {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 5px;
     }
 
     .pattern {
       cursor: pointer;
       border: 2px solid transparent;
-      padding: 5px;
+      padding: 3px;
       text-align: center;
     }
 
@@ -34,77 +119,99 @@
       border: 2px solid black;
     }
 
-    #sizeSliderContainer {
-      cursor: pointer;
-      display: block;
-      margin-top: 10px;
-      background: #fff600;
-      padding: 10px;
-      text-align: center;
-      text-emphasis-color: #005baa;
+    #pattern-container img {
+      width: 30px;
+      height: 30px;
     }
 
-    #sizeSlider {
-      writing-mode: bt-lr; /* Vertical slider */
+    /* Controls */
+    #size-slider-container {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
     }
 
-    #eraserButton {
-      background-color:#fff600;
-      text-emphasis-color: #005baa;
-      margin-top: 10px;
-      padding: 5px 10px;
+    #size-slider {
+      writing-mode: bt-lr;
     }
 
-    #header {
-      background-color: #005baa;
-      padding: 10px;
-      cursor: move;
-      text-align: center;
+    #eraser-button {
+      background-color: #fff600;
+      padding: 5px;
+      font-family: 'MS Sans Serif', sans-serif;
+      font-size: 12px;
+    }
+
+    /* Responsive scaling */
+    @media screen and (max-width: 768px) {
+      #left-box, #right-box {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Draggable window with canvas and all elements -->
-  <div id="canvasWindow">
-    <div id="header">Drawing Board - drag here</div>
-    
-    <!-- Canvas for drawing -->
-    <canvas id="DrawingBoard" width="800" height="600" style="border:1px solid #000;"></canvas>
+  <!-- Left Box for Live Stream and Video -->
+  <div id="left-box">
+    <div id="live-stream-container">
+      <div id="live-stream-header">Live Stream</div>
+      <div id="video-container">
+        <iframe src="https://www.youtube.com/embed/IIqtuupvdWg?si=BGUbSKgNnkutDRIH" title="YouTube video player"></iframe>
+      </div>
+    </div>
+  </div>
 
-    <!-- Pattern thumbnails and selection -->
-    <div id="patternContainer">
-      <!-- Pattern thumbnails will be dynamically added here -->
+  <!-- Right Box for Drawing and Controls -->
+  <div id="right-box">
+    <!-- Draggable and resizable canvas window -->
+    <div id="canvas-window">
+      <div id="canvas-header">Drawing Board - drag here</div>
+      <canvas id="drawing-board" style="border:1px solid #000; background-color: transparent;"></canvas>
     </div>
 
-    <!-- Slider for brush size -->
-    <div id="sizeSliderContainer">
-      <label for="sizeSlider">Brush Size: </label>
-      <input type="range" id="sizeSlider" min="1" max="50" value="10" onchange="updateBrushSize()">
-    </div>
+    <!-- Bottom interface for patterns and controls -->
+    <div id="interface-box">
+      <div id="pattern-container">
+        <!-- Pattern thumbnails will be dynamically added here -->
+      </div>
 
-    <!-- Eraser button -->
-    <button id="eraserButton" onclick="setEraser()">Eraser</button>
+      <div id="size-slider-container">
+        <label for="size-slider">Brush Size: </label>
+        <input type="range" id="size-slider" min="1" max="50" value="10" onchange="updateBrushSize()">
+      </div>
+
+      <button id="eraser-button" onclick="setEraser()">Eraser</button>
+    </div>
   </div>
 
   <script>
-    const canvas = document.getElementById('DrawingBoard');
+    const canvas = document.getElementById('drawing-board');
     const ctx = canvas.getContext('2d');
     let drawing = false;
     let brushSize = 10;
-    let selectedPattern = null;
+    let selectedPattern = "Wood";
 
-    // Set canvas background color
-    let canvasBgColor = 'white';
-    ctx.fillStyle = canvasBgColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Set canvas transparent background
+    canvas.style.backgroundColor = 'transparent';
 
-    // Make the canvas window draggable
-    const canvasWindow = document.getElementById('canvasWindow');
-    const header = document.getElementById('header');
+    // Resize canvas based on parent window size
+    function resizeCanvas() {
+      const parent = document.getElementById('canvas-window');
+      canvas.width = parent.clientWidth;
+      canvas.height = parent.clientHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Make the canvas window draggable and resizable
+    const canvasWindow = document.getElementById('canvas-window');
+    const canvasHeader = document.getElementById('canvas-header');
     let offsetX = 0, offsetY = 0, isDragging = false;
 
-    header.addEventListener('mousedown', (e) => {
+    canvasHeader.addEventListener('mousedown', (e) => {
       isDragging = true;
       offsetX = e.clientX - canvasWindow.offsetLeft;
       offsetY = e.clientY - canvasWindow.offsetTop;
@@ -113,16 +220,31 @@
     document.addEventListener('mouseup', () => isDragging = false);
     document.addEventListener('mousemove', (e) => {
       if (isDragging) {
-        canvasWindow.style.left = `${e.clientX - offsetX}px`;
-        canvasWindow.style.top = `${e.clientY - offsetY}px`;
+        const rightBoxWidth = document.getElementById('right-box').offsetWidth;
+        const rightBoxHeight = document.getElementById('right-box').offsetHeight;
+
+        let newX = e.clientX - offsetX;
+        let newY = e.clientY - offsetY;
+
+        // Prevent moving outside the parent container
+        newX = Math.max(0, Math.min(newX, rightBoxWidth - canvasWindow.offsetWidth));
+        newY = Math.max(0, Math.min(newY, rightBoxHeight - canvasWindow.offsetHeight));
+
+        canvasWindow.style.left = `${newX}px`;
+        canvasWindow.style.top = `${newY}px`;
       }
     });
 
-    // Pattern data
+    // Pattern data (8 total choices)
     const patterns = [
       { src: 'wood1.png', name: 'Wood' },
       { src: 'bamboo.png', name: 'Bamboo' },
-      { src: 'fiberhemp.png', name: 'Fiberhemp' }
+      { src: 'fiberhemp.png', name: 'Fiberhemp' },
+      { src: 'lisdodde.jpg', name: 'Bulrush' },
+      { src: 'stro-hooi.jpg', name: 'Straw' },
+      { src: 'cork.jpg', name: 'Cork' },
+      { src: 'mammothgrass.jpg', name: 'Mammothgrass' },
+      { src: 'pattern8.png', name: 'Recycled' }
     ];
 
     // Preload patterns and create thumbnails
@@ -147,9 +269,9 @@
       // Add pattern thumbnails to the UI
       const patternDiv = document.createElement('div');
       patternDiv.classList.add('pattern');
-      patternDiv.innerHTML = `<img src="${patternData.src}" width="50" height="50"><p>${patternData.name}</p>`;
+      patternDiv.innerHTML = `<img src="${patternData.src}" width="30" height="30"><p>${patternData.name}</p>`;
       patternDiv.onclick = () => selectPattern(index);
-      document.getElementById('patternContainer').appendChild(patternDiv);
+      document.getElementById('pattern-container').appendChild(patternDiv);
     });
 
     // Select a pattern
@@ -163,15 +285,15 @@
       });
     }
 
-    // Set eraser (matches the canvas background color)
+    // Set eraser (erases the drawn texture)
     function setEraser() {
-      ctx.strokeStyle = canvasBgColor;
-      ctx.globalCompositeOperation = 'source-over';  // Set to normal mode but stroke matches background
+      ctx.globalCompositeOperation = 'destination-out';  // Make eraser transparent
+      ctx.strokeStyle = 'rgba(0,0,0,1)';  // Erase by making the drawn stroke transparent
     }
 
     // Update brush size
     function updateBrushSize() {
-      brushSize = document.getElementById('sizeSlider').value;
+      brushSize = document.getElementById('size-slider').value;
     }
 
     canvas.addEventListener('mousedown', () => drawing = true);
@@ -182,12 +304,12 @@
 
     canvas.addEventListener('mousemove', (e) => {
       if (drawing) {
-        const rect = canvas.getBoundingClientRect();  // Get canvas position relative to viewport
-        const x = e.clientX - rect.left;              // Adjust X
-        const y = e.clientY - rect.top;               // Adjust Y
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
         ctx.lineWidth = brushSize;
         ctx.lineCap = 'round';
-        ctx.lineTo(x, y);                             // Use the adjusted x and y values
+        ctx.lineTo(x, y);
         ctx.stroke();
       }
     });
