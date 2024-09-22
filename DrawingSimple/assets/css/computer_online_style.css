@@ -12,6 +12,7 @@
 :root {
   --background-gray: #D9D9D9;
   --header-gray: #D9D9D9;
+  --button-grey: #626262;
   --chat-send: #fbcc00;
   --chat-receive: #c1c1c1;
   --slider-colour: #fbcc00;
@@ -32,6 +33,36 @@ body, html {
   background-repeat: repeat;
   background-size: 100vw;
   box-sizing: border-box;
+}
+
+#status-window {
+  position: flex;
+  top: 10px;
+  right: 10px;
+  width: 200px;
+  padding: 10px;
+  background-color: var(--background-gray);
+  color: white;
+  border: 2px solid white;
+  font-family: 'Redaction-Regular', sans-serif;
+  font-size: 14px;
+  z-index: 1000;
+}
+
+#pause-status-window {
+  display: none;
+  position: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 2;
+  bottom: 10px;
+  right: 10px;
+  padding: 20px;
+  background-color: var(--background-gray);
+  border: var(--line-width) solid var(--line-color);
+  color: black;
+  z-index: 1000;
 }
 
 #main-container {
@@ -124,8 +155,8 @@ body, html {
 
 #online-building-window {
   position: absolute;
-  top: 30vh;
-  left: 55vw;
+  top: 5vh;
+  left: 56vw;
   width: 800px;
   height: 600px;
   border: var(--line-width) solid var(--line-color);
@@ -235,6 +266,45 @@ body, html {
   border-radius: 50%;
   background: black;
   cursor: pointer;
+}
+
+#bottom-right-container {
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  display: flex;
+  gap: 60px;
+  align-items: left;
+}
+
+#connect-pause-button {
+  width: 120px;
+  height: 120px;
+  background-color: var(--button-grey);
+  color: var(--background-gray);
+  font-family: 'Redaction-Bold', serif;
+  font-size: 21px;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center;
+  border: var(--line-width) solid var(--line-color);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#connect-pause-button:hover {
+  background-color: var(--line-color); /* Change to line color (black) */
+  color: white; /* Text color changes to white */
+}
+
+#vpro-logo img {
+  width: 320px; /* Adjust size as needed */
+  height: 120px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  background-color: var(--background-gray);
+  border: var(--line-width) solid var(--line-color);
 }
 
 
