@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOUWDIO MOBILE</title>
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="assets/css/phone_chat_style.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+</head>
+<body>
+<div id="all-content">
+  <div id="main-container"> 
+      <div id="bouwdio-am">
+        <div id="bouwdio-am-header">Bouwdio AM</div>
+        <div id="info-content">
+          <p>Info about experience, disclaimer open radio channel, describes functionality, ***full experience is on PC</p>
+        </div>
+        <div id="chat-window"> 
+          <div class="peer-id" id="peer-id"></div>
+          <div class="main">
+              <div class="name">
+                  <span><i class="far fa-user"></i></span>
+                  <input type="text"
+                  id="name-input"
+                  class="name-input"
+                  value="anonymous"
+                  maxlength="20"/>
+              </div>
+              <ul class="message-container" id="message-container">
+                  <li class="message-left">
+                      <p class="message">
+                          loremipsum
+                          <span>bluebird - 26 july 10:345</span>
+                      </p>
+                  </li>
+                  <li class="message-right">
+                      <p class="message">
+                          loremipsum
+                          <span>bluebird - 26 july 10:345</span>
+                      </p>
+                  </li>
+
+                  <li class="message-feedback">
+                      <p class="feedback" id="feedback">
+                          killer is typing a message
+                      </p>
+                  </li>
+              </ul>
+              <form class="message-form" id="message-form">
+                  <input type="text" name="message" class="message-input" id="message-input">
+                  <div class="v-divider"></div>
+                  <button type="submit" class="send-button">send<i class="fas fa-paper-plane"></i></button>
+              </form>
+          </div>
+          <h3 class="clients-total" id="clients-total">total clients : 2</h3>
+          <div class="signal-circle" id="signal-circle"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Bottom Right Section -->
+<div id="bottom-right-container">
+  <div id="connect-pause-button">PAUSE</div>
+  <div id="vpro-logo">
+    <img src="assets/images/VPRO_tegenlicht_logo.png" alt="VPRO Tegenlicht Logo">
+  </div>
+</div>
+
+<!-- Statusvenster voor audio en microfoon -->
+<div id="pause-status-window">
+  Audio status: Active<br>
+  Microphone status: Active<br>
+  Status: Running
+</div>
+
+<!-- Link JS -->
+<script src="assets/js/phone_chat_main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"
+integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.4/peerjs.min.js"
+integrity="sha512-iFU+yF1keEaLDC9HEwPfLMSRaS0unBHE14GEgx6pQKJXjp5v0tvX8xpfp2lgJ62XEjbYp/M5C3CAmej/PWXMyA=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</body>
+</html>
