@@ -12,6 +12,9 @@
 :root {
   --background-gray: #D9D9D9;
   --header-gray: #D9D9D9;
+  --chat-send: #fbcc00;
+  --chat-receive: #c1c1c1;
+  --slider-colour: #fbcc00;
   --line-color: black;
   --line-width: 6px;
 }
@@ -19,7 +22,7 @@
 body, html {
   margin: 0;
   padding: 0;
-  font-family: 'Redaction-Regular', sans-serif;
+  font-family: 'Helvetica', sans-serif;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -56,7 +59,7 @@ body, html {
 
 #bouwdio-am-header {
   background-color: var(--header-gray);
-  font-family: 'Redaction-Bold', sans-serif;
+  font-family: 'Redaction-Bold', serif;
   text-transform: uppercase;
   padding: 10px;
   text-align: center;
@@ -100,7 +103,7 @@ body, html {
 
 #onsite-building-header {
   background-color: var(--header-gray);
-  font-family: 'Redaction-Bold', sans-serif;
+  font-family: 'Redaction-Bold', serif;
   text-transform: uppercase;
   padding: 10px;
   text-align: center;
@@ -121,9 +124,10 @@ body, html {
 
 #online-building-window {
   position: absolute;
-  top: 25vh;
-  left: 65vw;
-  width: 600px;
+  top: 30vh;
+  left: 55vw;
+  width: 800px;
+  height: 600px;
   border: var(--line-width) solid var(--line-color);
   background-color: var(--background-gray);
   z-index: 1000;
@@ -133,7 +137,7 @@ body, html {
 }
 
 #online-building-header {
-  font-family: 'Redaction-Bold', sans-serif;
+  font-family: 'Redaction-Bold', serif;
   text-transform: uppercase;
   padding: 10px;
   background-color: var(--header-gray);
@@ -145,13 +149,13 @@ body, html {
   width: 100%;
   height: 400px;
   background-color: transparent;
-  cursor: crosshair;
+  cursor: pointer;
 }
 
 #materials {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 50px;
   margin-top: 10px;
   padding: 10px;
   border-top: var(--line-width) solid var(--line-color);
@@ -160,7 +164,7 @@ body, html {
 .material {
   width: 30px;
   height: 30px;
-  text-align: center;
+  text-align: left;
   background-color: var(--background-gray);
   border: var(--line-width) solid var(--line-color);
   background-size: cover;
@@ -168,9 +172,9 @@ body, html {
 }
 
 .material p {
-  font-family: 'Redaction-Regular', sans-serif;
   font-size: 11px;
   position: absolute;
+  left: -5px;
   top: 30px;
 }
 
@@ -178,21 +182,40 @@ body, html {
   background-color: white;
 }
 
-#size-slider-container {
-  margin-top: 10px;
-  margin-left: 10px;
-  display: flex;
-  justify-content: space-between;
+#eraser-button {
+  width: 30px;
+  height: 30px;
+  text-align: left;
+  display: inline-flex;
+  flex-direction: column;
   align-items: center;
+  background-color: gray;
+  border: var(--line-width) solid var(--line-color);
+}
+
+#eraser-button p {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 11px;
+  margin-top: 11px;
+  text-align: left;
+}
+
+#size-slider-container {
+  font-family: 'Redaction-Bold', serif;
+  margin-top: 20px;
+  margin-left: 0px;
+  text-align: center;
+  position: relative;
+  top: 20px; /* Same position as material labels */
 }
 
 #size-slider {
   width: 100px;
+  margin-left: 20px;
   -webkit-appearance: none;
   appearance: none;
   height: 8px;
-  background: #d9d9d9;
-  border-radius: 5px;
+  background: var(--slider-colour);
   outline: none;
 }
 
@@ -202,7 +225,7 @@ body, html {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: darkgrey;
+  background: black;
   cursor: pointer;
 }
 
@@ -210,20 +233,151 @@ body, html {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: darkgrey;
+  background: black;
   cursor: pointer;
 }
 
-#eraser-button {
-  background-color: gray;
-  padding: 10px;
-  cursor: pointer;
-  font-family: 'Redaction-Bold', sans-serif;
-  border: var(--line-width) solid var(--line-color);
-  width: 40px;
-  height: 40px;
-  text-align: center;
+
+/* -------------- chat css ---------------*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  background-color: #ebebeb;
+}
+
+.main {
+  border: 8px solid #dddddd;
+  border-radius: 24px;
+}
+
+.name {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  padding: 8px 16px;
+  color: #707070;
+  background-color: #ebebeb;
+}
+
+.name > span {
+  color: var(--background-gray);
+}
+
+.name-input {
+  font-size: 21px;
+  padding: 10px;
+  font-weight: 700;
+  color: #707070;
+  flex-grow: 1;
+  border: 0;
+  margin: 0 12px;
+  outline: none;
+  text-align: center;
+  background-color: var(--header-gray);
+}
+
+/* Match Flexbox and sizing from #bouwdio-am */
+.message-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--header-gray);
+  width: 100%; /* Take full width of parent container */
+  height: 40vh; /* Take full height of parent container */
+  overflow-y: auto;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.message-left, .message-right {
+  list-style: none;
+  padding: 8px 12px;
+  margin: 12px;
+  max-width: 250px;
+  font-size: 18px;
+  word-wrap: break-word;
+}
+
+.message-left {
+  border-radius: 20px 20px 20px 0px;
+  align-self: flex-start;
+  background-color: var(--chat-receive);
+  box-shadow: -2px 2px 4px #dcdcdc;
+}
+
+.message-right {
+  border-radius: 20px 20px 0px 20px;
+  align-self: flex-end;
+  background-color: var(--chat-send);
+  box-shadow: 2px 2px 4px #dcdcdc;
+}
+
+.message-left > p > span, .message-right > p > span {
+  display: block;
+  font-style: italic;
+  font-size: 12px;
+  margin-top: 4px;
+  align-self: center;
+}
+
+.feedback {
+  font-style: italic;
+  font-size: 14px;
+  padding: 0px 16px 16px 16px;
+  color: #2d2d2d;
+  background-color: #f6f6f6;
+  text-align: center;
+}
+
+.message-form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Match parent width */
+}
+
+.message-input {
+  flex-grow: 1;
+  height: 48px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  padding: 0 12px;
+  background-color: #fff;
+}
+
+.send-button {
+  height: 48px;
+  font-size: 16px;
+  border: none;
+  padding: 0px 20px;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.v-divider {
+  width: 2px;
+  height: 48px;
+  background-color: #f6f6f6;
+}
+
+.clients-total {
+  margin: 0px 0;
+  padding: 10px;
+  color: #7e7e7e;
+}
+
+.signal-circle {
+  width: 30px;
+  margin: 0 auto;
+  height: 30px;
+  border: 5px solid black;
+  border-radius: 20px;
+  margin-bottom: 20px;
 }
