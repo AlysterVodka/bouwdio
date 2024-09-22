@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience Layout</title>
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="assets/css/computer_online_style.css">
+</head>
+<body>
+
+  <div id="main-container">
+
+    <div id="center-container">
+      
+      <div id="bouwdio-am">
+        <div id="bouwdio-am-header">Bouwdio AM</div>
+        <div id="info-content">
+          <p>Info about experience, disclaimer open radio channel, describes functionality, ***full experience is on PC</p>
+        </div>
+        <div id="chat-window"></div>
+      </div>
+
+      <div id="onsite-building">
+        <div id="onsite-building-header">Onsite Building</div>
+        <div id="video-container">
+          <iframe src="https://www.youtube.com/embed/IIqtuupvdWg?autoplay=1&mute=1&controls=0" title="YouTube video player"></iframe>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="online-building-window">
+      <div id="online-building-header">Online Building</div>
+      <canvas id="drawing-board"></canvas>
+
+      <div id="materials">
+        <div class="material" style="background-image: url('assets/images/wood1.png');"><p>Wood</p></div>
+        <div class="material" style="background-image: url('assets/images/bamboo.png');"><p>Bamboo</p></div>
+        <div class="material" style="background-image: url('assets/images/fiberhemp.png');"><p>Fiberhemp</p></div>
+        <div class="material" style="background-image: url('assets/images/cork.jpg');"><p>Cork</p></div>
+        <div class="material" style="background-image: url('assets/images/lisdodde.jpg');"><p>Lisdodde</p></div>
+        <div class="material" style="background-image: url('assets/images/mammothgrass.jpg');"><p>Mammothgrass</p></div>
+        <div class="material" style="background-image: url('assets/images/stro-hooi.jpg');"><p>Hay</p></div>
+        <div class="material" style="background-image: url('assets/images/recycledmat.jpg');"><p>Recycled</p></div>
+      </div>
+
+      <div id="size-slider-container">
+        <label for="size-slider">Pen Size</label>
+        <input type="range" id="size-slider" min="1" max="50" value="10" onchange="updateBrushSize()">
+        <div id="eraser-button" onclick="setEraser()">Eraser</div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Link JS -->
+  <script src="assets/js/computer_online_main.js"></script>
+</body>
+</html>
