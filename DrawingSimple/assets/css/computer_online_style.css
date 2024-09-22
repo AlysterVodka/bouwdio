@@ -50,6 +50,7 @@ body, html {
   display: flex;
   flex-direction: column;
   width: 33%;
+  height: 85vh;
   box-sizing: border-box;
 }
 
@@ -75,10 +76,16 @@ body, html {
 
 #chat-window {
   background-color: var(--background-gray);
-  height: 300px;
+  height: 800px;
   border: var(--line-width) solid var(--line-color);
-  padding: 10px;
+  padding: 0px;
   box-sizing: border-box;
+}
+
+#chat-iframe {
+  width: 100vh; /*change in chat_style.css*/
+  height: 100vw;
+  border: 0;
 }
 
 #onsite-building {
