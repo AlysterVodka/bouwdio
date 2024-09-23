@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BOUWDIO MOBILE</title>
+  <title>BOUWDIO PC</title>
   <!-- Link CSS -->
   <link rel="stylesheet" href="assets/css/phone_chat_style.css">
   <link rel="stylesheet"
@@ -14,7 +14,8 @@
 </head>
 <body>
 <div id="all-content">
-  <div id="main-container"> 
+  <div id="main-container">
+      
       <div id="bouwdio-am">
         <div id="bouwdio-am-header">Bouwdio AM</div>
         <div id="info-content">
@@ -55,14 +56,26 @@
                   <input type="text" name="message" class="message-input" id="message-input">
                   <div class="v-divider"></div>
                   <button type="submit" class="send-button">send<i class="fas fa-paper-plane"></i></button>
-              </form>
+        </form>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"
+        integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.4/peerjs.min.js"
+        integrity="sha512-iFU+yF1keEaLDC9HEwPfLMSRaS0unBHE14GEgx6pQKJXjp5v0tvX8xpfp2lgJ62XEjbYp/M5C3CAmej/PWXMyA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
           </div>
           <h3 class="clients-total" id="clients-total">total clients : 2</h3>
           <div class="signal-circle" id="signal-circle"></div>
+          <script src="/main.js"></script>
         </div>
       </div>
-    </div>
 
+      </div>
+
+    
   </div>
 </div>
 
@@ -83,12 +96,6 @@
 
 <!-- Link JS -->
 <script src="assets/js/phone_chat_main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"
-integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ=="
-crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.4/peerjs.min.js"
-integrity="sha512-iFU+yF1keEaLDC9HEwPfLMSRaS0unBHE14GEgx6pQKJXjp5v0tvX8xpfp2lgJ62XEjbYp/M5C3CAmej/PWXMyA=="
-crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>
