@@ -1,9 +1,9 @@
 
-const socket = io("https://VPROtest.hopto.org:8443",{})
+const socket = io()
 
 const peer = new Peer(undefined, {
     host: '/',
-    port: '8443',  // The port where the PeerJS server is hosted
+    port: '443',  // The port where the PeerJS server is hosted
     path: 'peerjs'
 })
 
@@ -20,6 +20,59 @@ const signalCircle = document.getElementById('signal-circle')
 let PEERID;
 let peers = [];  // Object to store connected peers
 let localStream;
+
+
+
+
+///////drawing section
+const canvas = document.getElementById('drawing-board');
+const ctx = canvas.getContext('2d');
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+let drawing = false;
+let brushSize = 10;
+ctx.strokeStyle = 'rgba(255,255,255,1)'
+ctx.globalCompositeOperation = 'source-over';
+
+canvas.addEventListener('mousedown', () => drawing = true);
+canvas.addEventListener('mouseup', () => {
+  drawing = false;
+  ctx.beginPath();
+});
+
+canvas.addEventListener('mousemove', (e) => {
+  if (drawing) {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    ctx.lineWidth = brushSize;
+    ctx.lineCap = 'round';
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  }
+});
+
+
+const toolsWindow = document.getElementById('board');
+    const toolsHeader = document.getElementById('board-header');
+    let offsetX = 0, offsetY = 0, isDragging = false;
+
+    toolsHeader.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      offsetX = e.clientX - toolsWindow.offsetLeft;
+      offsetY = e.clientY - toolsWindow.offsetTop;
+    });
+
+    document.addEventListener('mouseup', () => isDragging = false);
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        toolsWindow.style.left = `${e.clientX - offsetX}px`;
+        toolsWindow.style.top = `${e.clientY - offsetY}px`;
+      }
+    });
+
+///////// drawing section closed
+
+
 
 updateSignalIndicator(false);
 
@@ -42,7 +95,25 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
     localStream = stream;
     console.log(localStream)
 
+    function muteMicrophone(mute) {
+        const audioTracks = localStream.getAudioTracks();
+        if (audioTracks.length > 0) {
+            audioTracks[0].enabled = mute;  // Disable the microphone
+            console.log("Microphone muted.");
+        }
+    }
+
     socket.emit('peer-connected', PEERID);
+
+    socket.on('mute-user', (id)=>{
+        muteMicrophone(false);
+        console.log('muting YOU: ', id)
+    })
+
+    socket.on('UNmute-user', (id)=>{
+        muteMicrophone(true);
+        console.log('muting YOU: ', id)
+    })
 
 
     peer.on('call', (call) => {
@@ -73,7 +144,6 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
 
 // Add a new peer by calling them and sending the local audio stream
 function connectToNewPeer(peerId) {
-
 
     if (!localStream) {
         console.error('No local stream available to connect to peer:', peerId);
@@ -130,6 +200,33 @@ socket.on('chat-message', (data) =>{
 })
 
 
+socket.on('receiver-present', (peerId)=>{   
+    console.log('receiver activated', peerId)
+    updateSignalIndicator(true)
+
+    const streamImage = canvas.captureStream(30); // 30 FPS
+
+    ///////////temp record CHECK///////////
+    console.log('Stream tracks:', streamImage.getTracks());
+
+    videoElement = document.getElementById('received-video');
+    videoElement.srcObject = streamImage;
+    videoElement.play();
+
+    console.log(streamImage)
+            // Connect to the receiver
+    const call = peer.call(peerId, streamImage);
+
+    if (!call) {
+        console.error('Call object not created for peer:', peerId);
+        return;
+    } else {
+        console.log(call)
+        console.log('stream and call-elements')
+    }
+
+});
+
 function sendMessage(){
     if(messageInput.value === '') return
     // console.log(messageInput.value)
@@ -165,3 +262,9 @@ function scrolltoBottom(){
 function updateSignalIndicator(hasSignal) {
     signalCircle.style.backgroundColor = hasSignal ? 'green' : 'red';
 }
+
+
+
+
+
+

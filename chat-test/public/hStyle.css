@@ -1,0 +1,14 @@
+#user-list{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    border: 1px solid grey;
+    padding: 2%;
+    width: 50vw;
+}
+
+.user{
+    display: flex;
+    justify-content: space-around;
+}

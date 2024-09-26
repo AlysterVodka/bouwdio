@@ -1,0 +1,22 @@
+NU:
+
+implement KICK
+
+(en ADD ON BLACKLIST)
+
+dan:
+
+checken dockerfile.
+
+
+dan:
+
+inpassen css.
+
+
+
+Om ze op te slaan in de dictionairy: currentUserlist
+dielijst gebruik ik om de blacklist te updaten in the
+socket.on('kick-user')
+
+hahaaaa
