@@ -9,6 +9,6 @@ RUN npm install --only=production
 
 COPY . .
 
-EXPOSE 8443
+EXPOSE 9000
 
 CMD ["pm2-runtime", "start", "app.js"]

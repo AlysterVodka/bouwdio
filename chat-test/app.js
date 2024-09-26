@@ -29,12 +29,6 @@ app.get("/host", (req, res) => {
 });
 
 const io = require('socket.io')(server)
-const {ExpressPeerServer} = require('peer')
-const peerServer = ExpressPeerServer(server, {
-    debug: true
-})
-app.use('/peerjs', peerServer)
-
 
 ////////// CHECK IP /////////////////////////////////////
 const DATA_FILE = path.join(__dirname, 'blacklist.json');
