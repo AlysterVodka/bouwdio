@@ -225,7 +225,7 @@ function onConnected(socket){
     socket.on('peer-connected', (id) => {
         io.emit("remote-console", `FROM SERVER: Peer connected: ${id} `)
         // console.log(`Peer connected: ${peerId}`);
-        socket.to(id).emit("receiver-peer-present", receiverId)
+        io.to(id).emit("receiver-peer-present", receiverId)
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
     })
 
