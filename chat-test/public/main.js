@@ -8,17 +8,23 @@ const peer = new Peer(undefined, {
 
 const clientsTotal = document.getElementById("clients-total");
 
+//// **** dit zijn de chat functionaliteiten*/
 const messageContainer = document.getElementById("message-container");
 const nameInput = document.getElementById("name-input");
 const messageForm = document.getElementById("message-form");
 const messageInput = document.getElementById("message-input");
 
+
+////// *** signal circle gebruik ik om aan te geven of de takening door "receiver" ontvangen wordt
+///// *** receiver is de externe collector van alle tekeningen
 const signalCircle = document.getElementById("signal-circle");
 let PEERID;
 let peers = []; // Object to store connected peers
 let localStream;
 
 ///////drawing section
+
+/////// ***** deze gaat dus aanpassen en wordt waarschijnlijk een div met vierkante "pixels" erin
 const canvas = document.getElementById("drawing-board");
 const ctx = canvas.getContext("2d");
 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -45,6 +51,8 @@ canvas.addEventListener("mousemove", (e) => {
   }
 });
 
+//// *** Dit heb ik allemaal van jou over genomen
+//// *** En volgens mij hoef je lager dan drawing board niet meer te kijken!
 const toolsWindow = document.getElementById("board");
 const toolsHeader = document.getElementById("board-header");
 let offsetX = 0,
