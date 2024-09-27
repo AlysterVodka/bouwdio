@@ -132,6 +132,10 @@ navigator.mediaDevices
     //   });
     // });
 
+    socket.on("remote-console", data =>{
+      console.log("data")
+    })
+
     // Handle when a new peer is connected
     socket.on("receiver-peer-present", (peerId) => {
        console.log("receiver present: " + peerId);
