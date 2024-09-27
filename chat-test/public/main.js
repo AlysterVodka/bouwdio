@@ -256,3 +256,4 @@ connectPauseButton.addEventListener("click", function () {
     isPaused = false;
   }
 });
+
