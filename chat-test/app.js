@@ -179,13 +179,14 @@ io.use((socket, next) => {
 
 ////////////////////////////////////////////////////////
 
-
 io.on('connection', onConnected)
 
 function onConnected(socket){
     console.log(socket.id)
     socketsConnected.add(socket.id)
     io.emit('clients-total',socketsConnected.size)
+
+    io.emit("remote-console", "this is a test message")
 
 
     socket.on('disconnect', ()=>{
@@ -215,13 +216,16 @@ function onConnected(socket){
 
     socket.on("receiver-log-on", (id) =>{
         receiverId = id;
-        console.log("receiver has joined, ID: ",receiverId)
+        io.emit("remote-console", `FROM SERVER, receiver had joined:${receiverId} `)
+        // remoteConsole(`FROMSERVER: receiver has joined, ID: ${receiverId}`)
+        // console.log("receiver has joined, ID: ",receiverId)
     })
 
     // When a peer connects, notify others
-    socket.on('peer-connected', (peerId) => {
-        console.log(`Peer connected: ${peerId[1]}`);
-        socket.to(peerId[1]).emit("receiver-peer-present", receiverId)
+    socket.on('peer-connected', (id) => {
+        io.emit("remote-console", `FROM SERVER: Peer connected: ${id} `)
+        // console.log(`Peer connected: ${peerId}`);
+        socket.to(id).emit("receiver-peer-present", receiverId)
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
     })
 

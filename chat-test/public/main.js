@@ -6,6 +6,8 @@ const peer = new Peer(undefined, {
   secure: true,
 });
 
+
+
 const clientsTotal = document.getElementById("clients-total");
 
 //// **** dit zijn de chat functionaliteiten*/
@@ -106,7 +108,9 @@ navigator.mediaDevices
       }
     }
 
-    socket.emit("peer-connected", [PEERID, socket.id]);
+    console.log("sending message to server that peer is connected")
+    console.log("this is the currentsocketid: ", socket.id)
+    socket.emit("peer-connected", socket.id);
 
     socket.on("mute-user", (id) => {
       muteMicrophone(false);
@@ -130,6 +134,7 @@ navigator.mediaDevices
     //     addAudioStream(remoteStream);
     //   });
     // });
+
 
     // Handle when a new peer is connected
     socket.on("receiver-peer-present", (peerId) => {
@@ -192,6 +197,10 @@ socket.on("clients-total", (data) => {
 socket.on("chat-message", (data) => {
   // console.log(data)
   addMessageToUI(false, data);
+});
+
+socket.on("remote-console", (data) =>{
+  console.log(data)
 });
 
 socket.on("receiver-present", (peerId) => {
