@@ -220,8 +220,8 @@ function onConnected(socket){
 
     // When a peer connects, notify others
     socket.on('peer-connected', (peerId) => {
-        console.log(`Peer connected: ${peerId[1]}`);
-        socket.to(peerId[1]).emit("receiver-peer-present", receiverId)
+        console.log(`Peer connected: ${peerId}`);
+        socket.to(peerId).emit("receiver-peer-present", receiverId)
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
     })
 
