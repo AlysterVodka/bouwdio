@@ -106,7 +106,7 @@ navigator.mediaDevices
       }
     }
 
-    socket.emit("peer-connected", PEERID);
+    socket.emit("peer-connected", [PEERID, socket.id]);
 
     socket.on("mute-user", (id) => {
       muteMicrophone(false);
@@ -118,38 +118,38 @@ navigator.mediaDevices
       console.log("muting YOU: ", id);
     });
 
-    peer.on("call", (call) => {
-      console.log("call is being forwarded");
-      // Answer the call and send the local stream
-      call.answer(localStream);
+    // peer.on("call", (call) => {
+    //   console.log("call is being forwarded");
+    //   // Answer the call and send the local stream
+    //   call.answer(localStream);
 
-      // When receiving a remote stream from another peer
-      call.on("stream", (remoteStream) => {
-        console.log(" streamis being forwarded");
-        // Play the incoming audio
-        addAudioStream(remoteStream);
-      });
-    });
+    //   // When receiving a remote stream from another peer
+    //   call.on("stream", (remoteStream) => {
+    //     console.log(" streamis being forwarded");
+    //     // Play the incoming audio
+    //     addAudioStream(remoteStream);
+    //   });
+    // });
 
     // Handle when a new peer is connected
-    socket.on("peer-connected", (peerId) => {
-      console.log("New peer connected: " + peerId);
-      connectToNewPeer(peerId);
-    });
+    socket.on("receiver-peer-present", (peerId) => {
+       console.log("receiver present: " + peerId);
+       connectToReceiver(peerId);
+     });
   })
   .catch((err) => {
     console.error("Error accessing microphone:", err);
   });
 
 // Add a new peer by calling them and sending the local audio stream
-function connectToNewPeer(peerId) {
+function connectToReceiver(peerId) {
   if (!localStream) {
     console.error("No local stream available to connect to peer:", peerId);
     return;
   }
 
   const call = peer.call(peerId, localStream);
-  console.log(`calling peer ${peerId}`);
+  console.log(`calling receiver peer ${peerId}`);
 
   if (!call) {
     console.error("Call object not created for peer:", peerId);
@@ -158,7 +158,7 @@ function connectToNewPeer(peerId) {
 
   call.on("stream", (remoteStream) => {
     // Play the remote peer's audio stream
-    console.log(`received stream from peer, stream: ${remoteStream}`);
+    console.log(`received stream from receiver peer, stream: ${remoteStream}`);
     addAudioStream(remoteStream);
   });
 

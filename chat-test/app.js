@@ -13,6 +13,8 @@ const path = require('path')
 const PORT = process.env.PORT || 8443
 let socketsConnected = new Set()
 
+let receiverId;
+
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -204,7 +206,6 @@ function onConnected(socket){
                 socket.to(id).emit('UNmute-user')
             }
         }
-
     })
 
     socket.on('message', (data) =>{
@@ -212,9 +213,14 @@ function onConnected(socket){
         socket.broadcast.emit('chat-message', data)
     })
 
+    socket.on("receiver-log-on", (id) =>{
+        receiverId = id;
+    })
+
     // When a peer connects, notify others
     socket.on('peer-connected', (peerId) => {
-        console.log(`Peer connected: ${peerId}`);
+        console.log(`Peer connected: ${peerId[0]}`);
+        socket.to(peerId[1]).emit("receiver-peer-present", receiverId)
         socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
     })
 
