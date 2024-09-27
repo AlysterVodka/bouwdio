@@ -27,53 +27,7 @@ let localStream;
 ///////drawing section
 
 /////// ***** deze gaat dus aanpassen en wordt waarschijnlijk een div met vierkante "pixels" erin
-const canvas = document.getElementById("drawing-board");
-const ctx = canvas.getContext("2d");
-ctx.clearRect(0, 0, canvas.width, canvas.height);
-let drawing = false;
-let brushSize = 10;
-ctx.strokeStyle = "rgba(255,255,255,1)";
-ctx.globalCompositeOperation = "source-over";
 
-canvas.addEventListener("mousedown", () => (drawing = true));
-canvas.addEventListener("mouseup", () => {
-  drawing = false;
-  ctx.beginPath();
-});
-
-canvas.addEventListener("mousemove", (e) => {
-  if (drawing) {
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    ctx.lineWidth = brushSize;
-    ctx.lineCap = "round";
-    ctx.lineTo(x, y);
-    ctx.stroke();
-  }
-});
-
-//// *** Dit heb ik allemaal van jou over genomen
-//// *** En volgens mij hoef je lager dan drawing board niet meer te kijken!
-const toolsWindow = document.getElementById("board");
-const toolsHeader = document.getElementById("board-header");
-let offsetX = 0,
-  offsetY = 0,
-  isDragging = false;
-
-toolsHeader.addEventListener("mousedown", (e) => {
-  isDragging = true;
-  offsetX = e.clientX - toolsWindow.offsetLeft;
-  offsetY = e.clientY - toolsWindow.offsetTop;
-});
-
-document.addEventListener("mouseup", () => (isDragging = false));
-document.addEventListener("mousemove", (e) => {
-  if (isDragging) {
-    toolsWindow.style.left = `${e.clientX - offsetX}px`;
-    toolsWindow.style.top = `${e.clientY - offsetY}px`;
-  }
-});
 
 ///////// drawing section closed
 
