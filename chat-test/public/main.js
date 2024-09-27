@@ -138,7 +138,7 @@ navigator.mediaDevices
 
     // Handle when a new peer is connected
     socket.on("receiver-peer-present", (peerId) => {
-       console.log("receiver present: " + peerId);
+       console.log("starting to call RECEIVER: " + peerId);
        connectToReceiver(peerId);
      });
   })
