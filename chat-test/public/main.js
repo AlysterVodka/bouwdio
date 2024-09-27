@@ -217,3 +217,42 @@ function scrolltoBottom() {
 function updateSignalIndicator(hasSignal) {
   signalCircle.style.backgroundColor = hasSignal ? "green" : "red";
 }
+
+///------ Alyster toevoegingen ----/// 
+
+let selectedPattern = "assets/images/wood1.png"; /// pattern selector
+const allContent = document.getElementById("all-content"); /// container voor gehele pagina [voor verbergen]
+const pauseStatusWindow = document.getElementById("pause-status-window");
+const connectPauseButton = document.getElementById("connect-pause-button");
+let drawing = false;
+let isPaused = false; // Pauzeknop
+let audioStreamActive = false;
+let micStreamActive = false;
+
+// Set default pattern
+const img = new Image();
+img.src = selectedPattern;
+img.onload = () => {
+  const pattern = ctx.createPattern(img, "repeat");
+  ctx.strokeStyle = pattern;
+};
+
+// Functie om de pauzeknop te beheren
+connectPauseButton.addEventListener("click", function () {
+  if (!isPaused) {
+    // Verberg de content en toon de pauzestatus
+    allContent.style.display = "none"; // Verberg de content
+    pauseStatusWindow.style.display = "block"; // Toon het statusvenster
+    pauseStatusWindow.innerHTML = `
+      <h2>PAUSE</h2>
+      <p>Audio status: ${audioStreamActive ? "Active" : "Inactive"}</p>
+      <p>Microphone status: ${micStreamActive ? "Active" : "Inactive"}</p>
+    `;
+    isPaused = true;
+  } else {
+    // Toon de content en verberg de pauzestatus
+    allContent.style.display = "block"; // Toon de content
+    pauseStatusWindow.style.display = "none"; // Verberg het statusvenster
+    isPaused = false;
+  }
+});
