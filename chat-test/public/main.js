@@ -6,6 +6,10 @@ const peer = new Peer(undefined, {
   secure: true,
 });
 
+socket.on("remote-console", (data) =>{
+  console.log(data)
+})
+
 const clientsTotal = document.getElementById("clients-total");
 
 //// **** dit zijn de chat functionaliteiten*/
@@ -132,9 +136,6 @@ navigator.mediaDevices
     //   });
     // });
 
-    socket.on("remote-console", data =>{
-      console.log("data")
-    })
 
     // Handle when a new peer is connected
     socket.on("receiver-peer-present", (peerId) => {
