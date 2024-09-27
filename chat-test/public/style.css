@@ -29,7 +29,7 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../images/test_pointillised.png');
+  background-image: url('../assets/images/test_pointillised.png');
   background-repeat: repeat;
   background-size: 100vw;
   box-sizing: border-box;
