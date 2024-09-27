@@ -20,6 +20,8 @@ peer.on("open", (peerId) => {
   // Notify others that a new peer has joined
 });
 
+console.log("peer: ", peer)
+
 
 
 ////             MAAK STREAM               ///////
@@ -29,6 +31,8 @@ const audioContext = new AudioContext();
 // Create an empty MediaStream using MediaStreamDestination
 const destination = audioContext.createMediaStreamDestination();
 const emptyStream = destination.stream;
+
+console.log(" audiop stream : ", emptyStream)
 
 
 function addToStream(emptyStream, remotestream) {
@@ -58,7 +62,7 @@ peer.on("call", (call) => {
   call.answer(emptyStream);
   // When receiving a remote stream from another peer
   call.on("stream", (remoteStream) => {
-    console.log(" stream is being forwarded");
+    console.log("stream is being forwarded");
     addToStream(emptyStream, remoteStream)
     // Play the incoming audio
 

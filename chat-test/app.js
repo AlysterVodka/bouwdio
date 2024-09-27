@@ -215,13 +215,14 @@ function onConnected(socket){
 
     socket.on("receiver-log-on", (id) =>{
         receiverId = id;
+        console.log("receiver has joined, ID: ",receiverId)
     })
 
     // When a peer connects, notify others
     socket.on('peer-connected', (peerId) => {
-        console.log(`Peer connected: ${peerId[0]}`);
+        console.log(`Peer connected: ${peerId[1]}`);
         socket.to(peerId[1]).emit("receiver-peer-present", receiverId)
-        socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
+        // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
     })
 
     // Handle a peer disconnecting and notify others
