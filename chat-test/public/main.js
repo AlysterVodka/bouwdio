@@ -244,7 +244,7 @@ connectPauseButton.addEventListener("click", function () {
     allContent.style.display = "none"; // Verberg de content
     pauseStatusWindow.style.display = "block"; // Toon het statusvenster
     pauseStatusWindow.innerHTML = `
-      <h2>PAUSE</h2>
+      <h2>PAUSE - debug - replace with image</h2>
       <p>Audio status: ${audioStreamActive ? "Active" : "Inactive"}</p>
       <p>Microphone status: ${micStreamActive ? "Active" : "Inactive"}</p>
     `;
