@@ -1,19 +1,16 @@
 const fs = require('fs')
-const http = require('http')
+const https = require('https')
 const express = require('express')
 
 ///////// SETUP APP PORT ///////////////////////////
 const app = express()
-const server = http.createServer(
-    //{
-   // key: fs.readFileSync('certs/localhost-key.pem'),
-   // cert: fs.readFileSync('certs/localhost.pem')},
+const server = https.createServer({
+    key: fs.readFileSync('certs/localhost-key.pem'),
+    cert: fs.readFileSync('certs/localhost.pem')},
     app)
 const path = require('path')
 const PORT = process.env.PORT || 8443
 let socketsConnected = new Set()
-
-let receiverId;
 
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -31,6 +28,14 @@ app.get("/host", (req, res) => {
 });
 
 const io = require('socket.io')(server)
+const {ExpressPeerServer} = require('peer')
+const peerServer = ExpressPeerServer(server, {
+    debug: true
+})
+
+console.log("peerserver is: ", peerServer);
+app.use('/peerjs', peerServer)
+
 
 ////////// CHECK IP /////////////////////////////////////
 const DATA_FILE = path.join(__dirname, 'blacklist.json');
@@ -206,6 +211,7 @@ function onConnected(socket){
                 socket.to(id).emit('UNmute-user')
             }
         }
+
     })
 
     socket.on('message', (data) =>{
@@ -213,16 +219,10 @@ function onConnected(socket){
         socket.broadcast.emit('chat-message', data)
     })
 
-    socket.on("receiver-log-on", (id) =>{
-        receiverId = id;
-        console.log("receiver has joined, ID: ",receiverId)
-    })
-
     // When a peer connects, notify others
     socket.on('peer-connected', (peerId) => {
-        console.log(`Peer connected: ${peerId[1]}`);
-        socket.to(peerId[1]).emit("receiver-peer-present", receiverId)
-        // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
+        console.log(`Peer connected: ${peerId}`);
+        socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
     })
 
     // Handle a peer disconnecting and notify others

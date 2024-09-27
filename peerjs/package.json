@@ -1,0 +1,14 @@
+{
+  "name": "peerjs",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "peer": "^1.0.2"
+  }
+}
