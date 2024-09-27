@@ -106,6 +106,7 @@ function saveDictionary(dictionary) {
 
 // Load the dictionary into memory
 let dictionary = loadDictionary();
+let peerSocketIDMap = {}
 freshStart();
 
 
@@ -123,6 +124,12 @@ function updateMuted(key, mute) {
         saveDictionary(dictionary);  // Save the updated dictionary to the file
         io.emit('users-reloaded', dictionary)
     }
+
+function updatetrackpos(key, position) {
+    dictionary[key][2] = mute;  // Set the key-value pair
+    saveDictionary(dictionary);  // Save the updated dictionary to the file
+    io.emit('users-reloaded', dictionary)
+}
 
 
 function removeKey(key) {
@@ -153,7 +160,7 @@ io.use((socket, next) => {
         let id = socket.id;  // Assuming username is passed as a query parameter
 
         io.emit('socket-connected', id)
-        setKeyValue(id, [userIP, 0]);
+        setKeyValue(id, [userIP, 0, 0]);
         console.log("this is the ip", userIP, "this is the username", id)
 
     // if (blacklist.includes(userIP) || blacklist.includes(username)) {
@@ -223,10 +230,16 @@ function onConnected(socket){
 
     // When a peer connects, notify others
     socket.on('peer-connected', (id) => {
+        peerSocketIDMap[id] = peerid
         io.emit("remote-console", `FROM SERVER: Peer connected: ${id} `)
         // console.log(`Peer connected: ${peerId}`);
         io.to(id).emit("receiver-peer-present", receiverId)
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
+    })
+
+    socket.on("track-updated", (id, position)=>{
+        io.emit("remote-console", `socket id map : ${peerSocketIDMap[id]}`)
+        updatetrackpos(peerSocketIDMap[id], position)
     })
 
     // Handle a peer disconnecting and notify others

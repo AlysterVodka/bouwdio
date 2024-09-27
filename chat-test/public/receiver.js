@@ -40,6 +40,10 @@ function addToStream(emptyStream, remotestream) {
 
   console.log("audiotracks amount:", emptyStream.getAudioTracks().length);
 
+  trackPosition =  emptyStream.getAudioTracks().length+1
+
+  socket.emit("track-updated", (peerId, trackPosition))
+
   if (remotestream) {
       const audioTracks = remotestream.getAudioTracks();
       if (audioTracks.length > 0) {
@@ -62,11 +66,12 @@ peer.on("call", (call) => {
   console.log("call is being forwarded");
   // Answer the call and send the local stream
 
+  console.log(call.peer)
   call.answer(emptyStream);
   // When receiving a remote stream from another peer
   call.on("stream", (remoteStream) => {
     console.log("stream is being forwarded");
-    addToStream(emptyStream, remoteStream)
+    addToStream(emptyStream, remoteStream, call.peer)
     // Play the incoming audio
 
     console.log("Stream tracks:", remoteStream.getTracks());
