@@ -38,7 +38,7 @@ console.log(" audiop stream : ", emptyStream)
 function addToStream(emptyStream, remotestream) {
   console.log("trying to add stream")
 
-  console.log("audiotracks amount:", stream.getAudioTracks().length);
+  console.log("audiotracks amount:", emptyStream.getAudioTracks().length);
 
   if (remotestream) {
       const audioTracks = remotestream.getAudioTracks();
