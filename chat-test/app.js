@@ -189,6 +189,8 @@ function onConnected(socket){
     socketsConnected.add(socket.id)
     io.emit('clients-total',socketsConnected.size)
 
+    remoteConsole("this is a test message")
+
 
     socket.on('disconnect', ()=>{
         console.log('socket disconnected', socket.id)
@@ -223,7 +225,7 @@ function onConnected(socket){
 
     // When a peer connects, notify others
     socket.on('peer-connected', () => {
-        remoteConsole(`Peer connected:`)
+        remoteConsole("Peer connected:")
         // console.log(`Peer connected: ${peerId}`);
         socket.to(peerId).emit("receiver-peer-present", receiverId)
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
