@@ -107,7 +107,7 @@ navigator.mediaDevices
     }
 
     console.log("sending message to server that peer is connected")
-    socket.emit("peer-connected", socket.id);
+    socket.emit("peer-connected");
 
     socket.on("mute-user", (id) => {
       muteMicrophone(false);

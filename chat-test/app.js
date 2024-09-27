@@ -217,13 +217,13 @@ function onConnected(socket){
 
     socket.on("receiver-log-on", (id) =>{
         receiverId = id;
-        remoteConsole(`FROMSERVER: receiver has joined, ID: ${receiverId}`)
+        // remoteConsole(`FROMSERVER: receiver has joined, ID: ${receiverId}`)
         // console.log("receiver has joined, ID: ",receiverId)
     })
 
     // When a peer connects, notify others
-    socket.on('peer-connected', (peerId) => {
-        remoteConsole(`Peer connected: ${peerId}`)
+    socket.on('peer-connected', () => {
+        remoteConsole(`Peer connected:`)
         // console.log(`Peer connected: ${peerId}`);
         socket.to(peerId).emit("receiver-peer-present", receiverId)
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
