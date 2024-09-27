@@ -1,0 +1,301 @@
+@font-face {
+  font-family: 'Redaction-Regular';
+  src: url('../fonts/Redaction-Regular.woff2') format('woff2'),
+       url('../fonts/Redaction-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Redaction-Bold';
+  src: url('../fonts/Redaction-Bold.woff2') format('woff2'),
+       url('../fonts/Redaction-Bold.otf') format('opentype');
+}
+
+:root {
+  --background-gray: #D9D9D9;
+  --header-gray: #D9D9D9;
+  --button-grey: #626262;
+  --chat-send: #fbcc00;
+  --chat-receive: #c1c1c1;
+  --slider-colour: #fbcc00;
+  --line-color: black;
+  --line-width: 6px;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica', sans-serif;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../images/test_pointillised.png');
+  background-repeat: repeat;
+  background-size: 100vw;
+  box-sizing: border-box;
+}
+
+#status-window {
+  position: flex;
+  top: 10px;
+  right: 10px;
+  width: 200px;
+  padding: 10px;
+  background-color: var(--background-gray);
+  color: white;
+  border: 2px solid white;
+  font-family: 'Redaction-Regular', sans-serif;
+  font-size: 14px;
+  z-index: 1000;
+}
+
+#pause-status-window {
+  display: none;
+  position: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 2;
+  bottom: 10px;
+  right: 10px;
+  padding: 20px;
+  background-color: var(--background-gray);
+  border: var(--line-width) solid var(--line-color);
+  color: black;
+  z-index: 1000;
+}
+
+#main-container {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: row;
+  height: 90vh;
+  width: 90vw;
+  box-sizing: border-box;
+}
+
+#bouwdio-am {
+  display: flex;
+  flex-direction: column;
+  width: 85vw;
+  height: 80vh;
+  box-sizing: border-box;
+}
+
+#bouwdio-am-header {
+  background-color: var(--header-gray);
+  font-family: 'Redaction-Bold', serif;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-left: var(--line-width) solid var(--line-color);
+  border-right: var(--line-width) solid var(--line-color);
+  border-bottom: var(--line-width) solid var(--line-color);
+  border-top: var(--line-width) solid var(--line-color);
+}
+
+#info-content {
+  padding: 20px;
+  background-color: var(--background-gray);
+  height: 100px;
+  border-left: var(--line-width) solid var(--line-color);
+  border-right: var(--line-width) solid var(--line-color);
+}
+
+#chat-window {
+  background-color: var(--background-gray);
+  height: 700px;
+  border: var(--line-width) solid var(--line-color);
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+#chat-iframe {
+  width: 100vh; /*change in chat_style.css*/
+  height: 100vw;
+  border: 0;
+}
+
+#bottom-right-container {
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+  display: flex;
+  gap: 60px;
+  align-items: left;
+}
+
+#connect-pause-button {
+  width: 100px;
+  height: 100px;
+  background-color: var(--button-grey);
+  color: var(--background-gray);
+  font-family: 'Redaction-Bold', serif;
+  font-size: 21px;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center;
+  border: var(--line-width) solid var(--line-color);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#connect-pause-button:hover {
+  background-color: var(--line-color); /* Change to line color (black) */
+  color: white; /* Text color changes to white */
+}
+
+#vpro-logo img {
+  width: 260px; /* Adjust size as needed */
+  height: 100px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  background-color: var(--background-gray);
+  border: var(--line-width) solid var(--line-color);
+}
+
+
+/* -------------- chat css ---------------*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  background-color: #ebebeb;
+}
+
+.main {
+  border: 8px solid #dddddd;
+  border-radius: 24px;
+}
+
+.name {
+  display: flex;
+  font-size: 32px;
+  font-weight: 700;
+  padding: 8px 16px;
+  color: #707070;
+  background-color: #ebebeb;
+}
+
+.name > span {
+  color: var(--background-gray);
+}
+
+.name-input {
+  font-size: 21px;
+  padding: 10px;
+  font-weight: 700;
+  color: #707070;
+  flex-grow: 1;
+  border: 0;
+  margin: 0 12px;
+  outline: none;
+  text-align: center;
+  background-color: var(--header-gray);
+}
+
+/* Match Flexbox and sizing from #bouwdio-am */
+.message-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--header-gray);
+  width: 100%; /* Take full width of parent container */
+  height: 40vh; /* Take full height of parent container */
+  overflow-y: auto;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.message-left, .message-right {
+  list-style: none;
+  padding: 8px 12px;
+  margin: 12px;
+  max-width: 250px;
+  font-size: 18px;
+  word-wrap: break-word;
+}
+
+.message-left {
+  border-radius: 20px 20px 20px 0px;
+  align-self: flex-start;
+  background-color: var(--chat-receive);
+  box-shadow: -2px 2px 4px #dcdcdc;
+}
+
+.message-right {
+  border-radius: 20px 20px 0px 20px;
+  align-self: flex-end;
+  background-color: var(--chat-send);
+  box-shadow: 2px 2px 4px #dcdcdc;
+}
+
+.message-left > p > span, .message-right > p > span {
+  display: block;
+  font-style: italic;
+  font-size: 12px;
+  margin-top: 4px;
+  align-self: center;
+}
+
+.feedback {
+  font-style: italic;
+  font-size: 14px;
+  padding: 0px 16px 16px 16px;
+  color: #2d2d2d;
+  background-color: #f6f6f6;
+  text-align: center;
+}
+
+.message-form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Match parent width */
+}
+
+.message-input {
+  flex-grow: 1;
+  height: 48px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  padding: 0 12px;
+  background-color: #fff;
+}
+
+.send-button {
+  height: 48px;
+  font-size: 16px;
+  border: none;
+  padding: 0px 20px;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.v-divider {
+  width: 2px;
+  height: 48px;
+  background-color: #f6f6f6;
+}
+
+.clients-total {
+  margin: 0px 0;
+  padding: 10px;
+  color: #7e7e7e;
+}
+
+.signal-circle {
+  width: 30px;
+  margin: 0 auto;
+  height: 30px;
+  border: 5px solid black;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
