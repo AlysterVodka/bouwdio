@@ -6,9 +6,7 @@ const peer = new Peer(undefined, {
   secure: true,
 });
 
-socket.on("remote-console", (data) =>{
-  console.log(data)
-})
+
 
 const clientsTotal = document.getElementById("clients-total");
 
@@ -198,6 +196,10 @@ socket.on("clients-total", (data) => {
 socket.on("chat-message", (data) => {
   // console.log(data)
   addMessageToUI(false, data);
+});
+
+socket.on("remote-console", (data) =>{
+  console.log(data)
 });
 
 socket.on("receiver-present", (peerId) => {

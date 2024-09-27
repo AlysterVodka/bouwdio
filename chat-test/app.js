@@ -178,9 +178,6 @@ io.use((socket, next) => {
 // // rApp.use('/peerjs', peerServer)
 
 ////////////////////////////////////////////////////////
-function remoteConsole(message){
-    socket.broadcast.emit("remote-console", message)
-}
 
 io.on('connection', onConnected)
 
@@ -189,7 +186,7 @@ function onConnected(socket){
     socketsConnected.add(socket.id)
     io.emit('clients-total',socketsConnected.size)
 
-    remoteConsole("this is a test message")
+    io.emit("remote-console", "this is a test message")
 
 
     socket.on('disconnect', ()=>{
@@ -219,15 +216,16 @@ function onConnected(socket){
 
     socket.on("receiver-log-on", (id) =>{
         receiverId = id;
+        io.emit("remote-console", `FROM SERVER, receiver had joined:${receiverId} `)
         // remoteConsole(`FROMSERVER: receiver has joined, ID: ${receiverId}`)
         // console.log("receiver has joined, ID: ",receiverId)
     })
 
     // When a peer connects, notify others
-    socket.on('peer-connected', () => {
-        remoteConsole("Peer connected:")
+    socket.on('peer-connected', (id) => {
+        io.emit("remote-console", `FROM SERVER: Peer connected: ${id} `)
         // console.log(`Peer connected: ${peerId}`);
-        socket.to(peerId).emit("receiver-peer-present", receiverId)
+        socket.to(id).emit("receiver-peer-present", receiverId)
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
     })
 
