@@ -1,12 +1,13 @@
 const fs = require('fs')
-const https = require('https')
+const http = require('http')
 const express = require('express')
 
 ///////// SETUP APP PORT ///////////////////////////
 const app = express()
-const server = https.createServer({
-   key: fs.readFileSync('certs/localhost-key.pem'),
-   cert: fs.readFileSync('certs/localhost.pem')},
+const server = http.createServer(
+    //{
+   // key: fs.readFileSync('certs/localhost-key.pem'),
+   // cert: fs.readFileSync('certs/localhost.pem')},
     app)
 const path = require('path')
 const PORT = process.env.PORT || 8443
