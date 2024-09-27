@@ -257,3 +257,76 @@ connectPauseButton.addEventListener("click", function () {
   }
 });
 
+document.querySelectorAll(".material").forEach((material) => {
+  material.addEventListener("click", () => {
+    // Herstel alle knoppen naar hun oorspronkelijke materiaalpreview en verwijder selectie van gum
+    document.querySelectorAll(".material").forEach((el) => {
+      el.classList.remove("selected");
+      const imgUrl = el.getAttribute("data-image-url"); // Sla de originele URL op
+      el.style.backgroundImage = `url(${imgUrl})`; // Herstel de materiaalpreview
+      el.style.backgroundColor = ""; // Verwijder de zwarte achtergrondkleur
+    });
+
+    // Verwijder de selectie van de gum
+    const eraser = document.getElementById("eraser-button");
+    eraser.classList.remove("selected");
+    eraser.style.backgroundColor = ""; // Herstel de achtergrondkleur van de gum
+
+    // Verander de achtergrond van de geselecteerde knop naar zwart en verberg de materiaalpreview
+    material.classList.add("selected");
+    material.style.backgroundImage = "none"; // Verberg de materiaalpreview
+    material.style.backgroundColor = "black"; // Zet de achtergrond op zwart
+
+    // Update het tekenpatroon
+    const imgUrl = material.getAttribute("data-image-url");
+    const img = new Image();
+    img.src = imgUrl;
+    img.onload = () => {
+      const pattern = ctx.createPattern(img, "repeat");
+      ctx.strokeStyle = pattern;
+      ctx.globalCompositeOperation = "source-over"; // Zorg dat je weer "normaal" tekent
+    };
+  });
+});
+
+// Behandel de eraser apart
+document.getElementById("eraser-button").addEventListener("click", () => {
+  // Herstel alle materiaal knoppen en verwijder hun selectie
+  document.querySelectorAll(".material").forEach((el) => {
+    el.classList.remove("selected");
+    const imgUrl = el.getAttribute("data-image-url"); // Sla de originele URL op
+    el.style.backgroundImage = `url(${imgUrl})`; // Herstel de materiaalpreview
+    el.style.backgroundColor = ""; // Verwijder de zwarte achtergrondkleur
+  });
+
+  // Zet de gum als geselecteerd
+  const eraser = document.getElementById("eraser-button");
+  eraser.classList.add("selected");
+  eraser.style.backgroundColor = "black"; // Zwart voor geselecteerde gum
+
+  // Zet de gum functie in de canvas
+  ctx.globalCompositeOperation = "destination-out"; // Gum modus inschakelen
+});
+
+// Draggable window
+const onlineBuildingWindow = document.getElementById("online-building-window");
+const header = document.getElementById("online-building-header");
+let offsetX,
+  offsetY,
+  isDragging = false;
+
+header.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  offsetX = e.clientX - onlineBuildingWindow.offsetLeft;
+  offsetY = e.clientY - onlineBuildingWindow.offsetTop;
+});
+
+document.addEventListener("mouseup", () => (isDragging = false));
+document.addEventListener("mousemove", (e) => {
+  if (isDragging) {
+    let newX = e.clientX - offsetX;
+    let newY = e.clientY - offsetY;
+    onlineBuildingWindow.style.left = `${newX}px`;
+    onlineBuildingWindow.style.top = `${newY}px`;
+  }
+});
