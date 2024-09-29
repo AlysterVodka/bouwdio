@@ -41,6 +41,7 @@ document.getElementById('audio-refresh').addEventListener('click', refreshAudio)
 
 
 function refreshAudio(){
+  audioContext.resume()
   audioElement.srcObject = destination.stream;
   console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
   const audioTracks = audioElement.srcObject.getAudioTracks();
