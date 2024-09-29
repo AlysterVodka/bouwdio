@@ -39,6 +39,8 @@ gainNode.connect(audioContext.destination);
 
 // console.log(" audiop stream : ", emptyStream)
 
+
+
 audioElement = document.createElement("audio");
 document.body.appendChild(audioElement); // Add to DOM
 document.getElementById('audio-refresh').addEventListener('click', refreshAudio);
@@ -50,6 +52,8 @@ function refreshAudio(){
       console.log("AudioContext resumed after user interaction.");
     });
   }
+
+
   // audioElement.srcObject = destination.stream;
   // console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
   // const audioTracks = audioElement.srcObject.getAudioTracks();
