@@ -26,9 +26,9 @@ socket.on('send-receiver-id', ()=>{
 })
 
 
-function individual_stream(AUDIOcontext, muteTRACK, combinedSTREAM) {
+function individual_stream(AUDIOcontext, combinedSTREAM) {
   this.combinedSTREAM = combinedSTREAM;
-  this.muteTRACK = muteTRACK;
+  this.muteTRACK = 0;
   this.destination = 0;
   this.AUDIOcontext = AUDIOcontext
   this.finalstream = 0;
@@ -166,7 +166,7 @@ peer.on("call", (call) => {
   // console.log("call is being forwarded");
   // Answer the call and send the local stream
 
-  const STREAM = new individual_stream(audioContext, trackPosition, combinedStream)
+  const STREAM = new individual_stream(audioContext, combinedStream)
   console.log(STREAM)
   STREAM.setDestination()
   streams.push(STREAM)
