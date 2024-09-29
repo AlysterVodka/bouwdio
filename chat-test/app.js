@@ -233,7 +233,7 @@ function onConnected(socket){
         const bothDefined = ids.every(item => item !== undefined);
         if(bothDefined){
             io.emit("remote-console", `ids [0] , ${ids[0]}, ids [1] , ${ids[1]}`)
-            peerSocketIDMap[ids[0]] = ids[1]
+            peerSocketIDMap[ids[1]] = ids[0]
             io.emit("remote-console", peerSocketIDMap)
             io.emit("remote-console", `FROM SERVER: Peer connected: ${ids[1]} `)
             // console.log(`Peer connected: ${peerId}`);
@@ -243,7 +243,7 @@ function onConnected(socket){
     })
 
     socket.on("track-updated", (id, position)=>{
-        io.emit("remote-console", `socket id map : ${peerSocketIDMap[id]}`)
+        io.emit("remote-console", `socket id map : ${id}, track position : ${position}, peertsocketid : ${peerSocketIDMap[id]}`)
         updatetrackpos(peerSocketIDMap[id], position)
     })
 

@@ -77,10 +77,10 @@ peer.on("call", (call) => {
     console.log("Stream tracks:", remoteStream.getTracks());
 
     // videoElement.setAttribute("muted:1" || "allow:autoplay" || "width:400" ||"height:300"|| "class:received-video") ;
-    console.log("videoelement:", videoElement);
-    videoElement.srcObject = remoteStream;
-    console.log("videoelement:", videoElement);
-    videoElement.play();
+    // console.log("videoelement:", videoElement);
+    // videoElement.srcObject = remoteStream;
+    // console.log("videoelement:", videoElement);
+    // videoElement.play();
   });
 });
 
