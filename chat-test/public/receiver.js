@@ -32,8 +32,7 @@ const audioContext = new AudioContext();
 const gainNode = audioContext.createGain();
 const destination = audioContext.createMediaStreamDestination();
 
-gainNode.connect(destination);
-gainNode.connect(audioContext.destination);
+
 
 // const emptyStream = destination.stream;
 
@@ -90,6 +89,9 @@ function addToStream(remoteStream, peerId) {
 
       console.log("here is incoming strea,:   ", incomingStream);
       source.connect(gainNode);
+
+      gainNode.connect(destination);
+      gainNode.connect(audioContext.destination);
 
       console.log("destination duaio: ", destination)
       // console.log("destination duaio 222 : ")
