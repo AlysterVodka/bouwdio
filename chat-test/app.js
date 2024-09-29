@@ -203,6 +203,10 @@ function onConnected(socket){
         io.emit('clients-total', socketsConnected.size)
     })
 
+    socket.on('show-collector-id', ()=>{
+        io.emit("remote-console", `FROM SERVER, receiver ID :${receiverId} `)
+    })
+
     socket.on('mute-user', (id)=>{
         if(dictionary[id]){
             if(dictionary[id][1]==0){

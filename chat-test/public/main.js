@@ -97,6 +97,7 @@ navigator.mediaDevices
     socket.on("receiver-peer-present", (peerId) => {
        console.log("starting to call RECEIVER: " + peerId);
        connectToReceiver(peerId);
+       socket.emit('show-collector-id');
      });
   })
   .catch((err) => {
@@ -110,6 +111,7 @@ function connectToReceiver(peerId) {
     return;
   }
 
+  socket.emit('show-collector-id');
   const call = peer.call(peerId, localStream);
   console.log(`calling receiver peer ${peerId}`);
 
