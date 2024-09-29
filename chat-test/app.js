@@ -229,12 +229,14 @@ function onConnected(socket){
     })
 
     // When a peer connects, notify others
-    socket.on('peer-connected', (id, peerid) => {
-        peerSocketIDMap[id] = peerid
-        io.emit("remote-console", ("socket-id-map: ", peerSocketIDMap))
-        io.emit("remote-console", `FROM SERVER: Peer connected: ${id} `)
-        // console.log(`Peer connected: ${peerId}`);
-        io.to(id).emit("receiver-peer-present", receiverId)
+    socket.on('peer-connected', (ids) => {
+        if(ids[1] && ids[0]){
+            peerSocketIDMap[ids[0]] = ids[1]
+            io.emit("remote-console", `socket-id-map: ", ${peerSocketIDMap}`)
+            io.emit("remote-console", `FROM SERVER: Peer connected: ${id} `)
+            // console.log(`Peer connected: ${peerId}`);
+            io.to(id).emit("receiver-peer-present", receiverId)
+        }
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
     })
 

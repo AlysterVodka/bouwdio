@@ -6,7 +6,7 @@ const peer = new Peer(undefined, {
   secure: true,
 });
 
-
+console.log("is UPDATED !!!!!")
 
 const clientsTotal = document.getElementById("clients-total");
 
@@ -64,7 +64,9 @@ navigator.mediaDevices
 
     console.log("sending message to server that peer is connected")
     console.log("this is the currentsocketid: ", socket.id)
-    socket.emit("peer-connected", (socket.id, PEERID));
+    console.log("this is the peerid: ", PEERID)
+    let sendlist = [socket.id, PEERID]
+    socket.emit("peer-connected", sendlist);
 
     socket.on("mute-user", (id) => {
       muteMicrophone(false);
