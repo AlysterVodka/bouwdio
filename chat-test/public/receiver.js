@@ -181,8 +181,7 @@ peer.on("call", (call) => {
     // console.log("stream is being forwarded");
 
     let stream = addToStream(remoteStream, call.peer)
-    console.log("AFTERATH STREAM: ", stream)
-    call.answer(stream.destination.stream);
+    console.log("AFTERMATH STREAM: ", stream)
     // Play the incoming audio
     // console.log("Stream tracks:", remoteStream.getTracks());
     // videoElement.setAttribute("muted:1" || "allow:autoplay" || "width:400" ||"height:300"|| "class:received-video") ;
@@ -191,6 +190,7 @@ peer.on("call", (call) => {
     // console.log("videoelement:", videoElement);
     // videoElement.play();
   });
+  call.answer(stream ? stream.destination.stream : null);
 
 
   // socket.emit("receiver-log-on", PEERID);
