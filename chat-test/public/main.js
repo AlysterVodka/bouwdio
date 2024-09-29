@@ -132,9 +132,9 @@ function connectToReceiver(peerId) {
   console.log("stream call has passed");
 
   // Store the peer connection
-  peers[peerId] = call;
+  // peers[peerId] = call;
 
-  console.log(peers);
+  // console.log(peers);
 }
 
 // Play the remote audio stream
@@ -162,31 +162,31 @@ socket.on("remote-console", (data) =>{
   console.log(data)
 });
 
-socket.on("receiver-present", (peerId) => {
-  console.log("receiver activated", peerId);
-  updateSignalIndicator(true);
+// socket.on("receiver-present", (peerId) => {
+//   console.log("receiver activated", peerId);
+//   updateSignalIndicator(true);
 
-  const streamImage = canvas.captureStream(30); // 30 FPS
+//   // const streamImage = canvas.captureStream(30); // 30 FPS
 
-  ///////////temp record CHECK///////////
-  console.log("Stream tracks:", streamImage.getTracks());
+//   ///////////temp record CHECK///////////
+//   // console.log("Stream tracks:", streamImage.getTracks());
 
-  videoElement = document.getElementById("received-video");
-  videoElement.srcObject = streamImage;
-  videoElement.play();
+//   // videoElement = document.getElementById("received-video");
+//   // videoElement.srcObject = streamImage;
+//   // videoElement.play();
 
-  console.log(streamImage);
-  // Connect to the receiver
-  const call = peer.call(peerId, streamImage);
+//   // console.log(streamImage);
+//   // Connect to the receiver
+//   // const call = peer.call(peerId, streamImage);
 
-  if (!call) {
-    console.error("Call object not created for peer:", peerId);
-    return;
-  } else {
-    console.log(call);
-    console.log("stream and call-elements");
-  }
-});
+//   // if (!call) {
+//   //   console.error("Call object not created for peer:", peerId);
+//   //   return;
+//   // } else {
+//   //   console.log(call);
+//   //   console.log("stream and call-elements");
+//   // }
+// });
 
 function sendMessage() {
   if (messageInput.value === "") return;

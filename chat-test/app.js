@@ -232,9 +232,9 @@ function onConnected(socket){
     socket.on('peer-connected', (ids) => {
         const bothDefined = ids.every(item => item !== undefined);
         if(bothDefined){
-            io.emit("remote-console", `ids [0] , ${ids[0]}, ids [1] , ${ids[1]}`)
+            // io.emit("remote-console", `ids [0] , ${ids[0]}, ids [1] , ${ids[1]}`)
             peerSocketIDMap[ids[1]] = ids[0]
-            io.emit("remote-console", peerSocketIDMap)
+            // io.emit("remote-console", peerSocketIDMap)
             io.emit("remote-console", `FROM SERVER: Peer connected    : ${ids[1]} `)
             // console.log(`Peer connected: ${peerId}`);
             io.to(ids[0]).emit("receiver-peer-present", receiverId)

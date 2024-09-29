@@ -138,6 +138,8 @@ peer.on("call", (call) => {
   });
   call.answer(destination.stream);
 
+  // socket.emit("receiver-log-on", PEERID);
+
 });
 
 function setAttributes(el, attrs) {
