@@ -130,8 +130,6 @@ function addToStream(remoteStream, peerId) {
         console.log("combined stream tracks: ", combinedStream.getTracks())
       });
 
-
-
       // const options = {
       //   mediaStream: remoteStream,
       // };
@@ -143,18 +141,17 @@ function addToStream(remoteStream, peerId) {
       // gainNode.connect(destination);
 
       streams.forEach((element) =>{
-        stream.combinedSTREAM = combinedStream
+        element.combinedSTREAM = combinedStream
       })
 
-      const stream = new individual_stream(audioContext, trackPosition, combinedStream)
+      const STREAM = new individual_stream(audioContext, trackPosition, combinedStream)
 
-      stream.destination()
-      streams.push(stream)
+      STREAM.destination()
+      streams.push(STREAM)
 
-      console.log("destination duaio: ", stream.destination.stream)
+      console.log("destination duaio: ", STREAM.destination.stream)
       // console.log("destination duaio 222 : ")
-      refreshAudio();
-      return stream
+      return STREAM
       // console.log('Microphone audio track added to the empty stream');
   }
 }
