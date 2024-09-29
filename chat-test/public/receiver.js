@@ -44,8 +44,9 @@ function addToStream(emptyStream, remotestream, peerId) {
 
   socket.emit("track-updated", [peerId, trackPosition])
 
-  if (remotestream) {
+  if (remotestream && emptyStream) {
       const audioTracks = remotestream.getAudioTracks();
+      console.log(audioTracks);
       if (audioTracks.length > 0) {
           emptyStream.addTrack(audioTracks[0]);
           console.log('Microphone audio track added to the empty stream');
