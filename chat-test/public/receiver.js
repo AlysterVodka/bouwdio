@@ -109,9 +109,10 @@ function refreshAudio(){
 }
 
 
-function addToStream(remoteStream, peerId) {
+function addToStream(remoteStream, peerId, STREAM) {
   console.log("audiotracks amount:", remoteStream.getAudioTracks().length);
   trackPosition =  remoteStream.getAudioTracks().length
+  STREAM.muteTRACK = trackPosition
   socket.emit("track-updated", [peerId, trackPosition])
 
   if (remoteStream.getAudioTracks().length === 0) {
@@ -145,16 +146,9 @@ function addToStream(remoteStream, peerId) {
         console.log("another streamin the loop:", element)
       })
 
-      const STREAM = new individual_stream(audioContext, trackPosition, combinedStream)
-
-      console.log(STREAM)
-
-      STREAM.setDestination()
-      streams.push(STREAM)
 
       console.log("destination duaio: ", STREAM.destination.stream)
       // console.log("destination duaio 222 : ")
-      return STREAM
       // console.log('Microphone audio track added to the empty stream');
   }
 }
@@ -171,7 +165,11 @@ function addToStream(remoteStream, peerId) {
 peer.on("call", (call) => {
   // console.log("call is being forwarded");
   // Answer the call and send the local stream
-  let stream
+
+  const STREAM = new individual_stream(audioContext, trackPosition, combinedStream)
+  console.log(STREAM)
+  STREAM.setDestination()
+  streams.push(STREAM)
   console.log(call.peer)
   // When receiving a remote stream from another peer
   call.on("stream", (remoteStream) => {
@@ -180,7 +178,7 @@ peer.on("call", (call) => {
     ///      addAudioStream(remoteStream);
     // console.log("stream is being forwarded");
 
-    stream = addToStream(remoteStream, call.peer)
+    stream = addToStream(remoteStream, call.peer, STREAM)
     console.log("AFTERMATH STREAM: ", stream)
     // Play the incoming audio
     // console.log("Stream tracks:", remoteStream.getTracks());
@@ -190,7 +188,8 @@ peer.on("call", (call) => {
     // console.log("videoelement:", videoElement);
     // videoElement.play();
   });
-  call.answer(stream ? stream.destination.stream : null);
+
+  call.answer(STREAM.destination.stream);
 
 
   // socket.emit("receiver-log-on", PEERID);
