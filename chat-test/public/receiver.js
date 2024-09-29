@@ -47,7 +47,9 @@ function refreshAudio(){
   audioTracks.forEach((track, index) => {
     console.log(`Track ${index} - Kind: ${track.kind}, Active: ${track.readyState}`);
   });
-  audioElement.play();
+  audioElement.play().catch((error) => {
+    console.log('Error playing audio:', error);
+  });
   console.log(audioElement);
 }
 
@@ -57,9 +59,16 @@ function addToStream(remoteStream, peerId) {
   trackPosition =  emptyStream.getAudioTracks().length
   socket.emit("track-updated", [peerId, trackPosition])
 
+  
+  if (remoteStream.getAudioTracks().length === 0) {
+    console.error('No audio tracks found in remote stream');
+  }
+
   if (remoteStream) {
       const incomingStream = audioContext.createMediaStreamSource(remoteStream);
+
       incomingStream.connect(destination);
+
       console.log("destination duaio: ", destination.stream)
       console.log("destination duaio 222 : ", emptyStream)
       refreshAudio();
