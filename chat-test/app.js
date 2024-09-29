@@ -235,9 +235,9 @@ function onConnected(socket){
             io.emit("remote-console", `ids [0] , ${ids[0]}, ids [1] , ${ids[1]}`)
             peerSocketIDMap[ids[0]] = ids[1]
             io.emit("remote-console", peerSocketIDMap)
-            io.emit("remote-console", `FROM SERVER: Peer connected: ${id} `)
+            io.emit("remote-console", `FROM SERVER: Peer connected: ${ids[1]} `)
             // console.log(`Peer connected: ${peerId}`);
-            io.to(id).emit("receiver-peer-present", receiverId)
+            io.to(ids[0]).emit("receiver-peer-present", receiverId)
         }
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
     })
