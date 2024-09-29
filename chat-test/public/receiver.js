@@ -26,10 +26,27 @@ socket.on('send-receiver-id', ()=>{
 })
 
 
+function individual_stream(AUDIOcontext, muteTRACK, combinedSTREAM) {
+  this.combinedSTREAM = combinedSTREAM;
+  this.muteTRACK = muteTRACK;
+  this.destination = 0;
+  this.AUDIOcontext = AUDIOcontext
+  this.finalstream = 0;
+}
+
+individual_stream.prototype.destination = function() {
+  this.finalstream = this.AUDIOcontext.createMediaStreamSource(this.combinedSTREAM)
+  this.destination = this.AUDIOcontext.createMediaStreamDestination()
+  this.finalstream.connect(this.destination)
+  console.log('destination created : ', destination.stream)
+};
+
+
 ////             MAAK STREAM               ///////
 
 const audioContext = new AudioContext();
 const combinedStream = new MediaStream();
+const streams = [];
 
 // Create a silent audio track and add it to the combined stream
 function createSilentTrack() {
@@ -43,11 +60,12 @@ function createSilentTrack() {
   combinedStream.addTrack(destination.stream.getAudioTracks()[0]); // Add the silent track to the combined stream
 }
 
+const finalstream = audioContext.createMediaStreamSource(combinedStream)
+
 // Create the silent track initially
 createSilentTrack();
 
-const incomingSource = audioContext.createMediaStreamSource(combinedStream);
-const destination = audioContext.createMediaStreamDestination();
+
 incomingSource.connect(destination);
 
 // gainNode.connect(audioContext.destination);
@@ -106,12 +124,13 @@ function addToStream(remoteStream, peerId) {
     console.log(remoteStream)
       // const incomingStream = audioContext.createMediaStreamSource(remoteStream);
 
-
       remoteStream.getAudioTracks().forEach(track => {
         console.log(`Adding track from peer ${peerId}:`, track);
         combinedStream.addTrack(track); // Add the track to the central combined stream
         console.log("combined stream tracks: ", combinedStream.getTracks())
       });
+
+
 
       // const options = {
       //   mediaStream: remoteStream,
@@ -123,7 +142,16 @@ function addToStream(remoteStream, peerId) {
       // source.connect(gainNode);
       // gainNode.connect(destination);
 
-      console.log("destination duaio: ", combinedStream)
+      streams.forEach((element) =>{
+        stream.combinedSTREAM = combinedStream
+      })
+
+      const stream = new individual_stream(audioContext, trackPosition, combinedStream)
+
+      stream.destination()
+      streams.push(stream)
+
+      console.log("destination duaio: ", stream.destination.stream)
       // console.log("destination duaio 222 : ")
       refreshAudio();
       // console.log('Microphone audio track added to the empty stream');
