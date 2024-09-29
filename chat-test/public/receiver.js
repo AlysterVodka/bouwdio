@@ -82,8 +82,14 @@ function addToStream(remoteStream, peerId) {
   if (remoteStream) {
     console.log(remoteStream)
       const incomingStream = audioContext.createMediaStreamSource(remoteStream);
+
+      const options = {
+        mediaStream: remoteStream,
+      };
+      const source = new MediaStreamAudioSourceNode(audioCtx, options);
+
       console.log("here is incoming strea,:   ", incomingStream);
-      incomingStream.connect(gainNode);
+      source.connect(gainNode);
 
       console.log("destination duaio: ", destination)
       // console.log("destination duaio 222 : ")
