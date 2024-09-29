@@ -34,6 +34,21 @@ const emptyStream = destination.stream;
 
 console.log(" audiop stream : ", emptyStream)
 
+audioElement = document.createElement("audio");
+document.body.appendChild(audioElement); // Add to DOM
+
+
+document.getElementById('audio-refresh', refreshAudio())
+
+function refreshAudio(){
+  audioElement.srcObject = emptyStream;
+  console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
+  audioElement.play();
+  console.log("audioelement created");
+  console.log(audioElement);
+}
+
+
 
 function addToStream(emptyStream, remotestream, peerId) {
   console.log("trying to add stream")
