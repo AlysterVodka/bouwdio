@@ -27,9 +27,13 @@ console.log("peer: ", peer)
 ////             MAAK STREAM               ///////
 
 const audioContext = new AudioContext();
-
 // Create an empty MediaStream using MediaStreamDestination
-const destination = audioContext.destination;
+
+const gainNode = audioContext.createGain();
+const destination = audioContext.createMediaStreamDestination();
+
+gainNode.connect(mediaStreamDestination);
+gainNode.connect(audioContext.destination);
 
 // const emptyStream = destination.stream;
 
@@ -73,7 +77,7 @@ function addToStream(remoteStream, peerId) {
 
   if (remoteStream) {
       const incomingStream = audioContext.createMediaStreamSource(remoteStream);
-      incomingStream.connect(destination);
+      incomingStream.connect(gainNode);
 
       console.log("destination duaio: ", destination)
       console.log("destination duaio 222 : ")
