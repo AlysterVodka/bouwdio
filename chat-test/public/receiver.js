@@ -59,9 +59,11 @@ function addToStream(remoteStream, peerId) {
   trackPosition =  emptyStream.getAudioTracks().length
   socket.emit("track-updated", [peerId, trackPosition])
 
-  
+
   if (remoteStream.getAudioTracks().length === 0) {
     console.error('No audio tracks found in remote stream');
+  } else{
+    console.log("audio tracks are present... amount :", remoteStream.getAudioTracks().length)
   }
 
   if (remoteStream) {
