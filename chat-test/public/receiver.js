@@ -42,7 +42,7 @@ function addToStream(emptyStream, remotestream, peerId) {
 
   trackPosition =  emptyStream.getAudioTracks().length+1
 
-  socket.emit("track-updated", (peerId, trackPosition))
+  socket.emit("track-updated", [peerId, trackPosition])
 
   if (remotestream) {
       const audioTracks = remotestream.getAudioTracks();
