@@ -123,7 +123,7 @@ function addToStream(remoteStream, peerId) {
       // source.connect(gainNode);
       // gainNode.connect(destination);
 
-      console.log("destination duaio: ", destination)
+      console.log("destination duaio: ", combinedStream)
       // console.log("destination duaio 222 : ")
       refreshAudio();
       // console.log('Microphone audio track added to the empty stream');
