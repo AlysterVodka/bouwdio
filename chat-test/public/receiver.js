@@ -31,8 +31,11 @@ socket.on('send-receiver-id', ()=>{
 const audioContext = new AudioContext();
 // Create an empty MediaStream using MediaStreamDestination
 
+const combinedStream = new MediaStream();
 
+const incomingSource = audioContext.createMediaStreamSource(combinedStream);
 const destination = audioContext.createMediaStreamDestination();
+incomingSource.connect(destination); 
 
 // gainNode.connect(audioContext.destination);
 
@@ -89,17 +92,23 @@ function addToStream(remoteStream, peerId) {
 
   if (remoteStream) {
     console.log(remoteStream)
-      const incomingStream = audioContext.createMediaStreamSource(remoteStream);
+      // const incomingStream = audioContext.createMediaStreamSource(remoteStream);
 
-      const options = {
-        mediaStream: remoteStream,
-      };
-      const source = new MediaStreamAudioSourceNode(audioContext, options);
 
-      const gainNode = audioContext.createGain();
-      console.log("here is incoming stream:   ", incomingStream);
-      source.connect(gainNode);
-      gainNode.connect(destination);
+      remoteStream.getAudioTracks().forEach(track => {
+        console.log(`Adding track from peer ${peerId}:`, track);
+        combinedStream.addTrack(track); // Add the track to the central combined stream
+      });
+
+      // const options = {
+      //   mediaStream: remoteStream,
+      // };
+      // const source = new MediaStreamAudioSourceNode(audioContext, options);
+
+      // const gainNode = audioContext.createGain();
+      // console.log("here is incoming stream:   ", incomingStream);
+      // source.connect(gainNode);
+      // gainNode.connect(destination);
 
       console.log("destination duaio: ", destination)
       // console.log("destination duaio 222 : ")
