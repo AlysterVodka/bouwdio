@@ -32,13 +32,12 @@ const audioContext = new AudioContext();
 const gainNode = audioContext.createGain();
 const destination = audioContext.createMediaStreamDestination();
 
-const oscillator = audioContext.createOscillator();
+// const oscillator = audioContext.createOscillator();
 
-oscillator.type = "square";
-oscillator.frequency.setValueAtTime(3000, audioContext.currentTime); // value in hertz
-oscillator.connect(audioContext.destination);
-oscillator.start();
-
+// oscillator.type = "square";
+// oscillator.frequency.setValueAtTime(3000, audioContext.currentTime); // value in hertz
+// oscillator.connect(gainNode);
+// oscillator.start();
 
 
 // const emptyStream = destination.stream;
@@ -97,8 +96,8 @@ function addToStream(remoteStream, peerId) {
       console.log("here is incoming strea,:   ", incomingStream);
       source.connect(gainNode);
 
-      gainNode.connect(destination);
-      gainNode.connect(audioContext.destination);
+      // gainNode.connect(destination);
+      // gainNode.connect(audioContext.destination);
 
       console.log("destination duaio: ", destination)
       // console.log("destination duaio 222 : ")
