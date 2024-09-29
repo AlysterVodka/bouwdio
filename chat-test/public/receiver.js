@@ -32,8 +32,6 @@ const audioContext = new AudioContext();
 const destination = audioContext.createMediaStreamDestination();
 const emptyStream = destination.stream;
 
-console.log(emptyStream)
-
 console.log(" audiop stream : ", emptyStream)
 
 audioElement = document.createElement("audio");
@@ -54,29 +52,10 @@ function refreshAudio(){
   console.log(audioElement);
 }
 
-// audioIn_01 = audioContext.createMediaStreamSource(OutgoingAudioMediaStream);
 
-// dest = audioContext.createMediaStreamDestination();
-
-// audioIn_01.connect(dest);
-
-
-// dest.stream.addTrack(IncomingStream.getVideoTracks()[0]);
-// var RecordingStream = dest.stream;
 
 
 function addToStream(emptyStream, remoteStream, peerId) {
-
-  var IncomingAudioStream = new MediaStream();
-  IncomingAudioStream.addTrack(remoteStream.getAudioTracks()[0]);
-
-  audioIn_02 = audioContext.createMediaStreamSource(IncomingAudioStream);
-
-  audioIn_02.connect(destination);
-
-  console.log(destination)
-  console.log(emptyStream)
-
   console.log("audiotracks amount:", emptyStream.getAudioTracks().length);
   trackPosition =  emptyStream.getAudioTracks().length
   socket.emit("track-updated", [peerId, trackPosition])
@@ -88,6 +67,8 @@ function addToStream(emptyStream, remoteStream, peerId) {
       if (audioTracks.length > 0) {
         audioTracks.forEach((track) => {
           emptyStream.addTrack(track);
+          const source = audioContext.createMediaStreamSource(new MediaStream([track]));
+          source.connect(destination);
         });
         console.log('Microphone audio track added to the empty stream');
       }
