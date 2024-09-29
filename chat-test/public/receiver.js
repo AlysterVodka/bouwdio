@@ -80,6 +80,7 @@ function addToStream(remoteStream, peerId) {
   }
 
   if (remoteStream) {
+    console.log(remoteStream)
       const incomingStream = audioContext.createMediaStreamSource(remoteStream);
       console.log("here is incoming strea,:   ", incomingStream);
       incomingStream.connect(gainNode);
