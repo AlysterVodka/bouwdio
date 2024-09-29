@@ -123,7 +123,7 @@ function connectToReceiver(peerId) {
   call.on("stream", (remoteStream) => {
     // Play the remote peer's audio stream
     console.log(`received stream from receiver peer, stream: ${remoteStream}`);
-
+    console.log(remoteStream.getAudioTracks());
     addAudioStream(remoteStream);
   });
 
