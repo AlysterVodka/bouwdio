@@ -76,7 +76,7 @@ peer.on("call", (call) => {
   console.log(call.peer)
   // When receiving a remote stream from another peer
   call.on("stream", (remoteStream) => {
-    addAudioStream(stream);
+    addAudioStream(remoteStream);
     console.log("stream is being forwarded");
     ////////     --------      RESET ON!!! ---->>>    addToStream(emptyStream, remoteStream, call.peer)
     // Play the incoming audio
