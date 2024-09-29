@@ -40,7 +40,6 @@ function createSilentTrack() {
   const destination = audioContext.createMediaStreamDestination();
   source.connect(destination);
   source.start(); // Start the source (silent)
-  
   combinedStream.addTrack(destination.stream.getAudioTracks()[0]); // Add the silent track to the combined stream
 }
 
@@ -49,7 +48,7 @@ createSilentTrack();
 
 const incomingSource = audioContext.createMediaStreamSource(combinedStream);
 const destination = audioContext.createMediaStreamDestination();
-incomingSource.connect(destination); 
+incomingSource.connect(destination);
 
 // gainNode.connect(audioContext.destination);
 
@@ -64,7 +63,6 @@ incomingSource.connect(destination);
 // const emptyStream = destination.stream;
 
 // console.log(" audiop stream : ", emptyStream)
-
 
 
 audioElement = document.createElement("audio");
@@ -112,6 +110,7 @@ function addToStream(remoteStream, peerId) {
       remoteStream.getAudioTracks().forEach(track => {
         console.log(`Adding track from peer ${peerId}:`, track);
         combinedStream.addTrack(track); // Add the track to the central combined stream
+        console.log("combined stream: ", combinedStream)
       });
 
       // const options = {
