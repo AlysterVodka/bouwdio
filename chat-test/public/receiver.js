@@ -34,7 +34,7 @@ const destination = audioContext.createMediaStreamDestination();
 
 
 gainNode.connect(destination);
-gainNode.connect(audioContext.destination);
+// gainNode.connect(audioContext.destination);
 
 // const oscillator = audioContext.createOscillator();
 
@@ -100,7 +100,6 @@ function addToStream(remoteStream, peerId) {
       console.log("here is incoming stream:   ", incomingStream);
       source.connect(gainNode);
 
-
       console.log("destination duaio: ", destination)
       // console.log("destination duaio 222 : ")
       refreshAudio();
@@ -130,16 +129,13 @@ peer.on("call", (call) => {
     // console.log("stream is being forwarded");
     addToStream(remoteStream, call.peer)
     // Play the incoming audio
-
     // console.log("Stream tracks:", remoteStream.getTracks());
-
     // videoElement.setAttribute("muted:1" || "allow:autoplay" || "width:400" ||"height:300"|| "class:received-video") ;
     // console.log("videoelement:", videoElement);
     // videoElement.srcObject = remoteStream;
     // console.log("videoelement:", videoElement);
     // videoElement.play();
   });
-
   call.answer(destination.stream);
 
 });
