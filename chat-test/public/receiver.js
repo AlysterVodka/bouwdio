@@ -178,8 +178,8 @@ peer.on("call", (call) => {
     ///      addAudioStream(remoteStream);
     // console.log("stream is being forwarded");
 
-    stream = addToStream(remoteStream, call.peer, STREAM)
-    console.log("AFTERMATH STREAM: ", stream)
+    addToStream(remoteStream, call.peer, STREAM)
+    console.log("AFTERMATH STREAM: ", STREAM)
     // Play the incoming audio
     // console.log("Stream tracks:", remoteStream.getTracks());
     // videoElement.setAttribute("muted:1" || "allow:autoplay" || "width:400" ||"height:300"|| "class:received-video") ;
