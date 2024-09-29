@@ -65,6 +65,7 @@ function createSilentTrack() {
 createSilentTrack();
 
 const finalstream = audioContext.createMediaStreamSource(combinedStream)
+finalstream.connect(audioContext.destination)
 
 // incomingSource.connect(destination);
 
@@ -113,7 +114,6 @@ function addToStream(remoteStream, peerId) {
   trackPosition =  remoteStream.getAudioTracks().length
   socket.emit("track-updated", [peerId, trackPosition])
 
-
   if (remoteStream.getAudioTracks().length === 0) {
     console.error('No audio tracks found in remote stream');
   } else{
@@ -121,7 +121,7 @@ function addToStream(remoteStream, peerId) {
   }
 
   if (remoteStream) {
-    console.log(remoteStream)
+    // console.log(remoteStream)
       // const incomingStream = audioContext.createMediaStreamSource(remoteStream);
 
       remoteStream.getAudioTracks().forEach(track => {
@@ -142,9 +142,12 @@ function addToStream(remoteStream, peerId) {
 
       streams.forEach((element) =>{
         element.combinedSTREAM = combinedStream
+        console.log("another streamin the loop:", element)
       })
 
       const STREAM = new individual_stream(audioContext, trackPosition, combinedStream)
+
+      console.log(STREAM)
 
       STREAM.destination()
       streams.push(STREAM)
@@ -178,6 +181,7 @@ peer.on("call", (call) => {
     // console.log("stream is being forwarded");
 
     let stream = addToStream(remoteStream, call.peer)
+    console.log("AFTERATH STREAM: ", stream)
     call.answer(stream.destination.stream);
     // Play the incoming audio
     // console.log("Stream tracks:", remoteStream.getTracks());
