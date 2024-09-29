@@ -22,6 +22,11 @@ peer.on("open", (peerId) => {
 
 console.log("peer: ", peer)
 
+socket.on('send-receiver-id', ()=>{
+  socket.emit("receiver-log-on", PEERID);
+})
+
+
 
 
 ////             MAAK STREAM               ///////
