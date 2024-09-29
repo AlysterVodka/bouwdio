@@ -29,7 +29,7 @@ console.log("peer: ", peer)
 const audioContext = new AudioContext();
 
 // Create an empty MediaStream using MediaStreamDestination
-const destination = audioContext.createMediaStreamDestination();
+const destination = audioContext.destination;
 const emptyStream = destination.stream;
 
 console.log(" audiop stream : ", emptyStream)
