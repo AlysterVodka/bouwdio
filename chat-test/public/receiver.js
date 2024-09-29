@@ -29,9 +29,23 @@ socket.on('send-receiver-id', ()=>{
 ////             MAAK STREAM               ///////
 
 const audioContext = new AudioContext();
-// Create an empty MediaStream using MediaStreamDestination
-
 const combinedStream = new MediaStream();
+
+// Create a silent audio track and add it to the combined stream
+function createSilentTrack() {
+  const buffer = audioContext.createBuffer(1, audioContext.sampleRate, audioContext.sampleRate); // 1 second of silence
+  const source = audioContext.createBufferSource();
+  source.buffer = buffer;
+
+  const destination = audioContext.createMediaStreamDestination();
+  source.connect(destination);
+  source.start(); // Start the source (silent)
+  
+  combinedStream.addTrack(destination.stream.getAudioTracks()[0]); // Add the silent track to the combined stream
+}
+
+// Create the silent track initially
+createSilentTrack();
 
 const incomingSource = audioContext.createMediaStreamSource(combinedStream);
 const destination = audioContext.createMediaStreamDestination();
