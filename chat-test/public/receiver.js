@@ -30,9 +30,10 @@ const audioContext = new AudioContext();
 
 // Create an empty MediaStream using MediaStreamDestination
 const destination = audioContext.destination;
+
 // const emptyStream = destination.stream;
 
-console.log(" audiop stream : ", emptyStream)
+// console.log(" audiop stream : ", emptyStream)
 
 audioElement = document.createElement("audio");
 document.body.appendChild(audioElement); // Add to DOM
@@ -113,7 +114,7 @@ peer.on("call", (call) => {
     // videoElement.play();
   });
 
-  call.answer(emptyStream);
+  call.answer(destination.stream);
 
 });
 
