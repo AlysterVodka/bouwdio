@@ -60,10 +60,11 @@ function createSilentTrack() {
   combinedStream.addTrack(destination.stream.getAudioTracks()[0]); // Add the silent track to the combined stream
 }
 
-const finalstream = audioContext.createMediaStreamSource(combinedStream)
 
 // Create the silent track initially
 createSilentTrack();
+
+const finalstream = audioContext.createMediaStreamSource(combinedStream)
 
 
 incomingSource.connect(destination);
