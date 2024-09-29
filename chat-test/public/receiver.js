@@ -26,27 +26,40 @@ socket.on('send-receiver-id', ()=>{
 })
 
 
-function individual_stream(AUDIOcontext, combinedSTREAM) {
-  this.combinedSTREAM = combinedSTREAM;
+function individual_stream(AUDIOcontext, STREAMS, finalSTREAM) {
+  this.STREAMS = STREAMS;
   this.muteTRACK = 0;
   this.destination = 0;
   this.AUDIOcontext = AUDIOcontext
-  this.finalstream = 0;
+  this.finalstream = finalstream;
 }
 
 individual_stream.prototype.setDestination = function() {
-  this.finalstream = this.AUDIOcontext.createMediaStreamSource(this.combinedSTREAM)
   this.destination = this.AUDIOcontext.createMediaStreamDestination()
   this.finalstream.connect(this.destination)
-  this.finalstream.connect(this.AUDIOcontext.destination);
+  // this.finalstream.connect(this.AUDIOcontext.destination);
   console.log('destination created : ', this.destination.stream)
 };
+
+individual_stream.prototype.updateSTREAMS = function(streams){
+  this.STREAMS = streams
+  this.finalMute()
+}
+
+individual_stream.prototype.finalMute = function(){
+  for (let i = 0; i < this.STREAMS.length; i++) {
+    console.log(this.muteTRACK)
+    if(i != this.muteTRACK)
+      this.STREAMS[i].connect(this.destination)
+  }
+}
 
 
 ////             MAAK STREAM               ///////
 
 const audioContext = new AudioContext();
 const combinedStream = new MediaStream();
+const streams_objects = [];
 const streams = [];
 
 // Create a silent audio track and add it to the combined stream
@@ -58,7 +71,7 @@ function createSilentTrack() {
   const destination = audioContext.createMediaStreamDestination();
   source.connect(destination);
   source.start(); // Start the source (silent)
-  combinedStream.addTrack(destination.stream.getAudioTracks()[0]); // Add the silent track to the combined stream
+  combinedStream.addTrack(destination.stream.getAudioTracks()[0]); // Add the silent trFack to the combined stream
 }
 
 
@@ -126,11 +139,13 @@ function addToStream(remoteStream, peerId, STREAM) {
     // console.log(remoteStream)
       // const incomingStream = audioContext.createMediaStreamSource(remoteStream);
 
-      remoteStream.getAudioTracks().forEach(track => {
-        console.log(`Adding track from peer ${peerId}:`, track);
-        combinedStream.addTrack(track); // Add the track to the central combined stream
-        console.log("combined stream tracks: ", combinedStream.getTracks())
-      });
+      const mediaSource = audioContext.createMediaStreamSource(remoteStream);
+      streams.push(mediaSource)
+      // remoteStream.getAudioTracks().forEach(track => {
+      //   console.log(`Adding track from peer ${peerId}:`, track);
+      //   combinedStream.addTrack(track); // Add the track to the central combined stream
+      //   console.log("combined stream tracks: ", combinedStream.getTracks())
+      // });
 
       // const options = {
       //   mediaStream: remoteStream,
@@ -142,8 +157,8 @@ function addToStream(remoteStream, peerId, STREAM) {
       // source.connect(gainNode);
       // gainNode.connect(destination);
 
-      streams.forEach((element) =>{
-        element.combinedSTREAM = combinedStream
+      streams_objects.forEach((element) =>{
+        individual_stream.updateSTREAMS(streams)
         console.log("another streamin the loop:", element)
       })
 
@@ -167,10 +182,10 @@ peer.on("call", (call) => {
   // console.log("call is being forwarded");
   // Answer the call and send the local stream
 
-  const STREAM = new individual_stream(audioContext, combinedStream)
+  const STREAM = new individual_stream(audioContext, streams, combinedStream)
   console.log(STREAM)
   STREAM.setDestination()
-  streams.push(STREAM)
+  streams_objects.push(STREAM)
   console.log(call.peer)
   // When receiving a remote stream from another peer
   call.on("stream", (remoteStream) => {
