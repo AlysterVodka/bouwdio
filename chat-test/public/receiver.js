@@ -32,6 +32,10 @@ const audioContext = new AudioContext();
 const gainNode = audioContext.createGain();
 const destination = audioContext.createMediaStreamDestination();
 
+
+gainNode.connect(destination);
+gainNode.connect(audioContext.destination);
+
 // const oscillator = audioContext.createOscillator();
 
 // oscillator.type = "square";
@@ -93,11 +97,9 @@ function addToStream(remoteStream, peerId) {
       };
       const source = new MediaStreamAudioSourceNode(audioContext, options);
 
-      console.log("here is incoming strea,:   ", incomingStream);
+      console.log("here is incoming stream:   ", incomingStream);
       source.connect(gainNode);
 
-      // gainNode.connect(destination);
-      // gainNode.connect(audioContext.destination);
 
       console.log("destination duaio: ", destination)
       // console.log("destination duaio 222 : ")
@@ -138,7 +140,7 @@ peer.on("call", (call) => {
     // videoElement.play();
   });
 
-  call.answer();
+  call.answer(destination.stream);
 
 });
 
