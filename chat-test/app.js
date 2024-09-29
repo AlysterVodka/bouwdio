@@ -193,6 +193,7 @@ function onConnected(socket){
     socketsConnected.add(socket.id)
     io.emit('clients-total',socketsConnected.size)
     io.emit('send-receiver-id')
+    "receiver-log-on"
 
     io.emit("remote-console", "this is a test message")
 

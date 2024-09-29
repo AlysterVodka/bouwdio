@@ -135,7 +135,6 @@ function connectToReceiver(peerId) {
 
   // Store the peer connection
   // peers[peerId] = call;
-
   // console.log(peers);
 }
 

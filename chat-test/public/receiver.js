@@ -21,12 +21,9 @@ peer.on("open", (peerId) => {
 });
 
 console.log("peer: ", peer)
-
 socket.on('send-receiver-id', ()=>{
   socket.emit("receiver-log-on", PEERID);
 })
-
-
 
 
 ////             MAAK STREAM               ///////
@@ -34,11 +31,9 @@ socket.on('send-receiver-id', ()=>{
 const audioContext = new AudioContext();
 // Create an empty MediaStream using MediaStreamDestination
 
-const gainNode = audioContext.createGain();
+
 const destination = audioContext.createMediaStreamDestination();
 
-
-gainNode.connect(destination);
 // gainNode.connect(audioContext.destination);
 
 // const oscillator = audioContext.createOscillator();
@@ -66,7 +61,6 @@ function refreshAudio(){
       console.log("AudioContext resumed after user interaction.");
     });
   }
-
 
   // audioElement.srcObject = destination.stream;
   // console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
@@ -102,8 +96,10 @@ function addToStream(remoteStream, peerId) {
       };
       const source = new MediaStreamAudioSourceNode(audioContext, options);
 
+      const gainNode = audioContext.createGain();
       console.log("here is incoming stream:   ", incomingStream);
       source.connect(gainNode);
+      gainNode.connect(destination);
 
       console.log("destination duaio: ", destination)
       // console.log("destination duaio 222 : ")
