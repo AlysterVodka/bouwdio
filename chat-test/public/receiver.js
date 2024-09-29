@@ -32,6 +32,13 @@ const audioContext = new AudioContext();
 const gainNode = audioContext.createGain();
 const destination = audioContext.createMediaStreamDestination();
 
+const oscillator = audioContext.createOscillator();
+
+oscillator.type = "square";
+oscillator.frequency.setValueAtTime(3000, audioContext.currentTime); // value in hertz
+oscillator.connect(audioContext.destination);
+oscillator.start();
+
 
 
 // const emptyStream = destination.stream;
