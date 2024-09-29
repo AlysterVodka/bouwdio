@@ -158,7 +158,7 @@ function addToStream(remoteStream, peerId, STREAM) {
       // gainNode.connect(destination);
 
       streams_objects.forEach((element) =>{
-        individual_stream.updateSTREAMS(streams)
+        element.updateSTREAMS(streams)
         console.log("another streamin the loop:", element)
       })
 
