@@ -40,7 +40,7 @@ function addToStream(emptyStream, remotestream, peerId) {
 
   console.log("audiotracks amount:", emptyStream.getAudioTracks().length);
 
-  trackPosition =  emptyStream.getAudioTracks().length+1
+  trackPosition =  emptyStream.getAudioTracks().length
 
   socket.emit("track-updated", [peerId, trackPosition])
 
