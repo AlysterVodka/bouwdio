@@ -154,6 +154,7 @@ function addToStream(remoteStream, peerId) {
       console.log("destination duaio: ", stream.destination.stream)
       // console.log("destination duaio 222 : ")
       refreshAudio();
+      return stream
       // console.log('Microphone audio track added to the empty stream');
   }
 }
@@ -178,7 +179,7 @@ peer.on("call", (call) => {
 
     ///      addAudioStream(remoteStream);
     // console.log("stream is being forwarded");
-    addToStream(remoteStream, call.peer)
+    const stream = addToStream(remoteStream, call.peer)
     // Play the incoming audio
     // console.log("Stream tracks:", remoteStream.getTracks());
     // videoElement.setAttribute("muted:1" || "allow:autoplay" || "width:400" ||"height:300"|| "class:received-video") ;
@@ -187,7 +188,7 @@ peer.on("call", (call) => {
     // console.log("videoelement:", videoElement);
     // videoElement.play();
   });
-  call.answer(destination.stream);
+  call.answer(stream.destination.stream);
 
   // socket.emit("receiver-log-on", PEERID);
 
