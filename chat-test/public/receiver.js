@@ -32,7 +32,7 @@ const audioContext = new AudioContext();
 const gainNode = audioContext.createGain();
 const destination = audioContext.createMediaStreamDestination();
 
-gainNode.connect(mediaStreamDestination);
+gainNode.connect(destination);
 gainNode.connect(audioContext.destination);
 
 // const emptyStream = destination.stream;
