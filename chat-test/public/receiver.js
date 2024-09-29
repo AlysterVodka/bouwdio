@@ -30,7 +30,7 @@ const audioContext = new AudioContext();
 
 // Create an empty MediaStream using MediaStreamDestination
 const destination = audioContext.destination;
-const emptyStream = destination.stream;
+// const emptyStream = destination.stream;
 
 console.log(" audiop stream : ", emptyStream)
 
@@ -75,7 +75,7 @@ function addToStream(remoteStream, peerId) {
       incomingStream.connect(destination);
 
       console.log("destination duaio: ", destination.stream)
-      console.log("destination duaio 222 : ", emptyStream)
+      console.log("destination duaio 222 : ")
       refreshAudio();
       console.log('Microphone audio track added to the empty stream');
   }
