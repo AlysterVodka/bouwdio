@@ -32,11 +32,15 @@ const audioContext = new AudioContext();
 const destination = audioContext.createMediaStreamDestination();
 const emptyStream = destination.stream;
 
+console.log(emptyStream)
+
 console.log(" audiop stream : ", emptyStream)
 
 audioElement = document.createElement("audio");
 document.body.appendChild(audioElement); // Add to DOM
 document.getElementById('audio-refresh').addEventListener('click', refreshAudio);
+
+
 
 function refreshAudio(){
   audioElement.srcObject = emptyStream;
@@ -50,7 +54,29 @@ function refreshAudio(){
   console.log(audioElement);
 }
 
+// audioIn_01 = audioContext.createMediaStreamSource(OutgoingAudioMediaStream);
+
+// dest = audioContext.createMediaStreamDestination();
+
+// audioIn_01.connect(dest);
+
+
+// dest.stream.addTrack(IncomingStream.getVideoTracks()[0]);
+// var RecordingStream = dest.stream;
+
+
 function addToStream(emptyStream, remoteStream, peerId) {
+
+  var IncomingAudioStream = new MediaStream();
+  IncomingAudioStream.addTrack(remoteStream.getAudioTracks()[0]);
+
+  audioIn_02 = audioContext.createMediaStreamSource(IncomingAudioStream);
+
+  audioIn_02.connect(destination);
+
+  console.log(destination)
+  console.log(emptyStream)
+
   console.log("audiotracks amount:", emptyStream.getAudioTracks().length);
   trackPosition =  emptyStream.getAudioTracks().length
   socket.emit("track-updated", [peerId, trackPosition])
