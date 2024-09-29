@@ -43,12 +43,14 @@ function show_user(peerId, values) {
     userDiv.innerHTML = `
         <div class="user-name" id=user-name>${peerId} </div>
         <button id=${peerId} class="mute-button" style="color:red;">mute</button>
-        <div class ="kick-button">kick</div>`;
+        <div class ="kick-button">kick</div>
+        <div class ="track-position">${values[2]}</div>`;
   } else {
     userDiv.innerHTML = `
         <div class="user-name" id=user-name>${peerId} </div>
         <button id=${peerId} class="mute-button" style="color:green;">mute</button>
-        <div class ="kick-button">kick</div>`;
+        <div class ="kick-button">kick</div>
+        <div class ="track-position">${values[2]}</div>`;
   }
   userList.appendChild(userDiv);
 }
