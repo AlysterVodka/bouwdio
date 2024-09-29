@@ -41,6 +41,11 @@ document.getElementById('audio-refresh').addEventListener('click', refreshAudio)
 function refreshAudio(){
   audioElement.srcObject = emptyStream;
   console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
+
+  const audioTracks = audioElement.srcObject.getAudioTracks();
+  audioTracks.forEach((track, index) => {
+    console.log(`Track ${index} - Kind: ${track.kind}, Active: ${track.readyState}`);
+  });
   audioElement.play();
   console.log(audioElement);
 }
@@ -53,7 +58,6 @@ function addToStream(emptyStream, remoteStream, peerId) {
   if (remoteStream && emptyStream) {
       const audioTracks = remoteStream.getAudioTracks();
       console.log(audioTracks);
-
       
       if (audioTracks.length > 0) {
         audioTracks.forEach((track) => {
