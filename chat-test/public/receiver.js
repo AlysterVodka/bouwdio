@@ -75,7 +75,7 @@ function addToStream(remoteStream, peerId) {
       const incomingStream = audioContext.createMediaStreamSource(remoteStream);
       incomingStream.connect(destination);
 
-      console.log("destination duaio: ", destination.stream)
+      console.log("destination duaio: ", destination)
       console.log("destination duaio 222 : ")
       refreshAudio();
       console.log('Microphone audio track added to the empty stream');
@@ -114,7 +114,7 @@ peer.on("call", (call) => {
     // videoElement.play();
   });
 
-  call.answer(destination.stream);
+  call.answer();
 
 });
 
