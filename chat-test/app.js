@@ -242,9 +242,9 @@ function onConnected(socket){
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
     })
 
-    socket.on("track-updated", (id, position)=>{
-        io.emit("remote-console", `socket id map : ${id}, track position : ${position}, peertsocketid : ${peerSocketIDMap[id]}`)
-        updatetrackpos(peerSocketIDMap[id], position)
+    socket.on("track-updated", (data)=>{
+        io.emit("remote-console", `socket id map : ${data[0]}, track position : ${data[1]}, peertsocketid : ${peerSocketIDMap[data[0]]}`)
+        updatetrackpos(peerSocketIDMap[data[0]], data[1])
     })
 
     // Handle a peer disconnecting and notify others
