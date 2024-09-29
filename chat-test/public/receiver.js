@@ -159,7 +159,7 @@ peer.on("call", (call) => {
     // console.log("videoelement:", videoElement);
     // videoElement.play();
   });
-  call.answer(incomingSource);
+  call.answer(destination.stream);
 
   // socket.emit("receiver-log-on", PEERID);
 
