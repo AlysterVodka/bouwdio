@@ -141,7 +141,7 @@ function connectToReceiver(peerId) {
 function addAudioStream(stream) {
   const audioElement = document.createElement("audio");
   audioElement.srcObject = stream;
-  console,log("source object audio stream : ", audioElement.srcObject)
+  console.log("source object audio stream : ", audioElement.srcObject)
   audioElement.play();
   console.log("audioelement created");
   console.log(audioElement);
