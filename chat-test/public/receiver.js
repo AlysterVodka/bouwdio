@@ -38,8 +38,6 @@ audioElement = document.createElement("audio");
 document.body.appendChild(audioElement); // Add to DOM
 document.getElementById('audio-refresh').addEventListener('click', refreshAudio);
 
-
-
 function refreshAudio(){
   if (audioContext.state === 'suspended') {
     console.log("audiocontext was suspended")
@@ -47,16 +45,16 @@ function refreshAudio(){
       console.log("AudioContext resumed after user interaction.");
     });
   }
-  audioElement.srcObject = destination.stream;
-  console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
-  const audioTracks = audioElement.srcObject.getAudioTracks();
-  audioTracks.forEach((track, index) => {
-    console.log(`Track ${index} - Kind: ${track.kind}, Active: ${track.readyState}`);
-  });
-  audioElement.play().catch((error) => {
-    console.log('Error playing audio:', error);
-  });
-  console.log(audioElement);
+  // audioElement.srcObject = destination.stream;
+  // console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
+  // const audioTracks = audioElement.srcObject.getAudioTracks();
+  // audioTracks.forEach((track, index) => {
+  //   console.log(`Track ${index} - Kind: ${track.kind}, Active: ${track.readyState}`);
+  // });
+  // audioElement.play().catch((error) => {
+  //   console.log('Error playing audio:', error);
+  // });
+  // console.log(audioElement);
 }
 
 
@@ -74,7 +72,6 @@ function addToStream(remoteStream, peerId) {
 
   if (remoteStream) {
       const incomingStream = audioContext.createMediaStreamSource(remoteStream);
-
       incomingStream.connect(destination);
 
       console.log("destination duaio: ", destination.stream)
@@ -100,6 +97,8 @@ peer.on("call", (call) => {
   console.log(call.peer)
   // When receiving a remote stream from another peer
   call.on("stream", (remoteStream) => {
+    console.log("find here some audiotracks states: ", remoteStream.getAudioTracks().map(track => track.readyState));
+
     ///      addAudioStream(remoteStream);
     console.log("stream is being forwarded");
     addToStream(remoteStream, call.peer)
@@ -124,12 +123,12 @@ function setAttributes(el, attrs) {
 
 
 
-function addAudioStream(stream) {
-  const audioElement = document.createElement("audio");
-  audioElement.srcObject = stream;
-  console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
-  audioElement.play();
-  console.log("audioelement created");
-  console.log(audioElement);
-  document.body.appendChild(audioElement); // Add to DOM
-}
+// function addAudioStream(stream) {
+//   const audioElement = document.createElement("audio");
+//   audioElement.srcObject = stream;
+//   console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
+//   audioElement.play();
+//   console.log("audioelement created");
+//   console.log(audioElement);
+//   document.body.appendChild(audioElement); // Add to DOM
+// }
