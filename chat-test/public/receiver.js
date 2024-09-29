@@ -34,7 +34,7 @@ function individual_stream(AUDIOcontext, muteTRACK, combinedSTREAM) {
   this.finalstream = 0;
 }
 
-individual_stream.prototype.destination = function() {
+individual_stream.prototype.setDestination = function() {
   this.finalstream = this.AUDIOcontext.createMediaStreamSource(this.combinedSTREAM)
   this.destination = this.AUDIOcontext.createMediaStreamDestination()
   this.finalstream.connect(this.destination)
@@ -149,7 +149,7 @@ function addToStream(remoteStream, peerId) {
 
       console.log(STREAM)
 
-      STREAM.destination()
+      STREAM.setDestination()
       streams.push(STREAM)
 
       console.log("destination duaio: ", STREAM.destination.stream)
