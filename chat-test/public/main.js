@@ -66,6 +66,7 @@ navigator.mediaDevices
     console.log("this is the currentsocketid: ", socket.id)
     console.log("this is the peerid: ", PEERID)
     let sendlist = [socket.id, PEERID]
+    console.log("sendlist  ", sendlist);
     socket.emit("peer-connected", sendlist);
 
     socket.on("mute-user", (id) => {
