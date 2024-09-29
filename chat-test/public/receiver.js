@@ -41,7 +41,7 @@ document.getElementById('audio-refresh').addEventListener('click', refreshAudio)
 
 
 function refreshAudio(){
-  audioElement.srcObject = emptyStream;
+  audioElement.srcObject = destination.stream;
   console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
 
   const audioTracks = audioElement.srcObject.getAudioTracks();
@@ -53,25 +53,16 @@ function refreshAudio(){
 }
 
 
-
-
-function addToStream(emptyStream, remoteStream, peerId) {
+function addToStream(remoteStream, peerId) {
   console.log("audiotracks amount:", emptyStream.getAudioTracks().length);
   trackPosition =  emptyStream.getAudioTracks().length
   socket.emit("track-updated", [peerId, trackPosition])
 
-  if (remoteStream && emptyStream) {
-      const audioTracks = remoteStream.getAudioTracks();
-      console.log(audioTracks);
-      
-      if (audioTracks.length > 0) {
-        audioTracks.forEach((track) => {
-          emptyStream.addTrack(track);
-          const source = audioContext.createMediaStreamSource(new MediaStream([track]));
-          source.connect(destination);
-        });
-        console.log('Microphone audio track added to the empty stream');
-      }
+  if (remoteStream) {
+      const incomingStream = audioContext.createMediaStreamSource(remoteStream);
+      incomingStream.connect(destination);
+      refreshAudio();
+      console.log('Microphone audio track added to the empty stream');
   }
 }
 
@@ -93,7 +84,7 @@ peer.on("call", (call) => {
   call.on("stream", (remoteStream) => {
     ///      addAudioStream(remoteStream);
     console.log("stream is being forwarded");
-    addToStream(emptyStream, remoteStream, call.peer)
+    addToStream(remoteStream, call.peer)
     refreshAudio();
     // Play the incoming audio
 
