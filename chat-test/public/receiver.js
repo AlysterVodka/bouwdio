@@ -67,7 +67,6 @@ peer.on("call", (call) => {
   // Answer the call and send the local stream
 
   console.log(call.peer)
-  call.answer(emptyStream);
   // When receiving a remote stream from another peer
   call.on("stream", (remoteStream) => {
     console.log("stream is being forwarded");
@@ -82,6 +81,9 @@ peer.on("call", (call) => {
     // console.log("videoelement:", videoElement);
     // videoElement.play();
   });
+
+  call.answer(emptyStream);
+
 });
 
 function setAttributes(el, attrs) {
