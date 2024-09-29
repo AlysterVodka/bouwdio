@@ -43,7 +43,6 @@ document.getElementById('audio-refresh').addEventListener('click', refreshAudio)
 function refreshAudio(){
   audioElement.srcObject = destination.stream;
   console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
-
   const audioTracks = audioElement.srcObject.getAudioTracks();
   audioTracks.forEach((track, index) => {
     console.log(`Track ${index} - Kind: ${track.kind}, Active: ${track.readyState}`);
@@ -61,6 +60,8 @@ function addToStream(remoteStream, peerId) {
   if (remoteStream) {
       const incomingStream = audioContext.createMediaStreamSource(remoteStream);
       incomingStream.connect(destination);
+      console.log("destination duaio: ", destination.stream)
+      console.log("destination duaio 222 : ", emptyStream)
       refreshAudio();
       console.log('Microphone audio track added to the empty stream');
   }
