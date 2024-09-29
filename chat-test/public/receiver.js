@@ -38,7 +38,7 @@ individual_stream.prototype.setDestination = function() {
   this.finalstream = this.AUDIOcontext.createMediaStreamSource(this.combinedSTREAM)
   this.destination = this.AUDIOcontext.createMediaStreamDestination()
   this.finalstream.connect(this.destination)
-  console.log('destination created : ', destination.stream)
+  console.log('destination created : ', this.destination.stream)
 };
 
 
