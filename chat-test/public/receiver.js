@@ -41,7 +41,12 @@ document.getElementById('audio-refresh').addEventListener('click', refreshAudio)
 
 
 function refreshAudio(){
-  audioContext.resume()
+  if (audioContext.state === 'suspended') {
+    console.log("audiocontext was suspended")
+    audioContext.resume().then(() => {
+      console.log("AudioContext resumed after user interaction.");
+    });
+  }
   audioElement.srcObject = destination.stream;
   console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
   const audioTracks = audioElement.srcObject.getAudioTracks();
@@ -98,7 +103,6 @@ peer.on("call", (call) => {
     ///      addAudioStream(remoteStream);
     console.log("stream is being forwarded");
     addToStream(remoteStream, call.peer)
-    refreshAudio();
     // Play the incoming audio
 
     console.log("Stream tracks:", remoteStream.getTracks());
