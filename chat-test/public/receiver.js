@@ -110,7 +110,7 @@ function addToStream(remoteStream, peerId) {
       remoteStream.getAudioTracks().forEach(track => {
         console.log(`Adding track from peer ${peerId}:`, track);
         combinedStream.addTrack(track); // Add the track to the central combined stream
-        console.log("combined stream tracks: ", combinedStream.getTracks())
+        console.log("combined stream tracks: ", incomingSource.getTracks())
       });
 
       // const options = {
