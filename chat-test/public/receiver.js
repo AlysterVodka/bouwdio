@@ -66,8 +66,7 @@ createSilentTrack();
 
 const finalstream = audioContext.createMediaStreamSource(combinedStream)
 
-
-incomingSource.connect(destination);
+// incomingSource.connect(destination);
 
 // gainNode.connect(audioContext.destination);
 
