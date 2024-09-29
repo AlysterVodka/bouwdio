@@ -38,7 +38,8 @@ audioElement = document.createElement("audio");
 document.body.appendChild(audioElement); // Add to DOM
 
 
-document.getElementById('audio-refresh', refreshAudio())
+document.getElementById('audio-refresh').addEventListener('click', refreshAudio);
+
 
 function refreshAudio(){
   audioElement.srcObject = emptyStream;
