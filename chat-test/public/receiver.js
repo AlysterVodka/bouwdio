@@ -52,7 +52,7 @@ individual_stream.prototype.finalMute = function(){
     if(i != this.muteTRACK)
       console.log("i :  ", i)
       console.log(this.STREAMS[i])
-      this.STREAMS[i].connect(this.destination.stream)
+      this.STREAMS[i].connect(this.destination)
   }
 }
 
