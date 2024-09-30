@@ -38,7 +38,7 @@ individual_stream.prototype.setDestination = function() {
   this.destination = this.AUDIOcontext.createMediaStreamDestination()
   this.finalstream.connect(this.destination)
   // this.finalstream.connect(this.AUDIOcontext.destination);
-  console.log('destination created : ', this.destination.stream.getAudioTracks())
+  // console.log('destination created : ', this.destination.stream.getAudioTracks())
 };
 
 individual_stream.prototype.updateSTREAMS = function(streams){
@@ -48,8 +48,10 @@ individual_stream.prototype.updateSTREAMS = function(streams){
 
 individual_stream.prototype.finalMute = function(){
   for (let i = 0; i < this.STREAMS.length; i++) {
-    console.log(this.muteTRACK)
+    console.log("mute track number is: ", this.muteTRACK)
     if(i != this.muteTRACK)
+      console.log("i :  ", i)
+      console.log(this.STREAMS[i])
       this.STREAMS[i].connect(this.destination)
   }
 }
@@ -124,7 +126,7 @@ function refreshAudio(){
 
 
 function addToStream(remoteStream, peerId, STREAM) {
-  console.log("audiotracks amount:", remoteStream.getAudioTracks().length);
+  // console.log("audiotracks amount:", remoteStream.getAudioTracks().length);
   trackPosition =  remoteStream.getAudioTracks().length
   STREAM.muteTRACK = trackPosition
   socket.emit("track-updated", [peerId, trackPosition])
@@ -132,7 +134,7 @@ function addToStream(remoteStream, peerId, STREAM) {
   if (remoteStream.getAudioTracks().length === 0) {
     console.error('No audio tracks found in remote stream');
   } else{
-    console.log("audio tracks are present... amount :", remoteStream.getAudioTracks().length)
+    // console.log("audio tracks are present... amount :", remoteStream.getAudioTracks().length)
   }
 
   if (remoteStream) {
@@ -190,13 +192,13 @@ peer.on("call", (call) => {
   console.log(call.peer)
   // When receiving a remote stream from another peer
   call.on("stream", (remoteStream) => {
-    console.log("find here some audiotracks states: ", remoteStream.getAudioTracks().map(track => track.readyState));
+    // console.log("find here some audiotracks states: ", remoteStream.getAudioTracks().map(track => track.readyState));
 
     ///      addAudioStream(remoteStream);
     // console.log("stream is being forwarded");
 
     addToStream(remoteStream, call.peer, STREAM)
-    console.log("AFTERMATH STREAM: ", STREAM)
+    // console.log("AFTERMATH STREAM: ", STREAM)
     // Play the incoming audio
     // console.log("Stream tracks:", remoteStream.getTracks());
     // videoElement.setAttribute("muted:1" || "allow:autoplay" || "width:400" ||"height:300"|| "class:received-video") ;
