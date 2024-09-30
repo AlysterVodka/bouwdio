@@ -141,6 +141,7 @@ function addToStream(remoteStream, peerId, STREAM) {
 
       const mediaSource = audioContext.createMediaStreamSource(remoteStream);
       streams.push(mediaSource)
+      console.log("streams,checkin if they are multiple:", streams)
       // remoteStream.getAudioTracks().forEach(track => {
       //   console.log(`Adding track from peer ${peerId}:`, track);
       //   combinedStream.addTrack(track); // Add the track to the central combined stream
