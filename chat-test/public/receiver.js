@@ -127,7 +127,7 @@ function refreshAudio(){
 
 function addToStream(remoteStream, peerId, STREAM) {
   // console.log("audiotracks amount:", remoteStream.getAudioTracks().length);
-  trackPosition =  remoteStream.getAudioTracks().length
+  trackPosition =  streams.length
   STREAM.muteTRACK = trackPosition
   socket.emit("track-updated", [peerId, trackPosition])
 
