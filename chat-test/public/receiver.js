@@ -141,7 +141,7 @@ function addToStream(remoteStream, peerId, STREAM) {
 
       const mediaSource = audioContext.createMediaStreamSource(remoteStream);
       streams.push(mediaSource)
-      console.log("streams,checkin if they are multiple:", streams)
+      // console.log("streams,checkin if they are multiple:", streams)
       // remoteStream.getAudioTracks().forEach(track => {
       //   console.log(`Adding track from peer ${peerId}:`, track);
       //   combinedStream.addTrack(track); // Add the track to the central combined stream
@@ -160,11 +160,11 @@ function addToStream(remoteStream, peerId, STREAM) {
 
       streams_objects.forEach((element) =>{
         element.updateSTREAMS(streams)
-        console.log("another streamin the loop:", element)
+        // console.log("another streamin the loop:", element)
       })
 
 
-      console.log("destination duaio: ", STREAM.destination.stream)
+      console.log("stream_objects + streams inside: ", streams_objects)
       // console.log("destination duaio 222 : ")
       // console.log('Microphone audio track added to the empty stream');
   }
