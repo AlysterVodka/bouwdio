@@ -224,7 +224,7 @@ function onConnected(socket){
 
     socket.on('request_drawing', ()=>{
         if(DRAWING_dictionary){
-            io.to(socket.id).emit("DRAWING", DRAWING_dictionary)
+            io.emit("DRAWING", DRAWING_dictionary)
         }
     })
 

@@ -229,7 +229,6 @@ socket.emit("request_drawing")
 
 
 socket.on("DRAWING",(data) =>{
-
   // Loop through the dictionary and create divs
   Object.keys(data).forEach((rowKey, rowIndex) => {
       data[rowKey].forEach((item, colIndex) => {
