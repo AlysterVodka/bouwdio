@@ -196,7 +196,7 @@ for (let x = 0; x <= 19; x++) {
       div.id = `${x}-${y}`
 
       // Attach mousedown event for socket message
-      div.addEventListener('mouseenter', () => {
+      div.addEventListener('mousedown', () => {
         if (isMouseDown) {
           // Send a message through the socket
           // const message = { row: rowIndex, col: colIndex, data: item };
@@ -204,6 +204,13 @@ for (let x = 0; x <= 19; x++) {
           y = y;
           socket.emit("updateDrawing",[MATERIAL, x,y]);
         }
+      });
+      div.addEventListener('mouseenter', () => {
+          // Send a message through the socket
+          // const message = { row: rowIndex, col: colIndex, data: item };
+          x = x;
+          y = y;
+          socket.emit("updateDrawing",[MATERIAL, x,y]);
       });
 
       // Optionally, you can store some info in the div's dataset for reference
