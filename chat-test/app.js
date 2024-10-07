@@ -76,15 +76,16 @@ function addToList(item) {
 /////////////////////////////////////////////////////////////////////
 
 const current_users = path.join(__dirname, 'current_users.json');
+const drawing = path.join(__dirname, 'drawing.json');
 
 // Function to load the dictionary (JSON) from the file
-function loadDictionary() {
-    if (!fs.existsSync(current_users)) {
+function loadDictionary(filename) {
+    if (!fs.existsSync(filename)) {
         // If the file doesn't exist, start with an empty dictionary
         return {};
     }
 
-    const data = fs.readFileSync(current_users, 'utf-8');
+    const data = fs.readFileSync(filename, 'utf-8');
     try {
         // Parse the JSON data from the file
         return JSON.parse(data);
@@ -95,9 +96,10 @@ function loadDictionary() {
 }
 
 // Function to save the dictionary (JSON) back to the file
-function saveDictionary(dictionary) {
+function saveDictionary(dictionary, filename) {
     try {
-        fs.writeFileSync(current_users, JSON.stringify(dictionary, null, 4), 'utf-8');
+        fs.writeFileSync(filename, JSON.stringify(dictionary, null, 4), 'utf-8');
+        // console.log("DICTIONAIRY : ", dictionary, " SAVED, under filename : ",filename)
         // console.log("Dictionary saved successfully.");
     } catch (err) {
         console.error("Error saving dictionary:", err);
@@ -105,29 +107,32 @@ function saveDictionary(dictionary) {
 }
 
 // Load the dictionary into memory
-let dictionary = loadDictionary();
+let dictionary = loadDictionary(current_users);
 let peerSocketIDMap = {}
-freshStart();
+freshStart(dictionary, current_users);
+
+let DRAWING_dictionary = loadDictionary(drawing)
+start_drawing(DRAWING_dictionary)
 
 
 // Function to add or update a key-value pair in the dictionary
 function setKeyValue(key, value) {
     if(!dictionary[key]){
         dictionary[key] = value;  // Set the key-value pair
-        saveDictionary(dictionary);  // Save the updated dictionary to the file
+        saveDictionary(dictionary, current_users);  // Save the updated dictionary to the file
         io.emit('users-reloaded', dictionary)
     }
 }
 
 function updateMuted(key, mute) {
         dictionary[key][1] = mute;  // Set the key-value pair
-        saveDictionary(dictionary);  // Save the updated dictionary to the file
+        saveDictionary(dictionary, current_users);  // Save the updated dictionary to the file
         io.emit('users-reloaded', dictionary)
     }
 
 function updatetrackpos(key, position) {
     dictionary[key][2] = mute;  // Set the key-value pair
-    saveDictionary(dictionary);  // Save the updated dictionary to the file
+    saveDictionary(dictionary, current_users);  // Save the updated dictionary to the file
     io.emit('users-reloaded', dictionary)
 }
 
@@ -135,19 +140,39 @@ function updatetrackpos(key, position) {
 function removeKey(key) {
     if (key in dictionary) {
         delete dictionary[key];  // Remove the key
-        saveDictionary(dictionary);  // Save the updated dictionary to the file
+        saveDictionary(dictionary, current_users);  // Save the updated dictionary to the file
         io.emit('users-reloaded', dictionary)
     } else {
         console.log(`Key '${key}' does not exist.`);
     }
 }
 
-function freshStart(){
-    for(let key in dictionary){
-        delete dictionary[key];
-        saveDictionary;
+function freshStart(data, filename){
+    for(let key in data){
+        delete data[key];
+        saveDictionary(data, filename);
     }
 }
+
+function start_drawing(dictionary){
+    console.log("DRAWING STARTED")
+    for (let x = 0; x <= 19; x++) {
+        // For each key, assign an array with 20 values (y = 1 to 20)
+        dictionary[x] = [];
+        for (let y = 0; y <= 29; y++) {
+            let dict = 'texture'
+          dictionary[x].push(dict);
+        }
+      }
+      saveDictionary(dictionary, drawing)
+}
+
+
+function updateDrawing(dictionary, texture,x,y){
+    dictionary[x][y] = texture
+    saveDictionary(dictionary, drawing)
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 let currentUserList = {}
@@ -196,6 +221,18 @@ function onConnected(socket){
     "receiver-log-on"
 
     io.emit("remote-console", "this is a test message")
+
+    socket.on('request_drawing', ()=>{
+        if(DRAWING_dictionary){
+            io.to(socket.id).emit("DRAWING", DRAWING_dictionary)
+        }
+    })
+
+    socket.on("updateDrawing", (data)=>{
+        console.log("update_drawing : ", data)
+        updateDrawing(DRAWING_dictionary, data[0], data[1], data[2])
+        socket.emit('DRAWING', DRAWING_dictionary)
+    })
 
 
     socket.on('disconnect', ()=>{

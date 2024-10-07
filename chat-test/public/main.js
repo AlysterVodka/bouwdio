@@ -16,6 +16,8 @@ const nameInput = document.getElementById("name-input");
 const messageForm = document.getElementById("message-form");
 const messageInput = document.getElementById("message-input");
 
+const gridContainer = document.getElementById('grid');
+
 
 ////// *** signal circle gebruik ik om aan te geven of de takening door "receiver" ontvangen wordt
 ///// *** receiver is de externe collector van alle tekeningen
@@ -148,6 +150,100 @@ function addAudioStream(stream) {
   console.log(audioElement);
   document.body.appendChild(audioElement); // Add to DOM
 }
+
+
+///////////////////////////
+////  initiate drawing ////
+///////////////////////////
+
+let MATERIAL = null;
+
+let isMouseDown = false; // Track mouse down state
+
+// Listen for mouse down events
+document.addEventListener('mousedown', function() {
+    isMouseDown = true;
+});
+
+// Listen for mouse up events
+document.addEventListener('mouseup', function() {
+    isMouseDown = false;
+});
+
+for (const element of document.getElementsByClassName("material")) {
+  console.log(element)
+  // Get the ID of the current element
+  const elementId = element.id;
+
+  // Add an event listener (e.g., 'mousedown' event)
+  element.addEventListener('mousedown', () => {
+      // Do something with the ID (for example, log it to the console or send it to a server)
+      console.log('Element with ID:', elementId, 'was clicked.');
+      MATERIAL = elementId
+      
+      // If using a socket to send the ID, you can emit the ID here
+      // socket.emit('material-clicked', { id: elementId });
+  });
+}
+
+
+
+for (let x = 0; x <= 19; x++) {
+  // For each key, assign an array with 20 values (y = 1 to 20)
+  for (let y = 0; y <= 29; y++) {
+      const div = document.createElement('div');
+      div.classList.add('grid-item');
+      div.id = `${x}-${y}`
+
+      // Attach mousedown event for socket message
+      div.addEventListener('mouseenter', () => {
+        if (isMouseDown) {
+          // Send a message through the socket
+          // const message = { row: rowIndex, col: colIndex, data: item };
+          x = x;
+          y = y;
+          socket.emit("updateDrawing",[MATERIAL, x,y]);
+        }
+      });
+
+      // Optionally, you can store some info in the div's dataset for reference
+      div.dataset.row = x;
+      div.dataset.col = y;
+
+      // Append the div to the grid container
+      gridContainer.appendChild(div);
+  };
+};
+
+
+socket.emit("request_drawing")
+
+
+// document.getElementById("submitButton").addEventListener("click", function() {
+//   // Get the value of the input field
+//   let inputValue = document.getElementById("userInput").value;
+//   let x = Math.floor(Math.random() * 30) + 1; // Random integer between 1 and 100
+//   let y = Math.floor(Math.random() * 20) + 1;
+//   socket.emit("updateDrawing",[inputValue, x,y])
+// })
+
+
+socket.on("DRAWING",(data) =>{
+
+  // Loop through the dictionary and create divs
+  Object.keys(data).forEach((rowKey, rowIndex) => {
+      data[rowKey].forEach((item, colIndex) => {
+        // console.log(rowIndex, colIndex)
+        // console.log(data[rowIndex][colIndex])
+        let element = document.getElementById(`${rowIndex}-${colIndex}`);
+        // console.log(element)
+        element.className =  `grid-item ${data[rowIndex][colIndex]}`
+        // console.log(element.class)
+      });
+  });
+  // console.log(data)
+})
+
 
 socket.on("clients-total", (data) => {
   console.log(data);

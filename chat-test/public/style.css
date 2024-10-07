@@ -176,11 +176,66 @@ body, html {
   cursor: move;
 }
 
+#grid {
+  display: grid;
+  grid-template-columns: repeat(30, 20px); /* 30 columns */
+  grid-template-rows: repeat(20, 20px);    /* 20 rows */
+  gap: 0px; /* Optional: spacing between the divs */
+}
+.grid-item {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #0000007b;
+  background-color: lightblue;
+}
+.grid-item:hover {
+  background-color: lightgreen;
+}
+
+.lisdodde{
+  background-image: url('./assets/images/lisdodde.jpg');
+}
+
+.bamboo{
+  background-image: url('./assets/images/bamboo.png');
+}
+
+.cork{
+  background-image: url('./assets/images/cork.jpg');
+}
+
+.wood{
+  background-image: url('./assets/images/wood1.png');
+}
+
+.hemp{
+  background-image: url('./assets/images/fiberhemp.png');
+}
+
+.straw{
+  background-image: url('./assets/images/stro-hooi.jpg');
+}
+
+.grass{
+  background-image: url('./assets/images/mammothgrass.jpg');
+}
+
+.mat{
+  background-image: url('./assets/images/recycledmat.jpg');
+}
+
+
+
 #drawing-board {
-  width: 100%;
+  width: 600px;
   height: 400px;
   background-color: transparent;
   cursor: pointer;
+}
+
+#requestDrawing, #submitButton{
+  width: 30px;
+  height: 30px;
 }
 
 #materials {
