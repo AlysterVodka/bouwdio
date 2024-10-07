@@ -197,20 +197,21 @@ for (let x = 0; x <= 19; x++) {
 
       // Attach mousedown event for socket message
       div.addEventListener('mousedown', () => {
-        if (isMouseDown) {
+          // Send a message through the socket
+          // const message = { row: rowIndex, col: colIndex, data: item };
+          x = x;
+          y = y;
+          socket.emit("updateDrawing",[MATERIAL, x,y]);
+      });
+      div.addEventListener('mouseenter', () => {
+        if(isMouseDown){
+          console.log(isMouseDown)
           // Send a message through the socket
           // const message = { row: rowIndex, col: colIndex, data: item };
           x = x;
           y = y;
           socket.emit("updateDrawing",[MATERIAL, x,y]);
         }
-      });
-      div.addEventListener('mouseenter', () => {
-          // Send a message through the socket
-          // const message = { row: rowIndex, col: colIndex, data: item };
-          x = x;
-          y = y;
-          socket.emit("updateDrawing",[MATERIAL, x,y]);
       });
 
       // Optionally, you can store some info in the div's dataset for reference
