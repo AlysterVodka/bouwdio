@@ -224,14 +224,14 @@ function onConnected(socket){
 
     socket.on('request_drawing', ()=>{
         if(DRAWING_dictionary){
-            io.emit("DRAWING", DRAWING_dictionary)
+            io.to(socket.id).emit("DRAWING", DRAWING_dictionary)
         }
     })
 
     socket.on("updateDrawing", (data)=>{
         console.log("update_drawing : ", data)
         updateDrawing(DRAWING_dictionary, data[0], data[1], data[2])
-        socket.emit('DRAWING', DRAWING_dictionary)
+        io.emit('DRAWING', DRAWING_dictionary)
     })
 
 
