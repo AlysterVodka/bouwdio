@@ -157,7 +157,7 @@ body, html {
   position: absolute;
   top: 5vh;
   left: 56vw;
-  width: 800px;
+  width: 612px;;
   height: 600px;
   border: var(--line-width) solid var(--line-color);
   background-color: var(--background-gray);
@@ -181,12 +181,16 @@ body, html {
   grid-template-columns: repeat(30, 20px); /* 30 columns */
   grid-template-rows: repeat(20, 20px);    /* 20 rows */
   gap: 0px; /* Optional: spacing between the divs */
+  background-image: url(./assets/images/test_pointillised.png);
+  filter: hue-rotate(173deg);
+  width: fit-content;
 }
 .grid-item {
   width: 20px;
   height: 20px;
   border: 1px solid #0000007b;
-  background-color: lightblue;
+  background-color: #b5b5b5d1;
+  filter: hue-rotate(-173deg);
 }
 .grid-item:hover {
   background-color: lightgreen;
@@ -240,28 +244,31 @@ body, html {
 
 #materials {
   display: flex;
-  flex-wrap: wrap;
-  gap: 50px;
-  margin-top: 10px;
+  flex-wrap: nowrap;
+  /* gap: 50px; */
+  /* margin-top: 10px; */
   padding: 10px;
   border-top: var(--line-width) solid var(--line-color);
+  justify-content: space-between;
 }
 
 .material {
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   text-align: left;
   background-color: var(--background-gray);
   border: var(--line-width) solid var(--line-color);
   background-size: cover;
   position: relative;
+  display: flex;
+  /* justify-content: end; */
+  align-items: end;
+  padding-left: 1px;
 }
 
 .material p {
   font-size: 11px;
   position: absolute;
-  left: -5px;
-  top: 30px;
 }
 
 .material.selected {
@@ -271,14 +278,15 @@ body, html {
 
 
 #eraser-button {
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   text-align: left;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   background-color: gray;
   border: var(--line-width) solid var(--line-color);
+  justify-content: flex-end;
 }
 
 #eraser-button.selected {
@@ -303,11 +311,14 @@ body, html {
 
 #size-slider-container {
   font-family: 'Redaction-Bold', serif;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   margin-left: 0px;
   text-align: center;
   position: relative;
-  top: 20px; /* Same position as material labels */
+  height: 70px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 #size-slider {
