@@ -341,10 +341,9 @@ function frontEndImplementation(){
   let micStreamActive = false;
   
 
-  // Functie om de pauzeknop te beheren 
   // 9oct edit: vanuit hier moet de mic en audio ook worden gemute - oude logic zit er nog in, misschien hoeft dit niet te veranderen?
-  connectPauseButton.addEventListener("click", function () {
-    if (!isPaused) {
+   function applyPauseStatus() {
+    if (isPaused) {
       // Verberg de content en toon de pauzestatus
       allContent.style.display = "none"; // Verberg de content
       pauseStatusWindow.style.display = "block"; // Toon het statusvenster
@@ -353,13 +352,21 @@ function frontEndImplementation(){
         <p>Audio status: ${audioStreamActive ? "Active" : "Inactive"}</p>
         <p>Microphone status: ${micStreamActive ? "Active" : "Inactive"}</p>
       `;
-      isPaused = true;
     } else {
       // Toon de content en verberg de pauzestatus
       allContent.style.display = "block"; // Toon de content
       pauseStatusWindow.style.display = "none"; // Verberg het statusvenster
-      isPaused = false;
     }
+  }
+
+  applyPauseStatus();
+
+    // Functie om de pauzeknop te beheren 
+  connectPauseButton.addEventListener("click", function () {
+    if (!isPaused) {
+      isPaused = !isPaused;
+      applyPauseStatus();
+      isPaused = true;
   });
 
   // document.querySelectorAll(".material").forEach((material) => {
