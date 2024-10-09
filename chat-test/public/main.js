@@ -10,14 +10,13 @@ console.log("is UPDATED !!!!!")
 
 const clientsTotal = document.getElementById("clients-total");
 
-//// **** dit zijn de chat functionaliteiten*/
-const messageContainer = document.getElementById("message-container");
-const nameInput = document.getElementById("name-input");
-const messageForm = document.getElementById("message-form");
-const messageInput = document.getElementById("message-input");
+//// **** dit zijn de chat functionaliteiten*/ -- uitgecomment door Esther op 9okt
+// const messageContainer = document.getElementById("message-container");
+// const nameInput = document.getElementById("name-input");
+const messageForm = document.getElementById("message-form"); // connected to the drawing grid? --> when turning off 
+// const messageInput = document.getElementById("message-input"); 
 
 const gridContainer = document.getElementById('grid');
-
 
 ////// *** signal circle gebruik ik om aan te geven of de takening door "receiver" ontvangen wordt
 ///// *** receiver is de externe collector van alle tekeningen
@@ -257,9 +256,9 @@ socket.on("clients-total", (data) => {
   clientsTotal.innerText = `total clients: ${data}`;
 });
 
-socket.on("chat-message", (data) => {
+ socket.on("chat-message", (data) => {
   // console.log(data)
-  addMessageToUI(false, data);
+ // addMessageToUI(false, data);
 });
 
 socket.on("remote-console", (data) =>{
@@ -414,8 +413,8 @@ function frontEndImplementation(){
   // });
 
   // Draggable window
-  const onlineBuildingWindow = document.getElementById("online-building-window");
-  const header = document.getElementById("online-building-header");
+  const onlineBuildingWindow = document.getElementById("onsite-building");
+  const header = document.getElementById("onsite-building-header");
   let offsetX,
     offsetY,
     isDragging = false;

@@ -17,7 +17,8 @@
   --chat-receive: #c1c1c1;
   --slider-colour: #fbcc00;
   --line-color: black;
-  --line-width: 6px;
+  --line-width: 5px;
+  --thumbnail-line-width: 2.5px;
 }
 
 body, html {
@@ -29,7 +30,7 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../assets/images/test_pointillised.png');
+  background-image: url('../images/test_pointillised.png');
   background-repeat: repeat;
   background-size: 100vw;
   box-sizing: border-box;
@@ -84,7 +85,7 @@ body, html {
   display: flex;
   flex-direction: column;
   width: 33%;
-  height: 85vh;
+  height: 65vh;
   box-sizing: border-box;
 }
 
@@ -100,7 +101,26 @@ body, html {
   border-top: var(--line-width) solid var(--line-color);
 }
 
+#name-input-window {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  display: flex;
+  gap: 60px;
+  align-items: left;
+}
+
+#name-input-header {
+  background-color: var(--header-gray);
+  font-family: 'Redaction-Bold', serif;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border: var(--line-width) solid var(--line-color);
+}
+
 #info-content {
+  text-transform: uppercase;
   padding: 20px;
   background-color: var(--background-gray);
   height: 300px;
@@ -110,7 +130,7 @@ body, html {
 
 #chat-window {
   background-color: var(--background-gray);
-  height: 800px;
+  height: 600px;
   border: var(--line-width) solid var(--line-color);
   padding: 0px;
   box-sizing: border-box;
@@ -122,14 +142,39 @@ body, html {
   border: 0;
 }
 
-#onsite-building {
-  width: 50vw;
-  height: 60vh;
+#online-building-window {
   background-color: var(--background-gray);
-  border-top: var(--line-width) solid var(--line-color);
   border-right: var(--line-width) solid var(--line-color);
-  border-bottom: var(--line-width) solid var(--line-color);
   position: relative;
+
+  height: auto; /* Zorg dat de hoogte automatisch aanpast aan de inhoud */
+  max-height: 600px; /* Beperk de maximale hoogte van de box */
+  overflow: hidden; /* Verberg overloop om de grootte te beperken */
+}
+
+#online-building-header {
+  font-family: 'Redaction-Bold', serif;
+  text-transform: uppercase;
+  padding: 10px;
+  background-color: var(--header-gray);
+  border-bottom: var(--line-width) solid var(--line-color);
+  border-top: var(--line-width) solid var(--line-color);
+}
+#grid {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr); /* 20 kolommen */
+  grid-template-rows: repeat(20, 1fr); /* 20 rijen */
+}
+
+
+#video-container {
+  width: 100%;
+  height: 100%;
+}
+
+#video-container iframe {
+  width: 100%;
+  height: 100%;
 }
 
 #onsite-building-header {
@@ -139,26 +184,14 @@ body, html {
   padding: 10px;
   text-align: center;
   border-bottom: var(--line-width) solid var(--line-color);
+  cursor: move;
 }
-
-#video-container {
-  width: 100%;
-  height: 100%;
-  
-}
-
-#video-container iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-#online-building-window {
+#onsite-building { 
   position: absolute;
   top: 5vh;
-  left: 56vw;
-  width: 612px;;
-  height: 600px;
+  left: 54vw;
+  width: 450px;
+  height: 380px;
   border: var(--line-width) solid var(--line-color);
   background-color: var(--background-gray);
   z-index: 1000;
@@ -167,14 +200,6 @@ body, html {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-#online-building-header {
-  font-family: 'Redaction-Bold', serif;
-  text-transform: uppercase;
-  padding: 10px;
-  background-color: var(--header-gray);
-  border-bottom: var(--line-width) solid var(--line-color);
-  cursor: move;
-}
 
 #grid {
   display: grid;
@@ -228,8 +253,6 @@ body, html {
   background-image: url('./assets/images/recycledmat.jpg');
 }
 
-
-
 #drawing-board {
   width: 600px;
   height: 400px;
@@ -238,37 +261,39 @@ body, html {
 }
 
 #requestDrawing, #submitButton{
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
 }
 
 #materials {
   display: flex;
-  flex-wrap: nowrap;
-  /* gap: 50px; */
-  /* margin-top: 10px; */
-  padding: 10px;
+  justify-content: space-between; /* Verdeel de knoppen gelijkmatig over de rij */
+  align-items: center;
+  width: 100%; /* Zorg dat het de breedte van de container gebruikt */
+  height: 60px; /* Maximale hoogte van de thumbnails container */
+  padding: 0;
   border-top: var(--line-width) solid var(--line-color);
-  justify-content: space-between;
+  box-sizing: border-box; /* Zorg dat de padding niet buiten de box gaat */
 }
 
 .material {
-  width: 60px;
-  height: 60px;
-  text-align: left;
+  flex: 1 1 calc(25% - 10px); /* Schalen naar 25% van de containerbreedte min marge */
+  height: auto; /* Laat de hoogte zich aanpassen aan de breedte */
+  aspect-ratio: 1/1; /* Zorg voor een vierkant formaat */
   background-color: var(--background-gray);
-  border: var(--line-width) solid var(--line-color);
+  border: var(--thumbnail-line-width) solid var(--line-color);
   background-size: cover;
   position: relative;
   display: flex;
-  /* justify-content: end; */
-  align-items: end;
-  padding-left: 1px;
+  align-items: flex-end; /* Plaats tekst aan de onderkant */
+  margin-right: -1.5px; /* Zorg voor 1 pixel overlap */
 }
 
 .material p {
   font-size: 11px;
   position: absolute;
+  left: -5px;
+  top: 50px;
 }
 
 .material.selected {
@@ -278,15 +303,15 @@ body, html {
 
 
 #eraser-button {
-  width: 60px;
-  height: 60px;
-  text-align: left;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: gray;
-  border: var(--line-width) solid var(--line-color);
-  justify-content: flex-end;
+  flex: 1 1 calc(25% - 10px); /* Schalen naar 25% van de containerbreedte min marge */
+  height: auto; /* Laat de hoogte zich aanpassen aan de breedte */
+  aspect-ratio: 1/1; /* Zorg voor een vierkant formaat */
+  background-color: var(--button-grey);
+  border: var(--thumbnail-line-width) solid var(--line-color);
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: flex-end; /* Plaats tekst aan de onderkant */
 }
 
 #eraser-button.selected {
@@ -309,45 +334,6 @@ body, html {
   background-color: grey; /* Change to your desired hover color */
 }
 
-#size-slider-container {
-  font-family: 'Redaction-Bold', serif;
-  /* margin-top: 20px; */
-  margin-left: 0px;
-  text-align: center;
-  position: relative;
-  height: 70px;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
-#size-slider {
-  width: 100px;
-  margin-left: 20px;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 8px;
-  background: var(--slider-colour);
-  outline: none;
-}
-
-#size-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: black;
-  cursor: pointer;
-}
-
-#size-slider::-moz-range-thumb {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: black;
-  cursor: pointer;
-}
 
 #bottom-right-container {
   position: absolute;

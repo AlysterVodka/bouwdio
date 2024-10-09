@@ -21,43 +21,20 @@
       <div id="bouwdio-am">
         <div id="bouwdio-am-header">Bouwdio AM</div>
         <div id="info-content">
-          <p>Info about experience, disclaimer open radio channel, describes functionality, ***full experience is on PC</p>
+          <p>The future is collective</p>
+          <p>Choose the materiality of our future</p>
+          <p>Connect with the ground team via your computers' audio</p>
+          <p>Together you can decide how the city of the future should look like</p>
+          <p>You apply the materials</p>
+          <p>They build the space</p>
+          
         </div>
         <div id="chat-window"> 
           <div class="peer-id" id="peer-id"></div>
           <div class="main">
-              <div class="name">
-                  <span><i class="far fa-user"></i></span>
-                  <input type="text"
-                  id="name-input"
-                  class="name-input"
-                  value="anonymous"
-                  maxlength="20"/>
-              </div>
-              <ul class="message-container" id="message-container">
-                  <li class="message-left">
-                      <p class="message">
-                          loremipsum
-                          <span>bluebird - 26 july 10:345</span>
-                      </p>
-                  </li>
-                  <li class="message-right">
-                      <p class="message">
-                          loremipsum
-                          <span>bluebird - 26 july 10:345</span>
-                      </p>
-                  </li>
-
-                  <li class="message-feedback">
-                      <p class="feedback" id="feedback">
-                          killer is typing a message
-                      </p>
-                  </li>
-              </ul>
+              
               <form class="message-form" id="message-form">
-                  <input type="text" name="message" class="message-input" id="message-input">
-                  <div class="v-divider"></div>
-                  <button type="submit" class="send-button">send<i class="fas fa-paper-plane"></i></button>
+
         </form>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"
         integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ=="
@@ -69,25 +46,25 @@
         crossorigin="anonymous"
         referrerpolicy="no-referrer"></script>
           </div>
-          <h3 class="clients-total" id="clients-total">total clients : 2</h3>
           <div class="signal-circle" id="signal-circle"></div>
         </div>
-      </div>
-
-      <div id="onsite-building">
-        <div id="onsite-building-header">Onsite Building</div>
-        <div id="video-container">
-          <iframe src="https://www.youtube.com/embed/IIqtuupvdWg?autoplay=1&mute=1&controls=0" title="YouTube video player"></iframe>
+        <div id="name-input-window">
+          <div id="name-input-header">Enter Name</div>
+          <div class="name">
+            <span><i class="far fa-user"></i></span>
+            <input type="text"
+            id="name-input"
+            class="name-input"
+            value="anonymous"
+            maxlength="20"/>
+        </div>
         </div>
       </div>
 
-    </div>
-
-    <div id="online-building-window">
-      <div id="online-building-header">Online Building</div>
+      <div id="online-building-window">
+             <div id="online-building-header">Online Building</div>
       <div id="grid">
       </div>
-
       <div id="materials">
           <div class="material" id="wood" data-image-url="assets/images/wood1.png" style="background-image: url('assets/images/wood1.png');"><p>Wood</p></div>
           <div class="material" id="bamboo" data-image-url="assets/images/bamboo.png" style="background-image: url('assets/images/bamboo.png');"><p>Bamboo</p></div>
@@ -100,11 +77,17 @@
           <div id="eraser-button" onclick="setEraser()"><p>Eraser</p></div>
 
       </div>
-
-      <div id="size-slider-container">
-        <label for="size-slider">PEN SIZE</label>
-        <input type="range" id="size-slider" min="1" max="50" value="10" onchange="updateBrushSize()">
+      
       </div>
+
+    </div>
+
+    <div id="onsite-building">
+      <div id="onsite-building-header">Onsite Building</div>
+      <div id="video-container">
+        <iframe src="https://www.youtube.com/embed/IIqtuupvdWg?autoplay=1&mute=1&controls=0" title="YouTube video player"></iframe>
+      </div>
+
     </div>
     
   </div>

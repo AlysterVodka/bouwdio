@@ -17,7 +17,7 @@
   --chat-receive: #c1c1c1;
   --slider-colour: #fbcc00;
   --line-color: black;
-  --line-width: 6px;
+  --line-width: px;
 }
 
 body, html {
@@ -153,12 +153,12 @@ body, html {
   border: 0;
 }
 
-#online-building-window {
+#online-building-window { 
   position: absolute;
   top: 5vh;
   left: 56vw;
   width: 800px;
-  height: 600px;
+  height: 400px;
   border: var(--line-width) solid var(--line-color);
   background-color: var(--background-gray);
   z-index: 1000;
@@ -186,15 +186,15 @@ body, html {
 #materials {
   display: flex;
   flex-wrap: wrap;
-  gap: 50px;
-  margin-top: 10px;
-  padding: 10px;
+  gap: 0px;
+  margin-top: 0px;
+  padding: 0px;
   border-top: var(--line-width) solid var(--line-color);
 }
 
 .material {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   text-align: left;
   background-color: var(--background-gray);
   border: var(--line-width) solid var(--line-color);
