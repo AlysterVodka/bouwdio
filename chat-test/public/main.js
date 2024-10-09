@@ -339,27 +339,80 @@ function frontEndImplementation(){
   let audioStreamActive = false;
   let micStreamActive = false;
   
-
+  // Zet de applicatie standaard in pauzestand bij het laden van de pagina
+window.onload = function () {
+  allContent.style.display = "none"; // Verberg de content bij het opstarten
+  pauseStatusWindow.style.display = "block"; // Toon het pauzevenster
+};
   // Functie om de pauzeknop te beheren 
   // 9oct edit: vanuit hier moet de mic en audio ook worden gemute - oude logic zit er nog in, misschien hoeft dit niet te veranderen?
-  connectPauseButton.addEventListener("click", function () {
-    if (!isPaused) {
-      // Verberg de content en toon de pauzestatus
-      allContent.style.display = "none"; // Verberg de content
-      pauseStatusWindow.style.display = "block"; // Toon het statusvenster
-      pauseStatusWindow.innerHTML = `
-        <h2>PAUSE - debug - replace with image</h2>
-        <p>Audio status: ${audioStreamActive ? "Active" : "Inactive"}</p>
-        <p>Microphone status: ${micStreamActive ? "Active" : "Inactive"}</p>
-      `;
-      isPaused = true;
-    } else {
-      // Toon de content en verberg de pauzestatus
-      allContent.style.display = "block"; // Toon de content
-      pauseStatusWindow.style.display = "none"; // Verberg het statusvenster
-      isPaused = false;
-    }
+// Pauze functionaliteit voor de knop onderin (PAUSE knop)
+connectPauseButton.addEventListener("click", function () {
+  if (!isPaused) {
+    // Zet de applicatie op pauze
+    allContent.style.display = "none"; // Verberg de content
+    pauseStatusWindow.style.display = "block"; // Toon pauzevenster
+    isPaused = true;
+
+    // Zet de audio/microfoon uit zoals voorheen
+    audioStreamActive = false;
+    micStreamActive = false;
+  } else {
+    // Haal de applicatie uit pauze
+    allContent.style.display = "block"; // Toon de content
+    pauseStatusWindow.style.display = "none"; // Verberg pauzevenster
+    isPaused = false;
+
+    // Zet de audio/microfoon aan zoals voorheen
+    audioStreamActive = true;
+    micStreamActive = true;
+  }
+});
+
+// Functionaliteit voor "Click to Connect"-knop in het pauzevenster
+document.getElementById("click-to-connect-button").addEventListener("click", function () {
+  // Zelfde logica als hierboven om de applicatie uit pauze te halen
+  allContent.style.display = "block"; // Toon de content
+  pauseStatusWindow.style.display = "none"; // Verberg pauzevenster
+  isPaused = false;
+
+  // Zet de audio/microfoon aan
+  audioStreamActive = true;
+  micStreamActive = true;
+});
+
+// Selecteer de elementen
+const chatInfoDefault = document.getElementById('chat-info-default');
+const materialInfo = document.getElementById('material-info');
+const materialName = document.getElementById('material-name');
+const materialDescription = document.getElementById('material-description');
+
+// Voeg event listeners toe aan elk materiaal voor hover
+document.querySelectorAll('.material').forEach(material => {
+  material.addEventListener('mouseenter', () => {
+    // Verberg de standaardtekst
+    chatInfoDefault.style.display = 'none';
+
+    // Toon materiaal-informatie
+    materialInfo.style.display = 'block';
+    materialName.textContent = material.getAttribute('data-name');
+    materialDescription.textContent = material.getAttribute('data-description');
   });
+
+  material.addEventListener('mouseleave', () => {
+    // Herstel de standaardtekst
+    chatInfoDefault.style.display = 'block';
+    materialInfo.style.display = 'none';
+  });
+});
+
+// Zorg ervoor dat de bestaande click functionaliteit niet verstoord wordt
+document.querySelectorAll('.material').forEach(material => {
+  material.addEventListener('click', () => {
+    console.log(`Material ${material.getAttribute('data-name')} selected.`);
+    // Hier blijft je bestaande click functionaliteit intact voor het selecteren van materialen
+  });
+});
 
   // document.querySelectorAll(".material").forEach((material) => {
   //   material.addEventListener("click", () => {

@@ -30,6 +30,18 @@
           
         </div>
         <div id="chat-window"> 
+          <p id="chat-info-default">Hover over materials you want to know more about <br> click the material box to start drawing</p>
+  <p id="material-info" style="display: none;">
+    <span id="material-name" style="font-family: 'Redaction-Bold';"></span><br>
+    <span id="material-description" style="font-family: 'Open Sans';"></span>
+  </p>
+</div>
+
+<div class="materials-container">
+  <div class="material" id="wood" data-name="Wood" data-description="Wood placeholder text">Wood</div>
+  <div class="material" id="bamboo" data-name="Bamboo" data-description="Bamboo placeholder text">Bamboo</div>
+  <div class="material" id="hemp" data-name="Fiberhemp" data-description="Fiberhemp placeholder text">Fiberhemp</div>
+  
           <div class="peer-id" id="peer-id"></div>
           <div class="main">
               
@@ -103,9 +115,30 @@
 
 <!-- Statusvenster voor audio en microfoon -->
 <div id="pause-status-window">
-  Audio status: Active<br>
-  Microphone status: Active<br>
-  Status: Running
+  <!-- Bouwdio AM header met logo -->
+  <div id="pause-logo-header">
+    <img id="bouwdio-logo" src="assets/images/LOGO BOUWDIO ORANGE.png" alt="Bouwdio AM Logo">
+  </div>
+
+  <!-- Security Camera afbeelding -->
+  <div id="security-camera">
+    <img src="assets/images/security-camera.png" alt="Security Camera Icon">
+  </div>
+
+  <!-- Caution tekst -->
+  <div id="pause-status-window-header">
+    ! CAUTION !
+  </div>
+
+  <!-- Disclaimer tekst -->
+  <div id="disclaimer-text">
+    BY ENTERING THIS EXPERIENCE YOU AGREE TO SHARE YOUR VOICE WITH OTHERS AT ALL TIMES
+  </div>
+
+  <!-- Click to Connect button onderin -->
+  <div id="click-to-connect-button">
+    CLICK TO CONNECT
+  </div>
 </div>
 <div class="signal-circle" id="signal-circle"></div>
 <!-- Link JS -->
