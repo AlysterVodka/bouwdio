@@ -74,12 +74,17 @@ body, html {
   box-sizing: border-box;
 }
 
+/* Ensure the center container scales properly */
 #center-container {
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: 100%; /* Allow the content to scale */
   box-sizing: border-box;
+  justify-content: center;
+  align-items: top;
 }
+
 
 #bouwdio-am {
   display: flex;
@@ -104,10 +109,14 @@ body, html {
 #name-input-window {
   position: absolute;
   bottom: 20px;
-  left: 40px;
+  left: 20px; /* Adjust to align it properly with other elements */
   display: flex;
-  gap: 60px;
+  flex-direction: column;
   align-items: left;
+  width: auto; /* Adjust width based on content */
+  z-index: 1000;
+  border: var(--line-width) solid var(--line-color);
+
 }
 
 #name-input-header {
@@ -116,7 +125,7 @@ body, html {
   text-transform: uppercase;
   padding: 10px;
   text-align: center;
-  border: var(--line-width) solid var(--line-color);
+  border-bottom: var(--line-width) solid var(--line-color);
 }
 
 #info-content {
@@ -136,6 +145,16 @@ body, html {
   box-sizing: border-box;
 }
 
+/* Chat Window Thumbnails Styling */
+#chat-window .material {
+  font-weight: bold; /* Bold for material names */
+  margin-bottom: 5px; /* Spacing for text */
+}
+#chat-window .material p {
+  font-weight: normal; /* Placeholder text style */
+  color: gray;
+}
+
 #chat-iframe {
   width: 100vh; /*change in chat_style.css*/
   height: 100vw;
@@ -146,9 +165,7 @@ body, html {
   background-color: var(--background-gray);
   border-right: var(--line-width) solid var(--line-color);
   position: relative;
-
-  height: auto; /* Zorg dat de hoogte automatisch aanpast aan de inhoud */
-  max-height: 600px; /* Beperk de maximale hoogte van de box */
+  height: fit-content; /* Zorg dat de hoogte automatisch aanpast aan de inhoud */
   overflow: hidden; /* Verberg overloop om de grootte te beperken */
 }
 
@@ -165,7 +182,6 @@ body, html {
   grid-template-columns: repeat(20, 1fr); /* 20 kolommen */
   grid-template-rows: repeat(20, 1fr); /* 20 rijen */
 }
-
 
 #video-container {
   width: 100%;
@@ -267,13 +283,14 @@ body, html {
 
 #materials {
   display: flex;
-  justify-content: space-between; /* Verdeel de knoppen gelijkmatig over de rij */
+  justify-content: space-between; /* Distribute thumbnails evenly */
   align-items: center;
-  width: 100%; /* Zorg dat het de breedte van de container gebruikt */
-  height: 60px; /* Maximale hoogte van de thumbnails container */
+  width: 100%;
+  height: auto; /* Remove any fixed height, adjust to the content size */
   padding: 0;
+  margin: 0; /* Remove extra margins */
   border-top: var(--line-width) solid var(--line-color);
-  box-sizing: border-box; /* Zorg dat de padding niet buiten de box gaat */
+  box-sizing: border-box;
 }
 
 .material {
@@ -396,12 +413,12 @@ body {
 }
 
 .name {
+  font-family: 'Helvetica', sans-serif;
   display: flex;
-  font-size: 32px;
+  font-size: 18px;
   font-weight: 700;
-  padding: 8px 16px;
-  color: #707070;
-  background-color: #ebebeb;
+  color: var(--background-gray);
+  background-color: var(--background-gray);
 }
 
 .name > span {
@@ -409,7 +426,7 @@ body {
 }
 
 .name-input {
-  font-size: 21px;
+  font-size: 28px;
   padding: 10px;
   font-weight: 700;
   color: #707070;
@@ -511,10 +528,15 @@ body {
 }
 
 .signal-circle {
+  display: flex;
+  justify-content: center; /* Horizontaal centreren */
+  align-items: center;
+  position: absolute; /* Plaats het element absoluut op de pagina */
+  bottom: 20px; /* 20px marge vanaf de onderkant van de pagina */
+  left: 50%; /* Plaats het in het midden van de pagina */
+  transform: translateX(-50%); /* Verplaats het exact naar het midden */
   width: 30px;
-  margin: 0 auto;
   height: 30px;
   border: 5px solid black;
   border-radius: 20px;
-  margin-bottom: 20px;
 }
