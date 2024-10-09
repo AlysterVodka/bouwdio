@@ -30,7 +30,7 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../images/test_pointillised.png');
+  background-image: url('images/test_pointillised.png');
   background-repeat: repeat;
   background-size: 100vw;
   box-sizing: border-box;
@@ -204,7 +204,7 @@ body, html {
 }
 #onsite-building { 
   position: absolute;
-  top: 5vh;
+  top: 34vh;
   left: 54vw;
   width: 450px;
   height: 380px;
@@ -387,8 +387,7 @@ body, html {
   height: 120px;
   padding-left: 10px;
   padding-bottom: 10px;
-  background-color: var(--background-gray);
-  border: var(--line-width) solid var(--line-color);
+  z-index: -1;
 }
 
 
