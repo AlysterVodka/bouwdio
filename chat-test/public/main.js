@@ -336,14 +336,13 @@ function frontEndImplementation(){
   const pauseStatusWindow = document.getElementById("pause-status-window");
   const connectPauseButton = document.getElementById("connect-pause-button");
   let drawing = false;
-  let isPaused = false; // Pauzeknop
+  let isPaused = true; // Pauzeknop
   let audioStreamActive = false;
   let micStreamActive = false;
+  
 
-  // Set default pattern
-
-
-  // Functie om de pauzeknop te beheren
+  // Functie om de pauzeknop te beheren 
+  // 9oct edit: vanuit hier moet de mic en audio ook worden gemute - oude logic zit er nog in, misschien hoeft dit niet te veranderen?
   connectPauseButton.addEventListener("click", function () {
     if (!isPaused) {
       // Verberg de content en toon de pauzestatus
