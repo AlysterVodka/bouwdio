@@ -131,6 +131,7 @@ function refreshAudio(){
     });
   if(speaker.paused){
     speaker.play()
+    console.log(speaker)
   }
   }
 
