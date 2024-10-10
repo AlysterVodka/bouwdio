@@ -23,13 +23,17 @@
 body, html {
   margin: 0;
   padding: 0;
-  background-image: ('assets/images/test_pointillised.png');
-  height: 100vh;
   width: 100vw;
-  display: flex;
+  height: 100vh;
+  background-image: url('assets/images/test_pointillised.png');
+  background-position: center;
+  background-size: 150vh;
+  background-repeat: repeat;
+  box-sizing: border-box;
+  z-index: -2; /* Plaats het achter andere elementen */
   position: relative;
-  z-index: 1;
-  overflow: hidden;
+  display: grid;
+  place-items: center;
 }
 
 #pause-status-window {
@@ -71,30 +75,22 @@ body, html {
 }
 
 #bouwdio-logo {
-  width: 100%;
+  width: 92%;
   height: auto;
-  margin-bottom: 20px;
+  margin: 10px;
 }
 
 #security-camera img {
-  width: 50px;
+  display: block;  /* Zorg ervoor dat de afbeelding correct wordt weergegeven */
+  width: 100px;  /* Stel de gewenste grootte in */
+  margin: 0 auto; /* Zorgt ervoor dat het element in het midden staat */
+  margin-top: 20px;  /* Pas de afstand aan tussen de camera en de bovenstaande tekst */
+  margin-bottom: 20px;  /* Pas de afstand aan tussen de camera en de Caution tekst */
   height: auto;
+  justify-content: center;
   align-items: center;
 }
 
-#security-camera {
-  width: 100px;
-  height: auto;
-  display: flex;
-  padding: 20px;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto; /* Zorgt ervoor dat het element in het midden staat */
-  margin-bottom: 20px;
-  background-image: url('assets/images/security-camera.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-}
 
 #pause-button-container {
   width: 100%;
@@ -128,10 +124,10 @@ body, html {
   flex-direction: row;
   width: 100%;
   box-sizing: border-box;
-  overflow: hidden; 
+
 }
 
-/* Ensure the center container scales properly
+/* Ensure the center container scales properly*/
 #center-container {
   display: flex;
   flex-direction: row;
@@ -140,10 +136,9 @@ body, html {
   justify-content: center;
   align-items: top;
   overflow: hidden;
-}*/
+}
 
 #bouwdio-am {
-  flex: 1; /* Make them equal in width */
   display: flex;
   flex-direction: column;
   height: 300px; /* Ensure they match height */
@@ -162,7 +157,6 @@ body, html {
   border-right: var(--line-width) solid var(--line-color);
   border-bottom: var(--line-width) solid var(--line-color);
   border-top: var(--line-width) solid var(--line-color);
-  overflow: hidden;
 }
 
 #info-content { /* bouwdio am info*/
@@ -175,18 +169,19 @@ body, html {
 }
 
 #online-building-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Zorgt ervoor dat het venster de volledige beschikbare hoogte benut */
   background-color: var(--background-gray);
   border-right: var(--line-width) solid var(--line-color);
   position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
 }
 
 #online-building-header {
   font-family: 'Redaction-Bold', serif;
   text-transform: uppercase;
+  text-align: center;
   padding: 10px;
   background-color: var(--header-gray);
   border-bottom: var(--line-width) solid var(--line-color);
@@ -407,13 +402,12 @@ body, html {
 
 #chat-window {
   background-color: var(--background-gray);
-  /*height: fit-content;*/
-  height: auto;
+  height: 100%;
   border: var(--line-width) solid var(--line-color);
   padding: 20px;
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
-  overflow: hidden; /* Voorkom dat inhoud buiten de container valt */
+
 }
 
 #chat-info #default-text {
@@ -428,7 +422,7 @@ body, html {
 /* Chat Window Thumbnails Styling */
 #chat-window .material {
   font-weight: bold;
-  margin-bottom: 5px;
+
 }
 
 #chat-window .material p {
@@ -440,7 +434,6 @@ body, html {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   z-index: 1000;
   border-top: var(--line-width) solid var(--line-color);
   border-bottom: var(--line-width) solid var(--line-color);
@@ -461,16 +454,16 @@ body, html {
   font-size: 16px;
   padding: 8px;
   font-family: 'Open Sans', sans-serif;
-  color: var(--button-grey);
+  color: var(--header-grey);
   border: none; /* Verwijder de rand */
   outline: none;
   text-align: center;
   box-sizing: border-box; /* Inclusief padding en border */
-  background-color: white;
+  background-color: var(--button-grey);
 }
 
 .highlight {
-  color: var(--slider-colour);
+  background-color: #D19A32; /* Okerkleur */
 }
 
 #bottom-right-container {
@@ -481,7 +474,7 @@ body, html {
   gap: 60px;
   align-items: left;
 }
-
+/*
 #connect-pause-button {
   width: 120px;
   height: 120px;
@@ -502,10 +495,10 @@ body, html {
   background-color: var(--line-color);
   color: white;
 }
-
+*/
 #vpro-logo img {
-  width: 320px;
-  height: 120px;
+  width: 330px;
+  height: 100px;
   padding-left: 10px;
   padding-bottom: 10px;
   z-index: -1;
@@ -520,11 +513,6 @@ body, html {
   scroll-behavior: smooth;
 }
 
-body {
-  display: grid;
-  place-items: center;
-  
-}
 
 .main {
   border: 8px solid #dddddd;

@@ -378,7 +378,7 @@ document.getElementById("click-to-connect-button").addEventListener("click", fun
 
   // Controleer of de naam nog steeds 'anonymous' is of leeg
   if (userName === 'anonymous' || userName === "") {
-    nameInput.style.backgroundColor = 'yellow'; // Highlight het tekstvak
+    nameInput.style.backgroundColor = '#D4A017'; // Highlight het tekstvak
     setTimeout(() => {
       nameInput.style.backgroundColor = ''; // Verwijder highlight na 2 seconden
     }, 2000);
