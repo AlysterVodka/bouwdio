@@ -119,12 +119,12 @@ body, html {
 }
 
 #main-container {
-  margin-top: -200px;
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
   box-sizing: border-box;
-
+  margin: -50px;
 }
 
 /* Ensure the center container scales properly*/
@@ -141,10 +141,11 @@ body, html {
 #bouwdio-am {
   display: flex;
   flex-direction: column;
-  height: 300px; /* Ensure they match height */
+  flex-grow: 1; /* Allow it to grow and take available space */
+  height: 100%; /* Allow dynamic height */
+  width: 30vw;
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
-  overflow: hidden; /* Voorkom dat inhoud buiten de container valt */
 }
 
 #bouwdio-am-header {
@@ -153,10 +154,9 @@ body, html {
   text-transform: uppercase;
   padding: 10px;
   text-align: center;
-  border-left: var(--line-width) solid var(--line-color);
-  border-right: var(--line-width) solid var(--line-color);
-  border-bottom: var(--line-width) solid var(--line-color);
-  border-top: var(--line-width) solid var(--line-color);
+  border: var(--line-width) solid var(--line-color);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #info-content { /* bouwdio am info*/
@@ -171,9 +171,10 @@ body, html {
 #online-building-window {
   display: flex;
   flex-direction: column;
-  height: 100%; /* Zorgt ervoor dat het venster de volledige beschikbare hoogte benut */
+  height: 10%; /* Zorgt ervoor dat het venster de volledige beschikbare hoogte benut */
   background-color: var(--background-gray);
   border-right: var(--line-width) solid var(--line-color);
+  border-left: var(--line-width) solid var(--line-color);
   position: relative;
   justify-content: space-between;
 }
@@ -190,8 +191,13 @@ body, html {
 
 #grid {
   display: grid;
-  grid-template-columns: repeat(20, 1fr);
-  grid-template-rows: repeat(20, 1fr);
+  grid-template-columns: repeat(30, 20px);
+  grid-template-rows: repeat(20, 20px);
+  background-image: url(./assets/images/test_pointillised.png);
+  background-size: contain; /* Adjust size of grid background */
+  width: fit-content;
+  gap: 0px;
+  filter: hue-rotate(173deg);
 }
 
 #onsite-building-header {
@@ -327,7 +333,9 @@ body, html {
   margin-right: -1.5px;
 }
 
+
 .material p {
+  display: none;
   font-size: 11px;
   position: absolute;
   left: -5px;
@@ -357,9 +365,11 @@ body, html {
 
 #eraser-button p {
   font-family: 'SimplisticSans-Medium', sans-serif;
-  font-size: 11px;
-  margin-top: 31px;
-  text-align: left;
+  font-size: 15px;
+  padding: 5px;
+  text-transform: uppercase;
+  text-align: center;
+  color: whitesmoke;
 }
 
 .material,
@@ -402,11 +412,12 @@ body, html {
 
 #chat-window {
   background-color: var(--background-gray);
-  height: 100%;
+  height: auto; /* Allow auto height */
   border: var(--line-width) solid var(--line-color);
   padding: 20px;
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
+  overflow: visible; /* Fix content visibility */
 
 }
 
@@ -468,8 +479,8 @@ body, html {
 
 #bottom-right-container {
   position: absolute;
-  bottom: 20px;
-  right: 40px;
+  bottom: 10px;
+  right: 30px;
   display: flex;
   gap: 60px;
   align-items: left;
@@ -513,12 +524,6 @@ body, html {
   scroll-behavior: smooth;
 }
 
-
-.main {
-  border: 8px solid #dddddd;
-  border-radius: 24px;
-}
-
 .name {
   font-family: 'SimplisticSans-Medium', sans-serif;
   display: flex;
@@ -546,7 +551,7 @@ body, html {
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 20px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   width: 30px;

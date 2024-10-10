@@ -341,6 +341,7 @@ function frontEndImplementation(){
   
   // Zet de applicatie standaard in pauzestand bij het laden van de pagina
 window.onload = function () {
+  MATERIAL = 'wood'; // Set the default material to 'wood'
   allContent.style.display = "none"; // Verberg de content bij het opstarten
   pauseStatusWindow.style.display = "block"; // Toon het pauzevenster
 };
