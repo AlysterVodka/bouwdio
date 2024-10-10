@@ -201,7 +201,7 @@ const init = () => {
 
     socket.on("clients-total", (data) => {
       console.log(data);
-      clientsTotal.innerText = `total clients: ${data}`;
+      // clientsTotal.innerText = `total clients: ${data}`;
     });
     
     socket.on("chat-message", (data) => {
@@ -346,6 +346,7 @@ const init = () => {
   ////  initiate drawing ////
   ///////////////////////////
 const initDrawing = () =>{
+  console.log('initdrawing is called')
   MATERIAL = 'wood'; // Set the default material to 'wood';
   isMouseDown = false;
 
