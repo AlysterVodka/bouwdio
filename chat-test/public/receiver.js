@@ -62,7 +62,7 @@ individual_stream.prototype.finalMute = function(){
 
 const audioContext = new AudioContext();
 const combinedStream = new MediaStream();
-const streams_objects = {};
+const streams_objects = [];
 const streams = [];
 
 // Create a silent audio track and add it to the combined stream
