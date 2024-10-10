@@ -29,7 +29,7 @@ const init = () => {
   navigator.mediaDevices
   .getUserMedia({ audio: true })
   .then((stream) => {
-      info("Microphone access granted");
+      console.log("Microphone access granted");
       localStream = stream;
 
       // remove mic notification
