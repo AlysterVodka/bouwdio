@@ -210,6 +210,7 @@ function addToStream(remoteStream, peerId, STREAM) {
       })
 
       console.log("stream_objects + streams inside: ", streams_objects)
+      console.log("audioelement : ", speaker)
       // console.log("destination duaio 222 : ")
       // console.log('Microphone audio track added to the empty stream');
   }
