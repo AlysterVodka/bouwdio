@@ -134,7 +134,6 @@ function addToStream(remoteStream, peerId, STREAM) {
   // console.log("audiotracks amount:", remoteStream.getAudioTracks().length);
   trackPosition =  streams_objects.indexOf(STREAM)
   console.log(trackPosition, " is trackposition based on index of object")
-  STREAM.muteTRACK = trackPosition
   socket.emit("track-updated", [peerId, trackPosition])
 
   if (remoteStream.getAudioTracks().length === 0) {
@@ -167,7 +166,7 @@ function addToStream(remoteStream, peerId, STREAM) {
       // gainNode.connect(destination);
 
       streams_objects.forEach((element) =>{
-        element.updateSTREAMS(streams)
+        element.updateSTREAMS(streams, trackPosition)
         // console.log("another streamin the loop:", element)
       })
 
