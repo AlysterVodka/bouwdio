@@ -212,8 +212,10 @@ peer.on("call", (call) => {
   call.answer(STREAM.destination.stream);
 
   call.on('close', function() {
-    console.log(streams_objects)
-    console.log(streams)
+    console.log("closing stremobjects list ",streams_objects)
+    console.log("close call: ", streams_objects.indexOf(STREAM))
+
+    console.log("closing stream list", streams)
     // You can trigger additional actions here, like notifying the user
   });
 
