@@ -87,6 +87,7 @@ const finalstream = audioContext.createMediaStreamSource(combinedStream)
 
 function firstStream(){
   firstSTREAM = new individual_stream(audioContext, streams, combinedStream)
+  firstSTREAM.setDestination()
   streams_objects.push(firstSTREAM)
   streams.push("first stream")
 
