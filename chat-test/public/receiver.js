@@ -48,7 +48,7 @@ individual_stream.prototype.updateSTREAMS = function(streams){
 
 individual_stream.prototype.finalMute = function(){
   for (let i = 0; i < this.STREAMS.length; i++) {
-    console.log("mute track number is: ", this.muteTRACK)
+    // console.log("mute track number is: ", this.muteTRACK)
     if(i != this.muteTRACK){
       console.log("i :  ", i)
       console.log(this.STREAMS[i])
@@ -166,7 +166,6 @@ function addToStream(remoteStream, peerId, STREAM) {
         // console.log("another streamin the loop:", element)
       })
 
-
       console.log("stream_objects + streams inside: ", streams_objects)
       // console.log("destination duaio 222 : ")
       // console.log('Microphone audio track added to the empty stream');
@@ -187,7 +186,7 @@ peer.on("call", (call) => {
   // Answer the call and send the local stream
 
   const STREAM = new individual_stream(audioContext, streams, combinedStream)
-  console.log(STREAM)
+  // console.log(STREAM)
   STREAM.setDestination()
   streams_objects.push(STREAM)
   console.log(call.peer)
@@ -210,6 +209,11 @@ peer.on("call", (call) => {
   });
 
   call.answer(STREAM.destination.stream);
+
+  call.on('close', function() {
+    console.log(streams_objects)
+    // You can trigger additional actions here, like notifying the user
+  });
 
 
   // socket.emit("receiver-log-on", PEERID);
