@@ -612,7 +612,7 @@ const initDrawing = () =>{
   const materialsInfo = {
     wood: {
       name: "Wood",
-      description: "Wood placeholder text."
+      description: "Wood placeholder text. This is some wood, it floats in water. Wood comes from a tree. Trees can be farmed. Some farms are big, some are small. Trees have a lot of different types, they grow long roots. Wood can be used for a house or a boat."
     },
     bamboo: {
       name: "Bamboo",
@@ -622,9 +622,9 @@ const initDrawing = () =>{
       name: "Fiberhemp",
       description: "Fiberhemp placeholder text."
     },
-    cork: {
-      name: "Cork",
-      description: "Cork placeholder text."
+    mycelium: {
+      name: "Mycelium",
+      description: "Mycelium placeholder text."
     },
     lisdodde: {
       name: "Lisdodde",
