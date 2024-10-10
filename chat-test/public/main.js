@@ -485,8 +485,8 @@ const init = () => {
     //const connectPauseButton = document.getElementById("connect-pause-button");
     let drawing = false;
     let isPaused = true; // Pauzeknop
-    let audioStreamActive = false;
-    let micStreamActive = false;
+    let audioStreamActive = true;
+    let micStreamActive = true;
     
     // Zet de applicatie standaard in pauzestand bij het laden van de pagina
   // window.onload = function () {
