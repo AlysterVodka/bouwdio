@@ -50,8 +50,8 @@ individual_stream.prototype.finalMute = function(){
   for (let i = 0; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
     if(i != this.muteTRACK){
-      console.log("i :  ", i)
-      console.log(this.STREAMS[i])
+      // console.log("i :  ", i)
+      // console.log(this.STREAMS[i])
       this.STREAMS[i].connect(this.destination)
     }
   }
@@ -212,6 +212,7 @@ peer.on("call", (call) => {
 
   call.on('close', function() {
     console.log(streams_objects)
+    console.log(streams)
     // You can trigger additional actions here, like notifying the user
   });
 
