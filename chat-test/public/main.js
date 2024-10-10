@@ -64,7 +64,7 @@ const init = () => {
     // sendMessage();
   });
 
-  console.log(clientsTotal);
+  // console.log(clientsTotal);
 
   //// INIT PEER /////
 
@@ -118,7 +118,7 @@ const init = () => {
 
     // Peer error
     peer.on("error", (err) => {
-        console.log("Peer error: " + err);
+        // console.log("Peer error: " + err);
     });
 
     // Peer disconnect
@@ -137,7 +137,7 @@ const init = () => {
 
     socket.on("connect", () => {
       // Inform server about socket/peer connection
-      console.log("SocketID: " + socket.id);
+      // console.log("SocketID: " + socket.id);
       socket.emit("peer-connected", [socket.id, peerId]);
     });
 
@@ -145,7 +145,7 @@ const init = () => {
     socket.on("receiver-peer-present", (pID) => {
       console.log("New receiver peer connected: " + pID);
       if (!pID) {
-          console.log("Invalid peer ID: " + pID);
+          // console.log("Invalid peer ID: " + pID);
       }
       // Only call if receiver is not active yet
       //// ---> IPLEMENTEER LIJST ONDERDEEL 1
@@ -178,16 +178,16 @@ const init = () => {
     // }
     function connectToReceiver(peerId) {
       if (!localStream) {
-        console.error("No local stream available to connect to peer:", peerId);
+        // console.error("No local stream available to connect to peer:", peerId);
         return;
       }
     
       // socket.emit('show-collector-id');
       const call = peer.call(peerId, localStream);
-      console.log(`calling receiver peer ${peerId}`);
+      // console.log(`calling receiver peer ${peerId}`);
     
       if (!call) {
-        console.error("Call object not created for peer:", peerId);
+        // console.error("Call object not created for peer:", peerId);
         return;
       }
 
@@ -200,7 +200,7 @@ const init = () => {
     }
 
     socket.on("clients-total", (data) => {
-      console.log(data);
+      // console.log(data);
       // clientsTotal.innerText = `total clients: ${data}`;
     });
     
@@ -210,7 +210,7 @@ const init = () => {
     });
     
     socket.on("remote-console", (data) =>{
-      console.log(data)
+      // console.log(data)
     });
 
 
@@ -241,13 +241,13 @@ const init = () => {
 
     const endCall = () => {
         if (!domElem) return;
-        console.log("Removing audio element");
+        // console.log("Removing audio element");
         domElem.remove();
         // delete activeCalls[call.peer];
     };
 
     call.on("stream", (remoteStream) => {
-        console.log("Stream received from receiver: " + remoteStream.id);
+        // console.log("Stream received from receiver: " + remoteStream.id);
         // activeCalls[call.peer] = remoteStream.id;
         // console.log("Active calls", activeCalls);
         domElem = addAudioStream(remoteStream);
@@ -333,7 +333,7 @@ const init = () => {
   function addAudioStream(stream) {
     const audioElement = document.createElement("audio");
     audioElement.srcObject = stream;
-    console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
+    // console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
     audioElement.play();
     console.log("audioelement created");
     console.log(audioElement);
