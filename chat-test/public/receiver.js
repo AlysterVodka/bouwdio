@@ -51,7 +51,8 @@ individual_stream.prototype.updateSTREAMS = function(streams, mutePosition){
     // console.log("mute track number is: ", this.muteTRACK)
     if(i != mutePosition){
       // console.log("i :  ", i)
-      console.log(this.STREAMS[i])
+      // console.log(this.STREAMS[i])
+      console.log("THIS IS A MEDIASTREAM", this.STREAMS[i]==MediaStream)
       this.STREAMS[i].connect(this.destination)
     }
   }
@@ -277,8 +278,8 @@ function setAttributes(el, attrs) {
 function removeStream(index){
   streams_objects.splice(index, 1)
   streams.splice(index, 1)
-  console.log("new streams objects: :  ", streams_objects)
-  console.log("new streams : :  ", streams)
+  // console.log("new streams objects: :  ", streams_objects)
+  // console.log("new streams : :  ", streams)
   streams_objects.forEach((object)=>{
     trackPosition =  streams_objects.indexOf(object)
     console.log("new mute position aqcuired : ", trackPosition)
