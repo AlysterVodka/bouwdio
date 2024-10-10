@@ -346,7 +346,7 @@ const init = () => {
   ////  initiate drawing ////
   ///////////////////////////
 const initDrawing = () =>{
-  console.log('initdrawing is called')
+  // console.log('initdrawing is called')
   MATERIAL = 'wood'; // Set the default material to 'wood';
   isMouseDown = false;
 
@@ -372,6 +372,7 @@ const initDrawing = () =>{
         // If using a socket to send the ID, you can emit the ID here
         // socket.emit('material-clicked', { id: elementId });
     });
+  }
 
 
 
@@ -410,7 +411,6 @@ const initDrawing = () =>{
       };
     }
   }
-}
 
   // Listen for mouse down events
 
