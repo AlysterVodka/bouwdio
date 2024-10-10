@@ -99,7 +99,7 @@ function firstStream(){
   document.body.appendChild(audioElement);
 }
 
-firstSTREAM()
+firstStream()
 // finalstream.connect(audioContext.destination)
 
 // incomingSource.connect(destination);
