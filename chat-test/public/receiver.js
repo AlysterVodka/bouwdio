@@ -211,11 +211,10 @@ peer.on("call", (call) => {
   call.answer(STREAM.destination.stream);
 
   call.on('close', function() {
-    removeStream(streams_objects.indexOf(STREAM))
-
     console.log("closing stremobjects list ",streams_objects)
     console.log("close call: ", streams_objects.indexOf(STREAM))
     console.log("closing stream list", streams)
+    removeStream(streams_objects.indexOf(STREAM))
     // You can trigger additional actions here, like notifying the user
   });
 
@@ -232,6 +231,8 @@ function setAttributes(el, attrs) {
 function removeStream(index){
   delete streams_objects[index]
   delete streams[index]
+  console.log("new streams objects: :  ", streams_objects)
+  console.log("new streams : :  ", streams)
   streams_objects.forEach((object)=>{
     trackPosition =  streams_objects.indexOf(object)
     console.log("new mute position aqcuired : ", trackPosition)
