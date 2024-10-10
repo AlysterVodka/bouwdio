@@ -44,10 +44,10 @@ individual_stream.prototype.setDestination = function() {
 individual_stream.prototype.updateSTREAMS = function(streams, mutePosition){
   this.STREAMS = streams
   this.muteTRACK = mutePosition
-  console.log(streams == this.STREAMS, "checkl if streams matches streams")
+  console.log(streams == this.STREAMS, "check if streams matches streams")
   console.log("UPDATED VERSION")
   console.log("muting ", mutePosition)
-  for (let i = 0; i < this.STREAMS.length; i++) {
+  for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
     if(i != mutePosition){
       // console.log("i :  ", i)
@@ -106,14 +106,14 @@ audioElement.setAttribute("controls", "controls");
 document.body.appendChild(audioElement); // Add to DOM
 document.getElementById('audio-refresh').addEventListener('click', refreshAudio);
 
-function refreshAudio(){
+function refreshAudio(stream){
   if (audioContext.state === 'suspended') {
     console.log("audiocontext was suspended")
     audioContext.resume().then(() => {
       console.log("AudioContext resumed after user interaction.");
     });
   }
-  audioElement.srcObject = combinedStream;  // Set the combined stream as the srcObject of the audio element
+  audioElement.srcObject = stream.destination.stream;  // Set the combined stream as the srcObject of the audio element
   audioElement.play().catch((error) => {
     console.log('Error playing audio:', error);
   });
@@ -131,6 +131,12 @@ function refreshAudio(){
   // console.log(audioElement);
 }
 
+function firstStream(){
+  const STREAM = new individual_stream(audioContext, streams, combinedStream)
+  streams_objects.push(STREAM)
+  streams.push("first stream")
+
+}
 
 function addToStream(remoteStream, peerId, STREAM) {
   streams_objects.push(STREAM)
