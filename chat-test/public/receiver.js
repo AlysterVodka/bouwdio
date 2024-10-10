@@ -41,14 +41,16 @@ individual_stream.prototype.setDestination = function() {
   // console.log('destination created : ', this.destination.stream.getAudioTracks())
 };
 
-individual_stream.prototype.updateSTREAMS = function(streams){
+individual_stream.prototype.updateSTREAMS = function(streams, mutePosition){
   this.STREAMS = streams
+  this.muteTRACK = mutePosition
   this.finalMute()
 }
 
 individual_stream.prototype.finalMute = function(){
   for (let i = 0; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
+    console.log("muting ", this.muteTRACK)
     if(i != this.muteTRACK){
       // console.log("i :  ", i)
       // console.log(this.STREAMS[i])
@@ -212,6 +214,8 @@ peer.on("call", (call) => {
   call.answer(STREAM.destination.stream);
 
   call.on('close', function() {
+    removeStream(streams_objects.indexOf(STREAM))
+
     console.log("closing stremobjects list ",streams_objects)
     console.log("close call: ", streams_objects.indexOf(STREAM))
     console.log("closing stream list", streams)
@@ -225,6 +229,17 @@ peer.on("call", (call) => {
 
 function setAttributes(el, attrs) {
   Object.keys(attrs).forEach((key) => el.setAttribute(key, attrs[key]));
+}
+
+
+function removeStream(index){
+  delete streams_objects[index]
+  delete streams[index]
+  streams_objects.forEach((object)=>{
+    trackPosition =  streams_objects.indexOf(object)
+    console.log("new mute position aqcuired : ", trackPosition)
+    object.updateSTREAMS(streams, trackPosition)
+  })
 }
 
 
