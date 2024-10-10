@@ -92,10 +92,21 @@ function firstStream(){
 
   speaker = document.createElement("audio");
   speaker.srcObject = firstSTREAM.destination.stream;
+  speaker.autoplay = true; // Ensure autoplay is enabled
+  document.body.appendChild(speaker);
+
+  // Play the audio after creation
+
   // console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
   console.log("audioelement created");
   console.log(speaker);
   document.body.appendChild(speaker);
+
+  speaker.play().then(() => {
+    console.log("Audio is playing.");
+  }).catch(error => {
+    console.log("Error playing audio:", error);
+  });
 }
 
 firstStream()
