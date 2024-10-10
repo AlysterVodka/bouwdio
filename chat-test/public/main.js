@@ -21,6 +21,7 @@ const init = () => {
   ///// *** receiver is de externe collector van alle tekeningen
   const signalCircle = document.getElementById("signal-circle");
   let localStream, peerId, peer, socket, MATERIAL, isMouseDown;
+  const activeCalls = {};
 
   MATERIAL = 'wood'; // Set the default material to 'wood';
   isMouseDown = false;
@@ -123,8 +124,13 @@ const init = () => {
 
     // Peer disconnect
     peer.on("disconnected", (call) => {
-        console.log(call);
-        console.log("Peer disconnected");
+      if (!(pId in activeCalls)) {
+        info("Audio element was already removed");
+        return;
+      }
+      delete activeCalls[pId];
+      console.log(call);
+      console.log("Peer disconnected");
     });
 
   }
@@ -149,9 +155,9 @@ const init = () => {
       }
       // Only call if receiver is not active yet
       //// ---> IPLEMENTEER LIJST ONDERDEEL 1
-      // if (activeCalls[pID]) {
-      //     return;
-      // }
+      if (activeCalls[pID]) {
+          return;
+      }
       console.log("Connect to receiver peer");
       connectToReceiver(pID);
     });
@@ -243,12 +249,13 @@ const init = () => {
         if (!domElem) return;
         // console.log("Removing audio element");
         domElem.remove();
+        delete activeCalls[call.peer];
         // delete activeCalls[call.peer];
     };
 
     call.on("stream", (remoteStream) => {
         // console.log("Stream received from receiver: " + remoteStream.id);
-        // activeCalls[call.peer] = remoteStream.id;
+        activeCalls[call.peer] = remoteStream.id;
         // console.log("Active calls", activeCalls);
         domElem = addAudioStream(remoteStream);
     });
