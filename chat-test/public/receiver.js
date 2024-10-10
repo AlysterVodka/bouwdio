@@ -49,9 +49,9 @@ individual_stream.prototype.updateSTREAMS = function(streams, mutePosition){
 }
 
 individual_stream.prototype.finalMute = function(){
+  console.log("muting ", this.muteTRACK)
   for (let i = 0; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
-    console.log("muting ", this.muteTRACK)
     if(i != this.muteTRACK){
       // console.log("i :  ", i)
       console.log(this.STREAMS[i])
