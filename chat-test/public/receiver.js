@@ -122,13 +122,12 @@ function refreshAudio(){
     });
   }
   if(!firstSTREAM){
-    firstStream().then(stream =>{
-      audioElement.srcObject = stream.destination.stream;  // Set the combined stream as the srcObject of the audio element
-      audioElement.play().catch((error) => {
-        console.log('Error playing audio:', error);
-      });
-      console.log(audioElement);
-    })
+    firstStream()
+    audioElement.srcObject = firstSTREAM.destination.stream;  // Set the combined stream as the srcObject of the audio element
+    audioElement.play().catch((error) => {
+      console.log('Error playing audio:', error);
+    });
+    console.log(audioElement);
   }
   
 
