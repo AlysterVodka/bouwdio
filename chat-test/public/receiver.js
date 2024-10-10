@@ -62,7 +62,7 @@ individual_stream.prototype.finalMute = function(){
 
 const audioContext = new AudioContext();
 const combinedStream = new MediaStream();
-const streams_objects = [];
+const streams_objects = {};
 const streams = [];
 
 // Create a silent audio track and add it to the combined stream
@@ -127,8 +127,10 @@ function refreshAudio(){
 
 
 function addToStream(remoteStream, peerId, STREAM) {
+  streams_objects.push(STREAM)
   // console.log("audiotracks amount:", remoteStream.getAudioTracks().length);
-  trackPosition =  streams.length
+  trackPosition =  objectsList.indexOf(targetObject)
+  console.log(trackPosition, " is trackposition based on index of object")
   STREAM.muteTRACK = trackPosition
   socket.emit("track-updated", [peerId, trackPosition])
 
@@ -188,7 +190,6 @@ peer.on("call", (call) => {
   const STREAM = new individual_stream(audioContext, streams, combinedStream)
   // console.log(STREAM)
   STREAM.setDestination()
-  streams_objects.push(STREAM)
   console.log(call.peer)
   // When receiving a remote stream from another peer
   call.on("stream", (remoteStream) => {
