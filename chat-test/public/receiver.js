@@ -85,6 +85,8 @@ createSilentTrack();
 
 const finalstream = audioContext.createMediaStreamSource(combinedStream)
 
+finalstream.connect(audioContext.destination)
+
 function firstStream(){
   firstSTREAM = new individual_stream(audioContext, streams, combinedStream)
   firstSTREAM.setDestination()
@@ -132,7 +134,7 @@ firstStream()
 
 
 audioElement = document.createElement("audio");
-audioElement.setAttribute("controls", "controls");
+// audioElement.setAttribute("controls", "controls");
 document.body.appendChild(audioElement); // Add to DOM
 document.getElementById('audio-refresh').addEventListener('click', refreshAudio);
 
@@ -211,6 +213,7 @@ function addToStream(remoteStream, peerId, STREAM) {
 
       console.log("stream_objects + streams inside: ", streams_objects)
       console.log("audioelement : ", speaker)
+      console.log("audioelement audiotracks: ", speaker.getAudioTracks())
       // console.log("destination duaio 222 : ")
       // console.log('Microphone audio track added to the empty stream');
   }
