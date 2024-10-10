@@ -333,7 +333,7 @@ function frontEndImplementation(){
   let selectedPattern = "assets/images/wood1.png"; /// pattern selector
   const allContent = document.getElementById("all-content"); /// container voor gehele pagina [voor verbergen]
   const pauseStatusWindow = document.getElementById("pause-status-window");
-  const connectPauseButton = document.getElementById("connect-pause-button");
+  //const connectPauseButton = document.getElementById("connect-pause-button");
   let drawing = false;
   let isPaused = true; // Pauzeknop
   let audioStreamActive = false;
@@ -346,7 +346,8 @@ window.onload = function () {
 };
   // Functie om de pauzeknop te beheren 
   // 9oct edit: vanuit hier moet de mic en audio ook worden gemute - oude logic zit er nog in, misschien hoeft dit niet te veranderen?
-// Pauze functionaliteit voor de knop onderin (PAUSE knop)
+// Pauze functionaliteit voor de knop onderin (PAUSE knop) 
+/*
 connectPauseButton.addEventListener("click", function () {
   if (!isPaused) {
     // Zet de applicatie op pauze
@@ -368,9 +369,22 @@ connectPauseButton.addEventListener("click", function () {
     micStreamActive = true;
   }
 });
+*/
 
 // Functionaliteit voor "Click to Connect"-knop in het pauzevenster
 document.getElementById("click-to-connect-button").addEventListener("click", function () {
+  const nameInput = document.getElementById('name-input');
+  const userName = nameInput.value.trim();
+
+  // Controleer of de naam nog steeds 'anonymous' is of leeg
+  if (userName === 'anonymous' || userName === "") {
+    nameInput.style.backgroundColor = 'yellow'; // Highlight het tekstvak
+    setTimeout(() => {
+      nameInput.style.backgroundColor = ''; // Verwijder highlight na 2 seconden
+    }, 2000);
+    return; // Blokkeer toegang tot de ervaring totdat de naam is aangepast
+  }
+
   // Zelfde logica als hierboven om de applicatie uit pauze te halen
   allContent.style.display = "block"; // Toon de content
   pauseStatusWindow.style.display = "none"; // Verberg pauzevenster
@@ -379,40 +393,114 @@ document.getElementById("click-to-connect-button").addEventListener("click", fun
   // Zet de audio/microfoon aan
   audioStreamActive = true;
   micStreamActive = true;
+
+  // Start de video met geluid
+  const iframe = document.getElementById('onsite-video');
+  iframe.src = iframe.src.replace('autoplay=0&mute=1', 'autoplay=1&mute=0&controls=0');
+
+  // Update mouseNameElement met de ingevoerde naam
+  mouseNameElement.textContent = userName;
 });
 
-// Selecteer de elementen
-const chatInfoDefault = document.getElementById('chat-info-default');
-const materialInfo = document.getElementById('material-info');
-const materialName = document.getElementById('material-name');
-const materialDescription = document.getElementById('material-description');
+// Muis functionaliteit voor naam bij cursor als deze over het tekenraster beweegt
+const gridContainer = document.getElementById('grid');
 
-// Voeg event listeners toe aan elk materiaal voor hover
+// Maak een element voor de naam bij de muis
+const mouseNameElement = document.createElement('div');
+mouseNameElement.id = 'mouse-name';
+mouseNameElement.style.position = 'absolute';
+mouseNameElement.style.display = 'none';
+mouseNameElement.style.fontFamily = 'Open Sans';  // Stijl van de naam
+mouseNameElement.style.backgroundColor = 'rgba(255, 255, 255, 0.8)'; // Witte achtergrond met transparantie
+mouseNameElement.style.padding = '5px 10px'; // Maak de naam duidelijker zichtbaar
+mouseNameElement.style.fontSize = '14px'; // Maak de tekst beter leesbaar
+mouseNameElement.style.borderRadius = '5px'; // Iets grotere border-radius
+mouseNameElement.style.zIndex = '1000';
+document.body.appendChild(mouseNameElement);
+
+// Functie om de naam bij de muis te tonen bij hover op het tekenraster
+gridContainer.addEventListener('mouseenter', () => {
+  mouseNameElement.style.display = 'block';
+});
+
+// Verplaats de naam met de muisbeweging
+gridContainer.addEventListener('mousemove', (e) => {
+  mouseNameElement.style.left = `${e.pageX + 10}px`; // Plaats de naam 10px naast de cursor
+  mouseNameElement.style.top = `${e.pageY + 10}px`;  // Plaats de naam 10px onder de cursor
+});
+
+// Verberg de naam wanneer de muis het raster verlaat
+gridContainer.addEventListener('mouseleave', () => {
+  mouseNameElement.style.display = 'none';
+});
+
+
+const materials = document.querySelectorAll('.material');
+const chatDefault = document.getElementById('chat-default');
+const chatHover = document.getElementById('chat-hover');
+const hoverMaterialName = document.getElementById('hover-material-name');
+const hoverMaterialInfo = document.getElementById('hover-material-info');
+
+// Define materials with their names and descriptions
+const materialsInfo = {
+  wood: {
+    name: "Wood",
+    description: "Wood placeholder text."
+  },
+  bamboo: {
+    name: "Bamboo",
+    description: "Bamboo placeholder text."
+  },
+  hemp: {
+    name: "Fiberhemp",
+    description: "Fiberhemp placeholder text."
+  },
+  cork: {
+    name: "Cork",
+    description: "Cork placeholder text."
+  },
+  lisdodde: {
+    name: "Lisdodde",
+    description: "Lisdodde placeholder text."
+  },
+  grass: {
+    name: "Mammoth Grass",
+    description: "Mammoth Grass placeholder text."
+  },
+  straw: {
+    name: "Hay",
+    description: "Hay placeholder text."
+  },
+  mat: {
+    name: "Recycled Mat",
+    description: "Recycled Mat placeholder text."
+  }
+};
+
+// Add event listeners for hover functionality on materials
 document.querySelectorAll('.material').forEach(material => {
-  material.addEventListener('mouseenter', () => {
-    // Verberg de standaardtekst
-    chatInfoDefault.style.display = 'none';
+  material.addEventListener('mouseenter', function() {
+    const materialId = this.id;
+    
+    // Check if the hovered material has info
+    if (materialsInfo[materialId]) {
+      // Update the chat window with material info
+      document.getElementById('material-name').textContent = materialsInfo[materialId].name;
+      document.getElementById('material-description').textContent = materialsInfo[materialId].description;
 
-    // Toon materiaal-informatie
-    materialInfo.style.display = 'block';
-    materialName.textContent = material.getAttribute('data-name');
-    materialDescription.textContent = material.getAttribute('data-description');
+      // Hide default text and show material info
+      document.getElementById('default-text').style.display = 'none';
+      document.getElementById('material-info').style.display = 'block';
+    }
   });
 
-  material.addEventListener('mouseleave', () => {
-    // Herstel de standaardtekst
-    chatInfoDefault.style.display = 'block';
-    materialInfo.style.display = 'none';
-  });
-});
-
-// Zorg ervoor dat de bestaande click functionaliteit niet verstoord wordt
-document.querySelectorAll('.material').forEach(material => {
-  material.addEventListener('click', () => {
-    console.log(`Material ${material.getAttribute('data-name')} selected.`);
-    // Hier blijft je bestaande click functionaliteit intact voor het selecteren van materialen
+  material.addEventListener('mouseleave', function() {
+    // Show default text and hide material info when hover ends
+    document.getElementById('default-text').style.display = 'block';
+    document.getElementById('material-info').style.display = 'none';
   });
 });
+
 
   // document.querySelectorAll(".material").forEach((material) => {
   //   material.addEventListener("click", () => {

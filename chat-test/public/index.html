@@ -30,18 +30,18 @@
           
         </div>
         <div id="chat-window"> 
-          <p id="chat-info-default">Hover over materials you want to know more about <br> click the material box to start drawing</p>
-  <p id="material-info" style="display: none;">
-    <span id="material-name" style="font-family: 'Redaction-Bold';"></span><br>
-    <span id="material-description" style="font-family: 'Open Sans';"></span>
-  </p>
-</div>
+          <div id="chat-info">
+            <p id="default-text">Hover over materials you want to know more about.<br>Click the material box to start drawing.</p>
+            <div id="material-info" style="display:none;">
+              <p id="material-name"></p>
+              <p id="material-description"></p>
+            </div>
+          </div>
+          <div class="peer-id" id="peer-id"></div>
+          <form class="message-form" id="message-form"></form>
+          </div>
 
-<div class="materials-container">
-  <div class="material" id="wood" data-name="Wood" data-description="Wood placeholder text">Wood</div>
-  <div class="material" id="bamboo" data-name="Bamboo" data-description="Bamboo placeholder text">Bamboo</div>
-  <div class="material" id="hemp" data-name="Fiberhemp" data-description="Fiberhemp placeholder text">Fiberhemp</div>
-  
+          <!-- old chat logic, if removed drawing stops working -->
           <div class="peer-id" id="peer-id"></div>
           <div class="main">
               
@@ -60,17 +60,7 @@
           </div>
           
         </div>
-        <div id="name-input-window">
-          <div id="name-input-header">Enter Name</div>
-          <div class="name">
 
-            <input type="text"
-            id="name-input"
-            class="name-input"
-            value="anonymous"
-            maxlength="20"/>
-        </div>
-        </div>
       </div>
 
       <div id="online-building-window">
@@ -97,7 +87,7 @@
     <div id="onsite-building">
       <div id="onsite-building-header">Onsite Building</div>
       <div id="video-container">
-        <iframe src="https://www.youtube.com/embed/IIqtuupvdWg?autoplay=1&mute=1&controls=0" title="YouTube video player"></iframe>
+        <iframe id="onsite-video" src="https://www.youtube.com/embed/o7bimjJ9flY?autoplay=0&mute=1&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3" title="Youtube video player" frameborder="0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
 
     </div>
@@ -107,7 +97,7 @@
 
 <!-- Bottom Right Section -->
 <div id="bottom-right-container">
-  <div id="connect-pause-button">PAUSE</div>
+  <!-- <div id="connect-pause-button">PAUSE</div> -->
   <div id="vpro-logo">
     <img src="assets/images/logo-stacked-wit-solid-size.png" alt="VPRO Tegenlicht Logo">
   </div>
@@ -120,6 +110,17 @@
     <img id="bouwdio-logo" src="assets/images/LOGO BOUWDIO ORANGE.png" alt="Bouwdio AM Logo">
   </div>
 
+  <div id="name-input-window">
+    <div id="name-input-header">Enter Name</div>
+    <div class="name">
+
+      <input type="text"
+      id="name-input"
+      class="name-input"
+      value="anonymous"
+      maxlength="20"/>
+  </div>
+  </div>
   <!-- Security Camera afbeelding -->
   <div id="security-camera">
     <img src="assets/images/security-camera.png" alt="Security Camera Icon">

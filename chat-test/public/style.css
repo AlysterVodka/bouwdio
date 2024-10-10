@@ -23,32 +23,13 @@
 body, html {
   margin: 0;
   padding: 0;
-  font-family: 'SimplisticSans-Medium', sans-serif;
+  background-image: ('assets/images/test_pointillised.png');
   height: 100vh;
   width: 100vw;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url('../images/test_pointillised.png');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: #f0f0f0;
-  box-sizing: border-box;
-}
-
-#status-window {
-  position: flex;
-  top: 10px;
-  right: 10px;
-  width: 200px;
-  padding: 10px;
-  background-color: var(--background-gray);
-  color: white;
-  border: 2px solid white;
-  font-family: 'Redaction-Bold', sans-serif;
-  font-size: 14px;
-  z-index: 1000;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
 }
 
 #pause-status-window {
@@ -79,6 +60,7 @@ body, html {
   font-family: 'SimplisticSans-Medium', sans-serif;
   text-transform: uppercase;
   font-size: 14px;
+  padding: 20px;
   margin-bottom: 20px;
 }
 
@@ -98,13 +80,13 @@ body, html {
   width: 50px;
   height: auto;
   align-items: center;
-  margin: 15px 0;
 }
 
 #security-camera {
   width: 100px;
   height: auto;
   display: flex;
+  padding: 20px;
   justify-content: center;
   align-items: center;
   margin: 0 auto; /* Zorgt ervoor dat het element in het midden staat */
@@ -146,9 +128,10 @@ body, html {
   flex-direction: row;
   width: 100%;
   box-sizing: border-box;
+  overflow: hidden; 
 }
 
-/* Ensure the center container scales properly */
+/* Ensure the center container scales properly
 #center-container {
   display: flex;
   flex-direction: row;
@@ -156,14 +139,17 @@ body, html {
   box-sizing: border-box;
   justify-content: center;
   align-items: top;
-}
+  overflow: hidden;
+}*/
 
 #bouwdio-am {
   flex: 1; /* Make them equal in width */
   display: flex;
   flex-direction: column;
-  height: 100%; /* Ensure they match height */
+  height: 300px; /* Ensure they match height */
   box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  overflow: hidden; /* Voorkom dat inhoud buiten de container valt */
 }
 
 #bouwdio-am-header {
@@ -176,71 +162,16 @@ body, html {
   border-right: var(--line-width) solid var(--line-color);
   border-bottom: var(--line-width) solid var(--line-color);
   border-top: var(--line-width) solid var(--line-color);
+  overflow: hidden;
 }
 
-#name-input-window {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  width: auto;
-  z-index: 1000;
-  border: var(--line-width) solid var(--line-color);
-}
-
-#name-input-header {
-  background-color: var(--header-gray);
-  font-family: 'Redaction-Bold', serif;
-  text-transform: uppercase;
-  padding: 10px;
-  text-align: center;
-  border-bottom: var(--line-width) solid var(--line-color);
-}
-
-#info-content {
+#info-content { /* bouwdio am info*/
   text-transform: uppercase;
   padding: 20px;
   background-color: var(--background-gray);
   height: 300px;
   border-left: var(--line-width) solid var(--line-color);
   border-right: var(--line-width) solid var(--line-color);
-}
-
-#chat-window {
-  background-color: var(--background-gray);
-  height: 100%;
-  border: var(--line-width) solid var(--line-color);
-  padding: 10px;
-  box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
-}
-
-
-#chat-info-default {
-  font-size: 14px;
-  font-family: 'Open Sans', sans-serif;
-}
-
-#material-info {
-  font-size: 14px;
-}
-
-/* Chat Window Thumbnails Styling */
-#chat-window .material {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-#chat-window .material p {
-  font-weight: normal;
-  color: gray;
-}
-
-#chat-iframe {
-  width: 100vh;
-  height: 100vw;
-  border: 0;
 }
 
 #online-building-window {
@@ -268,16 +199,6 @@ body, html {
   grid-template-rows: repeat(20, 1fr);
 }
 
-#video-container {
-  width: 100%;
-  height: 100%;
-}
-
-#video-container iframe {
-  width: 100%;
-  height: 100%;
-}
-
 #onsite-building-header {
   background-color: var(--header-gray);
   font-family: 'Redaction-Bold', serif;
@@ -293,13 +214,30 @@ body, html {
   top: 34vh;
   left: 54vw;
   width: 450px;
-  height: 380px;
+  height: 350px;
   border: var(--line-width) solid var(--line-color);
   background-color: var(--background-gray);
   z-index: 1000;
   resize: both;
-  overflow: hidden;
+  overflow: hidden; /* Prevents scrollbars from showing up */
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#video-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* Centers the iframe */
+  align-items: center;     /* Centers the iframe */
+  overflow: hidden; /* Prevents video from creating scrollbars */
+  pointer-events: none;
+}
+
+#video-container iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the video fills the container */
+  border: none; /* Removes any borders on the iframe */
 }
 
 #grid {
@@ -440,6 +378,101 @@ body, html {
   background-color: grey;
 }
 
+/*#hover-material-name {
+  font-family: 'Redaction-Bold', serif;
+  color: rgb(70, 70, 70);
+}*/
+
+#material-name {
+  font-family: 'Redaction-Bold', serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#material-description {
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+}
+
+.material {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.material:hover {
+  background-color: rgba(128, 128, 128, 0.185);
+}
+
+#chat-window {
+  background-color: var(--background-gray);
+  /*height: fit-content;*/
+  height: auto;
+  border: var(--line-width) solid var(--line-color);
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  overflow: hidden; /* Voorkom dat inhoud buiten de container valt */
+}
+
+#chat-info #default-text {
+  font-family: 'Open Sans', sans-serif;
+  display: block; /* Standaard zichtbaar */
+}
+
+#material-info {
+  font-size: 14px;
+}
+
+/* Chat Window Thumbnails Styling */
+#chat-window .material {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#chat-window .material p {
+  font-weight: normal;
+  color: var(--button-grey);
+}
+
+#name-input-window {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  z-index: 1000;
+  border-top: var(--line-width) solid var(--line-color);
+  border-bottom: var(--line-width) solid var(--line-color);
+}
+
+#name-input-header {
+  background-color: var(--header-gray);
+  font-family: 'Redaction-Bold', serif;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  border-bottom: var(--line-width) solid var(--line-color);
+}
+
+.name-input {
+  width: 100%; /* Zorgt ervoor dat het venster de volledige breedte vult */
+  font-size: 16px;
+  padding: 8px;
+  font-family: 'Open Sans', sans-serif;
+  color: var(--button-grey);
+  border: none; /* Verwijder de rand */
+  outline: none;
+  text-align: center;
+  box-sizing: border-box; /* Inclusief padding en border */
+  background-color: white;
+}
+
+.highlight {
+  color: var(--slider-colour);
+}
+
 #bottom-right-container {
   position: absolute;
   bottom: 20px;
@@ -490,7 +523,7 @@ body, html {
 body {
   display: grid;
   place-items: center;
-  background-color: #ebebeb;
+  
 }
 
 .main {
@@ -502,95 +535,12 @@ body {
   font-family: 'SimplisticSans-Medium', sans-serif;
   display: flex;
   font-size: 18px;
-  font-weight: 700;
   color: var(--background-gray);
   background-color: var(--background-gray);
 }
 
 .name > span {
   color: var(--background-gray);
-}
-
-.name-input {
-  font-size: 28px;
-  padding: 10px;
-  font-weight: 700;
-  color: #707070;
-  flex-grow: 1;
-  border: 0;
-  margin: 0 12px;
-  outline: none;
-  text-align: center;
-  background-color: var(--header-gray);
-}
-
-/* Match Flexbox and sizing from #bouwdio-am */
-.message-container {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--header-gray);
-  width: 100%;
-  height: 40vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.message-left,
-.message-right {
-  list-style: none;
-  padding: 8px 12px;
-  margin: 12px;
-  max-width: 250px;
-  font-size: 18px;
-  word-wrap: break-word;
-}
-
-.message-left {
-  border-radius: 20px 20px 20px 0px;
-  align-self: flex-start;
-  background-color: var(--chat-receive);
-  box-shadow: -2px 2px 4px #dcdcdc;
-}
-
-.message-right {
-  border-radius: 20px 20px 0px 20px;
-  align-self: flex-end;
-  background-color: var(--chat-send);
-  box-shadow: 2px 2px 4px #dcdcdc;
-}
-
-.message-left > p > span,
-.message-right > p > span {
-  display: block;
-  font-style: italic;
-  font-size: 12px;
-  margin-top: 4px;
-  align-self: center;
-}
-
-.feedback {
-  font-style: italic;
-  font-size: 14px;
-  padding: 0px 16px 16px 16px;
-  color: #2d2d2d;
-  background-color: #f6f6f6;
-  text-align: center;
-}
-
-.message-form {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.message-input {
-  flex-grow: 1;
-  height: 48px;
-  font-size: 16px;
-  border: none;
-  outline: none;
-  padding: 0 12px;
-  background-color: #fff;
 }
 
 .send-button {
@@ -601,18 +551,6 @@ body {
   outline: none;
   background-color: #fff;
   cursor: pointer;
-}
-
-.v-divider {
-  width: 2px;
-  height: 48px;
-  background-color: #f6f6f6;
-}
-
-.clients-total {
-  margin: 0px 0;
-  padding: 10px;
-  color: #7e7e7e;
 }
 
 .signal-circle {
