@@ -64,7 +64,7 @@ const audioContext = new AudioContext();
 const combinedStream = new MediaStream();
 const streams_objects = [];
 const streams = [];
-let firstSTREAM = null;
+let firstSTREAM, speaker;
 
 
 // Create a silent audio track and add it to the combined stream
@@ -90,13 +90,12 @@ function firstStream(){
   streams_objects.push(firstSTREAM)
   streams.push("first stream")
 
-  const audioElement = document.createElement("audio");
-  audioElement.srcObject = firstSTREAM.destination.stream;
+  speaker = document.createElement("audio");
+  speaker.srcObject = firstSTREAM.destination.stream;
   // console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
-  audioElement.play();
   console.log("audioelement created");
-  console.log(audioElement);
-  document.body.appendChild(audioElement);
+  console.log(speaker);
+  document.body.appendChild(speaker);
 }
 
 firstStream()
@@ -130,6 +129,9 @@ function refreshAudio(){
     audioContext.resume().then(() => {
       console.log("AudioContext resumed after user interaction.");
     });
+  if(speaker.paused){
+    speaker.play()
+  }
   }
 
   
