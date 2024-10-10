@@ -64,7 +64,6 @@ const audioContext = new AudioContext();
 const combinedStream = new MediaStream();
 const streams_objects = [];
 const streams = [];
-const finalDestination = null;
 
 // Create a silent audio track and add it to the combined stream
 function createSilentTrack() {
@@ -72,10 +71,10 @@ function createSilentTrack() {
   const source = audioContext.createBufferSource();
   source.buffer = buffer;
 
-  finalDestination = audioContext.createMediaStreamDestination();
-  source.connect(finalDestination);
+  const destination = audioContext.createMediaStreamDestination();
+  source.connect(destination);
   source.start(); // Start the source (silent)
-  combinedStream.addTrack(finalDestination.stream.getAudioTracks()[0]); // Add the silent trFack to the combined stream
+  combinedStream.addTrack(destination.stream.getAudioTracks()[0]); // Add the silent trFack to the combined stream
 }
 
 
