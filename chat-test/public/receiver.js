@@ -64,6 +64,7 @@ const audioContext = new AudioContext();
 const combinedStream = new MediaStream();
 const streams_objects = [];
 const streams = [];
+const finalDestination = null;
 
 // Create a silent audio track and add it to the combined stream
 function createSilentTrack() {
@@ -71,10 +72,10 @@ function createSilentTrack() {
   const source = audioContext.createBufferSource();
   source.buffer = buffer;
 
-  const destination = audioContext.createMediaStreamDestination();
-  source.connect(destination);
+  finalDestination = audioContext.createMediaStreamDestination();
+  source.connect(finalDestination);
   source.start(); // Start the source (silent)
-  combinedStream.addTrack(destination.stream.getAudioTracks()[0]); // Add the silent trFack to the combined stream
+  combinedStream.addTrack(finalDestination.stream.getAudioTracks()[0]); // Add the silent trFack to the combined stream
 }
 
 
@@ -102,6 +103,7 @@ const finalstream = audioContext.createMediaStreamSource(combinedStream)
 
 
 audioElement = document.createElement("audio");
+audioElement.setAttribute("controls", "controls");
 document.body.appendChild(audioElement); // Add to DOM
 document.getElementById('audio-refresh').addEventListener('click', refreshAudio);
 
@@ -112,6 +114,11 @@ function refreshAudio(){
       console.log("AudioContext resumed after user interaction.");
     });
   }
+  audioElement.srcObject = combinedStream;  // Set the combined stream as the srcObject of the audio element
+  audioElement.play().catch((error) => {
+    console.log('Error playing audio:', error);
+  });
+  console.log(audioElement);
 
   // audioElement.srcObject = destination.stream;
   // console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
@@ -238,6 +245,14 @@ function removeStream(index){
     console.log("new mute position aqcuired : ", trackPosition)
     object.updateSTREAMS(streams, trackPosition)
   })
+}
+
+function renderStreams(object){
+  let stream = document.createElement('div')
+  stream.innerHTML({
+
+  })
+
 }
 
 
