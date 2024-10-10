@@ -50,10 +50,11 @@ individual_stream.prototype.updateSTREAMS = function(streams, mutePosition){
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
     if(i != mutePosition){
+      if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
+        this.STREAMS[i].connect(this.destination)
+      }
       // console.log("i :  ", i)
       // console.log(this.STREAMS[i])
-      console.log("THIS IS A MEDIASTREAM", this.STREAMS[i] instanceof MediaStreamAudioSourceNode)
-      this.STREAMS[i].connect(this.destination)
     }
   }
 }
