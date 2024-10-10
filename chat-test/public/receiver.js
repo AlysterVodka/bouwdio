@@ -64,6 +64,16 @@ const audioContext = new AudioContext();
 const combinedStream = new MediaStream();
 const streams_objects = [];
 const streams = [];
+const firstSTREAM = firstStream();
+
+
+function firstStream(){
+  firstSTREAM = new individual_stream(audioContext, streams, combinedStream)
+  streams_objects.push(STREAM)
+  streams.push("first stream")
+  return firstStream
+}
+
 
 // Create a silent audio track and add it to the combined stream
 function createSilentTrack() {
@@ -106,14 +116,14 @@ audioElement.setAttribute("controls", "controls");
 document.body.appendChild(audioElement); // Add to DOM
 document.getElementById('audio-refresh').addEventListener('click', refreshAudio);
 
-function refreshAudio(stream){
+function refreshAudio(){
   if (audioContext.state === 'suspended') {
     console.log("audiocontext was suspended")
     audioContext.resume().then(() => {
       console.log("AudioContext resumed after user interaction.");
     });
   }
-  audioElement.srcObject = stream.destination.stream;  // Set the combined stream as the srcObject of the audio element
+  audioElement.srcObject = firstSTREAM.destination.stream;  // Set the combined stream as the srcObject of the audio element
   audioElement.play().catch((error) => {
     console.log('Error playing audio:', error);
   });
@@ -131,12 +141,7 @@ function refreshAudio(stream){
   // console.log(audioElement);
 }
 
-function firstStream(){
-  const STREAM = new individual_stream(audioContext, streams, combinedStream)
-  streams_objects.push(STREAM)
-  streams.push("first stream")
 
-}
 
 function addToStream(remoteStream, peerId, STREAM) {
   streams_objects.push(STREAM)
