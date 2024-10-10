@@ -141,7 +141,11 @@ function refreshAudio(){
       console.log("AudioContext resumed after user interaction.");
     });
   if(speaker.paused){
-    speaker.play()
+    speaker.play().then(() => {
+      console.log("Audio is playing.");
+    }).catch(error => {
+      console.log("Error playing audio:", error);
+    });
     console.log(speaker)
   }
   }
