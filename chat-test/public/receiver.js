@@ -45,10 +45,6 @@ individual_stream.prototype.updateSTREAMS = function(streams, mutePosition){
   this.STREAMS = streams
   this.muteTRACK = mutePosition
   console.log(streams == this.STREAMS, "checkl if streams matches streams")
-  this.finalMute(mutePosition)
-}
-
-individual_stream.prototype.finalMute = function(mutePosition){
   console.log("muting ", mutePosition)
   for (let i = 0; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
