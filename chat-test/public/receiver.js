@@ -91,6 +91,7 @@ function firstStream(){
   streams.push("first stream")
 
   speaker = document.createElement("audio");
+  console.log("this is firststream ",firstSTREAM)
   speaker.srcObject = firstSTREAM.destination.stream;
   speaker.autoplay = true; // Ensure autoplay is enabled
   document.body.appendChild(speaker);
