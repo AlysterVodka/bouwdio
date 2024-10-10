@@ -64,6 +64,7 @@ const audioContext = new AudioContext();
 const combinedStream = new MediaStream();
 const streams_objects = [];
 const streams = [];
+let firstSTREAM = null;
 
 
 // Create a silent audio track and add it to the combined stream
@@ -84,13 +85,10 @@ createSilentTrack();
 
 const finalstream = audioContext.createMediaStreamSource(combinedStream)
 
-const firstSTREAM = firstStream();
-
 function firstStream(){
   firstSTREAM = new individual_stream(audioContext, streams, combinedStream)
   streams_objects.push(STREAM)
   streams.push("first stream")
-  return firstStream
 }
 // finalstream.connect(audioContext.destination)
 
