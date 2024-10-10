@@ -89,6 +89,14 @@ function firstStream(){
   firstSTREAM = new individual_stream(audioContext, streams, combinedStream)
   streams_objects.push(firstSTREAM)
   streams.push("first stream")
+
+  const audioElement = document.createElement("audio");
+  audioElement.srcObject = firstSTREAM.destination.stream;
+  // console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
+  audioElement.play();
+  console.log("audioelement created");
+  console.log(audioElement);
+  document.body.appendChild(audioElement);
 }
 // finalstream.connect(audioContext.destination)
 
@@ -121,14 +129,7 @@ function refreshAudio(){
       console.log("AudioContext resumed after user interaction.");
     });
   }
-  if(!firstSTREAM){
-    firstStream()
-    audioElement.srcObject = firstSTREAM.destination.stream;  // Set the combined stream as the srcObject of the audio element
-    audioElement.play().catch((error) => {
-      console.log('Error playing audio:', error);
-    });
-    console.log(audioElement);
-  }
+
   
 
   // audioElement.srcObject = destination.stream;
