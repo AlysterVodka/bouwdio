@@ -45,14 +45,14 @@ individual_stream.prototype.updateSTREAMS = function(streams, mutePosition){
   this.STREAMS = streams
   this.muteTRACK = mutePosition
   console.log(streams == this.STREAMS, "checkl if streams matches streams")
-  this.finalMute()
+  this.finalMute(mutePosition)
 }
 
-individual_stream.prototype.finalMute = function(){
-  console.log("muting ", this.muteTRACK)
+individual_stream.prototype.finalMute = function(mutePosition){
+  console.log("muting ", mutePosition)
   for (let i = 0; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
-    if(i != this.muteTRACK){
+    if(i != mutePosition){
       // console.log("i :  ", i)
       console.log(this.STREAMS[i])
       this.STREAMS[i].connect(this.destination)
