@@ -405,7 +405,7 @@ const init = () => {
   };
 
 
-  socket.emit("request_drawing")
+  // socket.emit("request_drawing")
 
 
   // document.getElementById("submitButton").addEventListener("click", function() {
