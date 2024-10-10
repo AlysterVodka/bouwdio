@@ -198,6 +198,11 @@ const init = () => {
       }
 
       handleCall(call);
+
+      window.addEventListener('beforeunload', function () {
+        // Signal the other peer that we are closing
+        call.close();
+      });
     
 
       // Store the peer connection
