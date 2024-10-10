@@ -64,7 +64,7 @@ const audioContext = new AudioContext();
 const combinedStream = new MediaStream();
 const streams_objects = [];
 const streams = [];
-const firstSTREAM = firstStream();
+
 
 
 function firstStream(){
@@ -92,6 +92,8 @@ function createSilentTrack() {
 createSilentTrack();
 
 const finalstream = audioContext.createMediaStreamSource(combinedStream)
+
+const firstSTREAM = firstStream();
 // finalstream.connect(audioContext.destination)
 
 // incomingSource.connect(destination);
