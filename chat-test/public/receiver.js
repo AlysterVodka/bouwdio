@@ -229,8 +229,8 @@ function setAttributes(el, attrs) {
 
 
 function removeStream(index){
-  delete streams_objects[index]
-  delete streams[index]
+  streams_objects.splice(index, 1)
+  streams.splice(index, 1)
   console.log("new streams objects: :  ", streams_objects)
   console.log("new streams : :  ", streams)
   streams_objects.forEach((object)=>{
