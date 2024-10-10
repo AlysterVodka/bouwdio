@@ -98,6 +98,8 @@ function firstStream(){
   console.log(audioElement);
   document.body.appendChild(audioElement);
 }
+
+firstSTREAM()
 // finalstream.connect(audioContext.destination)
 
 // incomingSource.connect(destination);
