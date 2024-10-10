@@ -17,7 +17,7 @@
   --slider-colour: #fbcc00;
   --line-color: black;
   --line-width: 5px;
-  --thumbnail-line-width: 2.5px;
+  --thumbnail-line-width: 3px;
 }
 
 body, html {
@@ -174,7 +174,7 @@ body, html {
   height: 10%; /* Zorgt ervoor dat het venster de volledige beschikbare hoogte benut */
   background-color: var(--background-gray);
   border-right: var(--line-width) solid var(--line-color);
-  border-left: var(--line-width) solid var(--line-color);
+  border-left: var(--thumbnail-line-width) solid var(--line-color);
   position: relative;
   justify-content: space-between;
 }
@@ -365,7 +365,7 @@ body, html {
 
 #eraser-button p {
   font-family: 'SimplisticSans-Medium', sans-serif;
-  font-size: 15px;
+  font-size: 1px;
   padding: 5px;
   text-transform: uppercase;
   text-align: center;
