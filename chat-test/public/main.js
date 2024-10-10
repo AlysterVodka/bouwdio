@@ -20,7 +20,11 @@ const init = () => {
   ////// *** signal circle gebruik ik om aan te geven of de takening door "receiver" ontvangen wordt
   ///// *** receiver is de externe collector van alle tekeningen
   const signalCircle = document.getElementById("signal-circle");
-  let localStream, peerId, peer, socket;
+  let localStream, peerId, peer, socket, MATERIAL, isMouseDown;
+
+  MATERIAL = 'wood'; // Set the default material to 'wood';
+  isMouseDown = false;
+
   let peers = []; // Object to store connected peers
 
 
@@ -210,6 +214,9 @@ const init = () => {
     });
 
 
+    initDrawing();
+
+
     socket.on("DRAWING",(data) =>{
       // Loop through the dictionary and create divs
       Object.keys(data).forEach((rowKey, rowIndex) => {
@@ -338,13 +345,12 @@ const init = () => {
   ///////////////////////////
   ////  initiate drawing ////
   ///////////////////////////
+const initDrawing = () =>{
+  MATERIAL = 'wood'; // Set the default material to 'wood';
+  isMouseDown = false;
 
-  let MATERIAL = 'wood'; // Set the default material to 'wood';
-  let isMouseDown = false; // Track mouse down state
-
-  // Listen for mouse down events
   document.addEventListener('mousedown', function() {
-      isMouseDown = true;
+    isMouseDown = true;
   });
 
   // Listen for mouse up events
@@ -353,20 +359,19 @@ const init = () => {
   });
 
   for (const element of document.getElementsByClassName("material")) {
-    console.log(element)
+    // console.log(element)
     // Get the ID of the current element
     const elementId = element.id;
 
     // Add an event listener (e.g., 'mousedown' event)
     element.addEventListener('mousedown', () => {
         // Do something with the ID (for example, log it to the console or send it to a server)
-        console.log('Element with ID:', elementId, 'was clicked.');
+        // console.log('Element with ID:', elementId, 'was clicked.');
         MATERIAL = elementId
-        
         // If using a socket to send the ID, you can emit the ID here
         // socket.emit('material-clicked', { id: elementId });
     });
-  }
+
 
 
   for (let x = 0; x <= 19; x++) {
@@ -401,8 +406,12 @@ const init = () => {
 
         // Append the div to the grid container
         gridContainer.appendChild(div);
-    };
-  };
+      };
+    }
+  }
+}
+
+  // Listen for mouse down events
 
 
   // socket.emit("request_drawing")
