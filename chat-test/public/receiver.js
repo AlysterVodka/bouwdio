@@ -41,15 +41,15 @@ individual_stream.prototype.setDestination = function() {
   // console.log('destination created : ', this.destination.stream.getAudioTracks())
 };
 
-individual_stream.prototype.updateSTREAMS = function(streams, mutePosition){
+individual_stream.prototype.updateSTREAMS = function(streams){
   this.STREAMS = streams
-  this.muteTRACK = mutePosition
+  console.log(trackPosition, " is trackposition based on index of object")
   console.log(streams == this.STREAMS, "check if streams matches streams")
   console.log("UPDATED VERSION")
-  console.log("muting ", mutePosition)
+  console.log("muting ", this.muteTRACK)
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
-    if(i != mutePosition){
+    if(i != this.muteTRACK){
       if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
         this.STREAMS[i].connect(this.destination)
       }
@@ -176,7 +176,8 @@ function addToStream(remoteStream, peerId, STREAM) {
   streams_objects.push(STREAM)
   // console.log("audiotracks amount:", remoteStream.getAudioTracks().length);
   trackPosition =  streams_objects.indexOf(STREAM)
-  console.log(trackPosition, " is trackposition based on index of object")
+  STREAM.muteTRACK = trackPosition
+  console.log(STREAM.muteTRACK, " is trackposition based on index of object")
   socket.emit("track-updated", [peerId, trackPosition])
 
   if (remoteStream.getAudioTracks().length === 0) {
@@ -208,9 +209,11 @@ function addToStream(remoteStream, peerId, STREAM) {
       // source.connect(gainNode);
       // gainNode.connect(destination);
 
-      streams_objects.forEach((element) =>{
-        element.updateSTREAMS(streams, trackPosition)
-        console.log("this is stream ... : ", element)
+      streams_objects.forEach((element, index) =>{
+        // let mutePosition =  streams_objects.indexOf(STREAM)
+        STREAM.muteTRACK = index
+        element.updateSTREAMS(streams)
+        console.log(`this is stream ${index}: `, element)
         // console.log("another streamin the loop:", element)
       })
 
