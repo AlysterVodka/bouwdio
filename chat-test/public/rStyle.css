@@ -7,8 +7,9 @@
     border: 3px solid black;
     background-color: white;
     display: flex;
-    justify-content: space-around;
-    align-self: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-content: start;
 }
 
 body{
