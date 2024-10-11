@@ -286,10 +286,12 @@ function removeStream(index){
   streams.splice(index, 1)
   // console.log("new streams objects: :  ", streams_objects)
   // console.log("new streams : :  ", streams)
+  signalContainer.innerHTML = ''
   streams_objects.forEach((object)=>{
     trackPosition =  streams_objects.indexOf(object)
     console.log("new mute position aqcuired : ", trackPosition)
     object.updateSTREAMS(streams, trackPosition)
+    renderStreams(element)
   })
 }
 

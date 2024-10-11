@@ -28,7 +28,7 @@ body{
 }
 
 .stream_object{
-    width: 50%;
+    width: 45%;
     border: 1px solid black;
     display: flex;
     flex-direction: row;
