@@ -1,6 +1,6 @@
 const socket = io();
 
-const present_light = document.getElementById("signal-circle");
+const signalContainer = document.getElementById("signal-circle");
 
 ///// SET CANVAS PARAMETERS ///////
 
@@ -208,11 +208,12 @@ function addToStream(remoteStream, peerId, STREAM) {
       // console.log("here is incoming stream:   ", incomingStream);
       // source.connect(gainNode);
       // gainNode.connect(destination);
-
+      signalContainer.innerHTML = ''
       streams_objects.forEach((element, index) =>{
         // let mutePosition =  streams_objects.indexOf(STREAM)
         STREAM.muteTRACK = index
         element.updateSTREAMS(streams)
+        renderStreams(element)
         console.log(`this is stream ${index}: `, element)
         // console.log("another streamin the loop:", element)
       })
@@ -294,10 +295,18 @@ function removeStream(index){
 
 function renderStreams(object){
   let stream = document.createElement('div')
-  stream.innerHTML({
-
+  stream.innerHTML =
+  `<div id="stream_id">${object}</div>`
+  let mutebutton = document.createElement('div')
+  mutebutton.addEventListener('click', ()=>{
+    console.log("mute everywhere")
   })
-
+  mutebutton.id = "mutebutton"
+  let audiolevel = document.createElement('div')
+  audiolevel.id = "audiolevel"
+  stream.push(mutebutton)
+  stream.push(audiolevel)
+  signalContainer.push(stream)
 }
 
 
