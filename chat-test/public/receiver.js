@@ -210,6 +210,7 @@ function addToStream(remoteStream, peerId, STREAM) {
 
       streams_objects.forEach((element) =>{
         element.updateSTREAMS(streams, trackPosition)
+        console.log("this is stream ... : ", element)
         // console.log("another streamin the loop:", element)
       })
 
