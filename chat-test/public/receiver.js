@@ -304,9 +304,9 @@ function renderStreams(object){
   mutebutton.id = "mutebutton"
   let audiolevel = document.createElement('div')
   audiolevel.id = "audiolevel"
-  stream.push(mutebutton)
-  stream.push(audiolevel)
-  signalContainer.push(stream)
+  stream.appendChild(mutebutton)
+  stream.appendChild(audiolevel)
+  signalContainer.appendChild(stream)
 }
 
 
