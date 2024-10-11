@@ -23,3 +23,18 @@ body{
   border: black 1px solid;
   overflow: hidden;
 }
+
+.mutebutton{
+    border: 1px solid black;
+}
+
+.stream_object{
+    width: 50%;
+    border: 1px solid black;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    justify-content: space-around;
+    height: 30px;
+}

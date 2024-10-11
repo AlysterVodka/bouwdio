@@ -301,9 +301,11 @@ function renderStreams(object){
   mutebutton.addEventListener('click', ()=>{
     console.log("mute everywhere")
   })
+  stream.classList = "stream_object"
   mutebutton.id = "mutebutton"
+  mutebutton.innerHTML = 'MUTE'
   let audiolevel = document.createElement('div')
-  audiolevel.id = "audiolevel"
+  audiolevel.classList = "audiolevel"
   stream.appendChild(mutebutton)
   stream.appendChild(audiolevel)
   signalContainer.appendChild(stream)
