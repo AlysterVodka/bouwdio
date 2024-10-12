@@ -44,3 +44,8 @@ body{
     border: 1px solid black;
     height: 20px;
 }
+
+.VOLUME{
+    background-color: greenyellow;
+    height:auto;
+}

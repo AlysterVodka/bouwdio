@@ -25,6 +25,8 @@ socket.on('send-receiver-id', ()=>{
   socket.emit("receiver-log-on", PEERID);
 })
 
+const analyserNodes = [];
+
 
 function individual_stream(AUDIOcontext, STREAMS, finalSTREAM) {
   this.STREAMS = STREAMS;
@@ -44,18 +46,35 @@ individual_stream.prototype.setDestination = function() {
 individual_stream.prototype.updateSTREAMS = function(streams){
   this.STREAMS = streams
   console.log(trackPosition, " is trackposition based on index of object")
-  console.log(streams == this.STREAMS, "check if streams matches streams")
-  console.log("UPDATED VERSION")
+  // console.log(streams == this.STREAMS, "check if streams matches streams")
+  // console.log("UPDATED VERSION")
   console.log("muting ", this.muteTRACK)
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
-    if(i != this.muteTRACK){
-      if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
-        this.STREAMS[i].connect(this.destination)
+    if(this.muteTRACK != 0){
+      if(i != this.muteTRACK){
+        if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
+            this.STREAMS[i].connect(this.destination)
+        }
       }
+    }
+    else{
+      if(i != this.muteTRACK){
+        if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
+          const analyserNode = this.AUDIOcontext.createAnalyser();
+          analyserNodes[i] = analyserNode;
+  
+          this.STREAMS[i].connect(analyserNode);
+  
+          analyserNode.connect(this.destination);
+
+          monitorAudioLevel(analyserNode, i)
+
+        }
+      }
+    }
       // console.log("i :  ", i)
       // console.log(this.STREAMS[i])
-    }
   }
 }
 
@@ -116,6 +135,30 @@ function firstStream(){
 }
 
 firstStream()
+
+function monitorAudioLevel(analyserNode, index){
+  const dataArray = new Uint8Array(analyserNode.frequencyBinCount);
+  
+  const updateVolumeLevel = () => {
+    analyserNode.getByteFrequencyData(dataArray);
+    
+    // Calculate the average volume level for this track
+    const average = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
+    const volumePercentage = (average / 255) * 100;
+
+    // Update the HTML element for this specific track
+    const volumeElement = document.getElementById(`volume${index}`);
+    if (volumeElement) {
+      volumeElement.style.width = volumePercentage + '%';
+    }
+
+    // Continuously update
+    requestAnimationFrame(updateVolumeLevel);
+  };
+
+  updateVolumeLevel();
+
+}
 // finalstream.connect(audioContext.destination)
 
 // incomingSource.connect(destination);
@@ -287,15 +330,15 @@ function removeStream(index){
   // console.log("new streams objects: :  ", streams_objects)
   // console.log("new streams : :  ", streams)
   signalContainer.innerHTML = ''
-  streams_objects.forEach((object)=>{
+  streams_objects.forEach((object, index)=>{
     trackPosition =  streams_objects.indexOf(object)
     console.log("new mute position aqcuired : ", trackPosition)
     object.updateSTREAMS(streams, trackPosition)
-    renderStreams(element)
+    renderStreams(element, index)
   })
 }
 
-function renderStreams(object){
+function renderStreams(object, i){
   let stream = document.createElement('div')
   stream.innerHTML =
   `<div id="stream_id">${object}</div>`
@@ -308,6 +351,10 @@ function renderStreams(object){
   mutebutton.innerHTML = 'MUTE'
   let audiolevel = document.createElement('div')
   audiolevel.classList = "audiolevel"
+  const volume = document.createElement('div')
+  volume.id = `volume${i}`
+  volume.classList = "VOLUME"
+  audiolevel.appendChild(volume)
   stream.appendChild(mutebutton)
   stream.appendChild(audiolevel)
   signalContainer.appendChild(stream)
