@@ -334,7 +334,7 @@ function removeStream(index){
     trackPosition =  streams_objects.indexOf(object)
     console.log("new mute position aqcuired : ", trackPosition)
     object.updateSTREAMS(streams, trackPosition)
-    renderStreams(element, index)
+    renderStreams(object, index)
   })
 }
 
