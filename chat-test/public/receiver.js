@@ -256,7 +256,7 @@ function addToStream(remoteStream, peerId, STREAM) {
         // let mutePosition =  streams_objects.indexOf(STREAM)
         STREAM.muteTRACK = index
         element.updateSTREAMS(streams)
-        renderStreams(element)
+        renderStreams(element, index)
         console.log(`this is stream ${index}: `, element)
         // console.log("another streamin the loop:", element)
       })
