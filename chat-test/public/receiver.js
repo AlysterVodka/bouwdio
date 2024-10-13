@@ -19,7 +19,7 @@ const init = () =>{
       console.log("Microphone access granted");
       // localStream = stream;
 
-      const destination = audioContext.createMediaStreamDestination();
+      // const destination = audioContext.createMediaStreamDestination();
       // const microphoneSource = audioContext.createMediaStreamSource(stream);
       // microphoneSource.connect(destination);
       // localStream.start(); // Start the source (silent)
@@ -28,7 +28,7 @@ const init = () =>{
       finalstream = audioContext.createMediaStreamSource(stream)
       streams.push(finalstream)
   
-      finalstream.connect(audioContext.destination)
+      // finalstream.connect(audioContext.destination)
 
       // remove mic notification
       //// ->>> DIT IS VOOR ESTHER'S PAUSE-ELEMENT
@@ -218,7 +218,6 @@ const init = () =>{
           if(index != 0){
             analyserNode.connect(this.destination);
           }
-
           monitorAudioLevel(analyserNode, index)
         }
     }
