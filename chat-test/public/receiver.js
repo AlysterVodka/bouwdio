@@ -117,22 +117,22 @@ individual_stream.prototype.reconnect = function(index){
           // console.log('HOST IS FALSE for index, ', i)
           if(i != this.Position){
             // console.log("somehow connecting the self?")
-            if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
-                this.STREAMS[i].connect(this.destination)
+            if(this.STREAMS[index] instanceof MediaStreamAudioSourceNode){
+                this.STREAMS[index].connect(this.destination)
             }
           }
       }
       else{
             // console.log('HOST IS TRUE for index, ', i)
-            if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
+            if(this.STREAMS[index] instanceof MediaStreamAudioSourceNode){
               const analyserNode = this.AUDIOcontext.createAnalyser();
-              analyserNodes[i] = analyserNode;
+              analyserNodes[index] = analyserNode;
       
-              this.STREAMS[i].connect(analyserNode);
+              this.STREAMS[index].connect(analyserNode);
       
               analyserNode.connect(this.destination);
 
-              monitorAudioLevel(analyserNode, i)
+              monitorAudioLevel(analyserNode, index)
             }
       }
   } catch (error) {
