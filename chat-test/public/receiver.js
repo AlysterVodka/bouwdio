@@ -100,7 +100,9 @@ individual_stream.prototype.connectStreams = function(){
 
 individual_stream.prototype.disconnect = function(index){
   console.log("DISCONNECTING ... : ", index)
-  this.STREAMS[index].disconnect(this.destination)
+  if(this.Position != index){
+    this.STREAMS[index].disconnect(this.destination)
+  }
 }
 
 
