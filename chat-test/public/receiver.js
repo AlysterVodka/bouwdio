@@ -99,7 +99,7 @@ individual_stream.prototype.connectStreams = function(){
 }
 
 individual_stream.prototype.disconnect = function(index){
-  console.log("DISCONNECTING ... : ", index)
+  console.log("DISCONNECTING ... : ", index, " for object ", this.Position)
   try{
       this.STREAMS[index].disconnect(this.destination)
   } catch (error) {
