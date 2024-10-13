@@ -364,7 +364,7 @@ function removeStream(index){
 function renderStreams(object, i){
   let stream = document.createElement('div')
   stream.innerHTML =
-  `<div id="stream_id">${object.position}</div>`
+  `<div id="stream_id">${object.Position}</div>`
   let mutebutton = document.createElement('div')
   mutebutton.setAttribute('data-user-id', i);
   mutebutton.addEventListener('click', ()=>{
