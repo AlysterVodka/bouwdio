@@ -63,7 +63,7 @@ individual_stream.prototype.connectStreams = function(){
   }
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
-    console.log("this POSITION, ", this.position)
+    console.log("this POSITION, ", this.Position)
     if(this.Position != 0){
       if(!MUTETRACKS.includes(i)){
         console.log('HOST IS FALSE for index, ', i)
@@ -128,9 +128,9 @@ finalstream.connect(audioContext.destination)
 function firstStream(){
   firstSTREAM = new individual_stream(audioContext, streams, combinedStream)
   firstSTREAM.setDestination()
+  firstSTREAM.Position = 0
   streams_objects.push(firstSTREAM)
   streams.push("first stream")
-  firstSTREAM.Position = 0
 
   speaker = document.createElement("audio");
   console.log("this is firststream ",firstSTREAM)
