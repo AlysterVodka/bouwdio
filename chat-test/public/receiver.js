@@ -132,7 +132,7 @@ const init = () =>{
       socket.emit("receiver-log-on", PEERID);
     })
 
-    firstStream()
+    //firstStream()
 
     ////initSocket ENDS here
 
