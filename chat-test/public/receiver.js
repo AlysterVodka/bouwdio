@@ -30,6 +30,7 @@ const analyserNodes = [];
 
 function individual_stream(AUDIOcontext, STREAMS, finalSTREAM) {
   this.STREAMS = STREAMS;
+  this.HOST = false;
   this.muteTRACK = 0;
   this.destination = 0;
   this.AUDIOcontext = AUDIOcontext
@@ -49,9 +50,16 @@ individual_stream.prototype.updateSTREAMS = function(streams){
   // console.log(streams == this.STREAMS, "check if streams matches streams")
   // console.log("UPDATED VERSION")
   console.log("muting ", this.muteTRACK)
+  const connectedNodes = this.destination.numberOfInputs;
+  console.log('connected nodes: ', connectedNodes)
+  if (connectedNodes > 0) {
+    // Disconnect everything connected to audioContext.destination
+    audioContext.destination.disconnect();
+    console.log("All streams disconnected from the destination.");
+  }
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
-    if(this.muteTRACK != 0){
+    if(this.HOST == false){
       if(i != this.muteTRACK){
         if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
             this.STREAMS[i].connect(this.destination)
@@ -60,6 +68,7 @@ individual_stream.prototype.updateSTREAMS = function(streams){
     }
     else{
       if(i != this.muteTRACK){
+        console.log('HOST IS TRUE')
         if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
           const analyserNode = this.AUDIOcontext.createAnalyser();
           analyserNodes[i] = analyserNode;
@@ -113,6 +122,7 @@ function firstStream(){
   firstSTREAM.setDestination()
   streams_objects.push(firstSTREAM)
   streams.push("first stream")
+  firstSTREAM.HOST = true
 
   speaker = document.createElement("audio");
   console.log("this is firststream ",firstSTREAM)
@@ -337,6 +347,7 @@ function removeStream(index){
     renderStreams(object, index)
   })
 }
+
 
 function renderStreams(object, i){
   let stream = document.createElement('div')
