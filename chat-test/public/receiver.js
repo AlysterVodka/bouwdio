@@ -70,7 +70,6 @@ individual_stream.prototype.updateSTREAMS = function(streams){
       }
     }
     else{
-      if(this.Position != 0){
         if(!MUTETRACKS.includes(i)){
           console.log('HOST IS TRUE for index, ', i)
           if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
@@ -85,7 +84,6 @@ individual_stream.prototype.updateSTREAMS = function(streams){
 
           }
         }
-      }
     }
       // console.log("i :  ", i)
       // console.log(this.STREAMS[i])
