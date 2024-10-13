@@ -54,13 +54,13 @@ individual_stream.prototype.updateSTREAMS = function(streams){
 
 individual_stream.prototype.connectStreams = function(){
   // console.log("CONNECTING STREAMS, WITHOUT ", MUTETRACKS)
-  const connectedNodes = this.destination.numberOfInputs;
+  // const connectedNodes = this.destination.numberOfInputs;
   // console.log('connected nodes should be ZERO, NOW IS = ', connectedNodes)
-  if (connectedNodes > 0) {
+  // if (connectedNodes > 0) {
     // Disconnect everything connected to audioContext.destination
-    this.destination.disconnect();
-    console.log("DICSONNECTED ", this.Position)
-  }
+    // this.destination.disconnect();
+    // console.log("DICSONNECTED ", this.Position)
+  // }
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
     // console.log("this POSITION, ", this.Position)
@@ -71,7 +71,7 @@ individual_stream.prototype.connectStreams = function(){
         console.log(MUTETRACKS.includes(i),"MUTETRACKS: ", MUTETRACKS," INCLUDES ", i)
         // console.log('HOST IS FALSE for index, ', i)
         if(i != this.Position){
-          console.log("somehow connecting the self?")
+          // console.log("somehow connecting the self?")
           if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
               this.STREAMS[i].connect(this.destination)
           }
@@ -96,6 +96,11 @@ individual_stream.prototype.connectStreams = function(){
       // console.log("i :  ", i)
       // console.log(this.STREAMS[i])
   }
+}
+
+individual_stream.prototype.disconnect = function(index){
+  console.log("DISCONNECTING ... : ", index)
+  this.streams[index].disconnect(this.destination)
 }
 
 
@@ -379,7 +384,7 @@ function renderStreams(object, i){
       console.log('added: ',userID ,'NEW MUTELIST, ', MUTETRACKS)
     }
     streams_objects.forEach((object) => {
-      object.destination.disconnect()
+      object.disconnect(userID)
       // object.connectStreams()
     })
     // console.log(MUTETRACKS)
