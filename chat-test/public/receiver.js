@@ -221,7 +221,6 @@ const init = () =>{
   }
 
 
-
   const firstStream = () => {
     firstSTREAM = new individual_stream(audioContext, streams, combinedStream)
     firstSTREAM.setDestination()
@@ -392,6 +391,9 @@ const init = () =>{
   /// here INIT function closes
 
 }
+
+
+window.addEventListener("load", init);
 
 
 
