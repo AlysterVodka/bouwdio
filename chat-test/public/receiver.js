@@ -26,12 +26,12 @@ socket.on('send-receiver-id', ()=>{
 })
 
 const analyserNodes = [];
+const MUTETRACKS = [];
 
 
 function individual_stream(AUDIOcontext, STREAMS, finalSTREAM) {
   this.STREAMS = STREAMS;
-  this.HOST = false;
-  this.muteTRACK = 0;
+  this.Position = 0;
   this.destination = 0;
   this.AUDIOcontext = AUDIOcontext
   this.finalstream = finalstream;
@@ -49,7 +49,7 @@ individual_stream.prototype.updateSTREAMS = function(streams){
   console.log(trackPosition, " is trackposition based on index of object")
   // console.log(streams == this.STREAMS, "check if streams matches streams")
   // console.log("UPDATED VERSION")
-  console.log("muting ", this.muteTRACK)
+  console.log("muting ", MUTETRACKS)
   const connectedNodes = this.destination.numberOfInputs;
   console.log('connected nodes: ', connectedNodes)
   if (connectedNodes > 0) {
@@ -59,26 +59,31 @@ individual_stream.prototype.updateSTREAMS = function(streams){
   }
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
-    if(this.HOST == false){
-      if(i != this.muteTRACK){
-        if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
-            this.STREAMS[i].connect(this.destination)
+    if(this.Position != 0){
+      if(!MUTETRACKS.includes(i)){
+        console.log('HOST IS FALSE for index, ', i)
+        if(i != this.Position){
+          if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
+              this.STREAMS[i].connect(this.destination)
+          }
         }
       }
     }
     else{
-      if(i != this.muteTRACK){
-        console.log('HOST IS TRUE')
-        if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
-          const analyserNode = this.AUDIOcontext.createAnalyser();
-          analyserNodes[i] = analyserNode;
-  
-          this.STREAMS[i].connect(analyserNode);
-  
-          analyserNode.connect(this.destination);
+      if(this.Position != 0){
+        if(!MUTETRACKS.includes(i)){
+          console.log('HOST IS TRUE for index, ', i)
+          if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
+            const analyserNode = this.AUDIOcontext.createAnalyser();
+            analyserNodes[i] = analyserNode;
+    
+            this.STREAMS[i].connect(analyserNode);
+    
+            analyserNode.connect(this.destination);
 
-          monitorAudioLevel(analyserNode, i)
+            monitorAudioLevel(analyserNode, i)
 
+          }
         }
       }
     }
@@ -122,7 +127,7 @@ function firstStream(){
   firstSTREAM.setDestination()
   streams_objects.push(firstSTREAM)
   streams.push("first stream")
-  firstSTREAM.HOST = true
+  firstSTREAM.Position = 0
 
   speaker = document.createElement("audio");
   console.log("this is firststream ",firstSTREAM)
@@ -229,8 +234,8 @@ function addToStream(remoteStream, peerId, STREAM) {
   streams_objects.push(STREAM)
   // console.log("audiotracks amount:", remoteStream.getAudioTracks().length);
   trackPosition =  streams_objects.indexOf(STREAM)
-  STREAM.muteTRACK = trackPosition
-  console.log(STREAM.muteTRACK, " is trackposition based on index of object")
+  STREAM.Position = trackPosition
+  console.log(STREAM.Position, " is trackposition based on index of object")
   socket.emit("track-updated", [peerId, trackPosition])
 
   if (remoteStream.getAudioTracks().length === 0) {
@@ -264,7 +269,7 @@ function addToStream(remoteStream, peerId, STREAM) {
       signalContainer.innerHTML = ''
       streams_objects.forEach((element, index) =>{
         // let mutePosition =  streams_objects.indexOf(STREAM)
-        STREAM.muteTRACK = index
+        STREAM.Position = index
         element.updateSTREAMS(streams)
         renderStreams(element, index)
         console.log(`this is stream ${index}: `, element)
@@ -354,9 +359,17 @@ function renderStreams(object, i){
   stream.innerHTML =
   `<div id="stream_id">${object}</div>`
   let mutebutton = document.createElement('div')
+  mutebutton.setAttribute('data-user-id', i);
   mutebutton.addEventListener('click', ()=>{
-    console.log("mute everywhere")
+    if(MUTETRACKS.includes(mutebutton.dataset.userId)){
+      console.log('ALRLEADY IN LIST, ', mutebutton.dataset.userId)
+    } else{
+      console.log('Adding to list, ', mutebutton.dataset.userId)
+    }
+    MUTETRACKS.push(mutebutton.dataset.userId)
+    console.log(MUTETRACKS)
   })
+  
   stream.classList = "stream_object"
   mutebutton.id = "mutebutton"
   mutebutton.innerHTML = 'MUTE'
