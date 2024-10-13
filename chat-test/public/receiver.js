@@ -228,6 +228,7 @@ const init = () =>{
     firstSTREAM = new individual_stream(audioContext, streams, combinedStream)
     firstSTREAM.setDestination()
     firstSTREAM.Position = 0
+    firstSTREAM.connectStreams()
     streams_objects.push(firstSTREAM)
     // streams.push("first stream")
 
