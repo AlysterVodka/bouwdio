@@ -371,7 +371,9 @@ function renderStreams(object, i){
       console.log('Adding to list, ', mutebutton.dataset.userId)
       MUTETRACKS.push(mutebutton.dataset.userId)
     }
-    object.connectStreams()
+    streams_objects.forEach((object) => {
+      object.connectStreams()
+    })
     console.log(MUTETRACKS)
   })
 
