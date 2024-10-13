@@ -215,7 +215,9 @@ const init = () =>{
   
           this.STREAMS[index].connect(analyserNode);
   
-          analyserNode.connect(this.destination);
+          if(index != 0){
+            analyserNode.connect(this.destination);
+          }
 
           monitorAudioLevel(analyserNode, index)
         }
