@@ -365,11 +365,11 @@ function renderStreams(object, i){
       console.log('ALRLEADY IN LIST, ', mutebutton.dataset.userId)
     } else{
       console.log('Adding to list, ', mutebutton.dataset.userId)
+      MUTETRACKS.push(mutebutton.dataset.userId)
     }
-    MUTETRACKS.push(mutebutton.dataset.userId)
     console.log(MUTETRACKS)
   })
-  
+
   stream.classList = "stream_object"
   mutebutton.id = "mutebutton"
   mutebutton.innerHTML = 'MUTE'
