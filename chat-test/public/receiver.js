@@ -115,7 +115,7 @@ individual_stream.prototype.reconnect = function(index){
         // console.log('mutetracks includes the number  ', i, ' MUTRTRACKS = ', MUTETRACKS)
           // console.log(MUTETRACKS.includes(i),"MUTETRACKS: ", MUTETRACKS," INCLUDES ", i)
           // console.log('HOST IS FALSE for index, ', i)
-          if(i != this.Position){
+          if(index != this.Position){
             // console.log("somehow connecting the self?")
             if(this.STREAMS[index] instanceof MediaStreamAudioSourceNode){
                 this.STREAMS[index].connect(this.destination)
