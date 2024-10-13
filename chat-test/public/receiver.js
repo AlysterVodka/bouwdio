@@ -200,7 +200,7 @@ const init = () =>{
     }
   }
 
-  individual_stream.prototype.positioning = function(index){
+  individual_stream.prototype.connecting = function(index){
     if(this.Position != 0){
         if(index != this.Position){
           if(this.STREAMS[index] instanceof MediaStreamAudioSourceNode){
