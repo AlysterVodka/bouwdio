@@ -68,9 +68,10 @@ individual_stream.prototype.connectStreams = function(){
       console.log('this position, ', this.Position)
       console.log('mutetracks includes the number  ', i, ' MUTRTRACKS = ', MUTETRACKS)
       if(!MUTETRACKS.includes(i)){
-        console.log("THIS SHOULDN't HAPPEN")
+        console.log(MUTETRACKS.includes(i),"MUTETRACKS: ", MUTETRACKS," INCLUDES ", i)
         // console.log('HOST IS FALSE for index, ', i)
         if(i != this.Position){
+          console.log("somehow connecting the self?")
           if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
               this.STREAMS[i].connect(this.destination)
           }
