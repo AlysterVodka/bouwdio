@@ -107,6 +107,39 @@ individual_stream.prototype.disconnect = function(index){
   }
 }
 
+individual_stream.prototype.reconnect = function(index){
+  console.log("RECONNECTING ... : ", index, " for object ", this.Position)
+  try{
+      if(this.Position != 0){
+        // console.log('this position, ', this.Position)
+        // console.log('mutetracks includes the number  ', i, ' MUTRTRACKS = ', MUTETRACKS)
+          // console.log(MUTETRACKS.includes(i),"MUTETRACKS: ", MUTETRACKS," INCLUDES ", i)
+          // console.log('HOST IS FALSE for index, ', i)
+          if(i != this.Position){
+            // console.log("somehow connecting the self?")
+            if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
+                this.STREAMS[i].connect(this.destination)
+            }
+          }
+      }
+      else{
+            // console.log('HOST IS TRUE for index, ', i)
+            if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
+              const analyserNode = this.AUDIOcontext.createAnalyser();
+              analyserNodes[i] = analyserNode;
+      
+              this.STREAMS[i].connect(analyserNode);
+      
+              analyserNode.connect(this.destination);
+
+              monitorAudioLevel(analyserNode, i)
+            }
+      }
+  } catch (error) {
+    console.log("Node was not connected, skipping...", error);
+  }
+}
+
 
 ////             MAAK STREAM               ///////
 
@@ -382,15 +415,18 @@ function renderStreams(object, i){
       // console.log('ALRLEADY IN LIST, ', mutebutton.dataset.userId)
       removeItem(MUTETRACKS, userID)
       console.log('removed: ',userID ,'NEW MUTELIST, ', MUTETRACKS)
+      streams_objects.forEach((object) => {
+          object.reconnect(userID)
+          // object.connectStreams()
+        // object.connectStreams()
+      })
     } else{
       // console.log('Adding to list, ', mutebutton.dataset.userId)
       MUTETRACKS.push(userID)
       console.log('added: ',userID ,'NEW MUTELIST, ', MUTETRACKS)
-    }
-    streams_objects.forEach((object) => {
       object.disconnect(userID)
+    }
       // object.connectStreams()
-    })
     // console.log(MUTETRACKS)
   })
 
