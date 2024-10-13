@@ -17,14 +17,15 @@ const init = () =>{
   .getUserMedia({ audio: true })
   .then((stream) => {
       console.log("Microphone access granted");
-      localStream = stream;
+      // localStream = stream;
 
       const destination = audioContext.createMediaStreamDestination();
-      localStream.connect(destination);
-      localStream.start(); // Start the source (silent)
-      combinedStream.addTrack(destination.stream.getAudioTracks()[0]);
+      // const microphoneSource = audioContext.createMediaStreamSource(stream);
+      // microphoneSource.connect(destination);
+      // localStream.start(); // Start the source (silent)
+      // combinedStream.addTrack(destination.stream.getAudioTracks()[0]);
 
-      finalstream = audioContext.createMediaStreamSource(combinedStream)
+      finalstream = audioContext.createMediaStreamSource(stream)
       streams.push(finalstream)
   
       finalstream.connect(audioContext.destination)
