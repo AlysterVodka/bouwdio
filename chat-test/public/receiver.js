@@ -100,8 +100,10 @@ individual_stream.prototype.connectStreams = function(){
 
 individual_stream.prototype.disconnect = function(index){
   console.log("DISCONNECTING ... : ", index)
-  if(this.Position != index){
-    this.STREAMS[index].disconnect(this.destination)
+  try{
+      this.STREAMS[index].disconnect(this.destination)
+  } catch (error) {
+    console.log("Node was not connected, skipping...", error);
   }
 }
 
