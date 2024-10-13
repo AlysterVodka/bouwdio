@@ -134,6 +134,10 @@ const init = () =>{
       socket.emit("receiver-log-on", PEERID);
     })
 
+    socket.on("remote-console", (data) =>{
+      console.log(data)
+    });
+
     firstStream()
 
     ////initSocket ENDS here
