@@ -132,7 +132,7 @@ const init = () =>{
       socket.emit("receiver-log-on", PEERID);
     })
 
-    //firstStream()
+    firstStream()
 
     ////initSocket ENDS here
 
@@ -149,7 +149,7 @@ const init = () =>{
 
   individual_stream.prototype.setDestination = function() {
     this.destination = this.AUDIOcontext.createMediaStreamDestination()
-    this.finalstream.connect(this.destination)
+    // this.finalstream.connect(this.destination)
     // this.finalstream.connect(this.AUDIOcontext.destination);
     // console.log('destination created : ', this.destination.stream.getAudioTracks())
   };
