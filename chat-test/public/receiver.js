@@ -53,19 +53,20 @@ individual_stream.prototype.updateSTREAMS = function(streams){
 }
 
 individual_stream.prototype.connectStreams = function(){
-  console.log("CONNECTING STREAMS, WITHOUT ", MUTETRACKS)
+  // console.log("CONNECTING STREAMS, WITHOUT ", MUTETRACKS)
   const connectedNodes = this.destination.numberOfInputs;
-  console.log('connected nodes should be ZERO, NOW IS = ', connectedNodes)
+  // console.log('connected nodes should be ZERO, NOW IS = ', connectedNodes)
   if (connectedNodes > 0) {
     // Disconnect everything connected to audioContext.destination
     this.destination.disconnect();
-    console.log("All streams disconnected from the destination.");
+    // console.log("All streams disconnected from the destination.");
   }
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
     // console.log("this POSITION, ", this.Position)
     if(this.Position != 0){
       if(!MUTETRACKS.includes(i)){
+        console.log("THIS SHOULDN't HAPPEN")
         // console.log('HOST IS FALSE for index, ', i)
         if(i != this.Position){
           if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
