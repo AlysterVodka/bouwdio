@@ -367,15 +367,16 @@ function renderStreams(object, i){
   `<div id="stream_id">${object.Position}</div>`
   let mutebutton = document.createElement('div')
   mutebutton.setAttribute('data-user-id', i);
+  let userID = +mutebutton.dataset.userId
   mutebutton.addEventListener('click', ()=>{
-    if(MUTETRACKS.includes(mutebutton.dataset.userId)){
+    if(MUTETRACKS.includes(userID)){
       // console.log('ALRLEADY IN LIST, ', mutebutton.dataset.userId)
-      removeItem(MUTETRACKS, mutebutton.dataset.userId)
-      console.log('removed: ',mutebutton.dataset.userId ,'NEW MUTELIST, ', MUTETRACKS)
+      removeItem(MUTETRACKS, userID)
+      console.log('removed: ',userID ,'NEW MUTELIST, ', MUTETRACKS)
     } else{
       // console.log('Adding to list, ', mutebutton.dataset.userId)
-      MUTETRACKS.push(mutebutton.dataset.userId)
-      console.log('added: ',mutebutton.dataset.userId ,'NEW MUTELIST, ', MUTETRACKS)
+      MUTETRACKS.push(userID)
+      console.log('added: ',userID ,'NEW MUTELIST, ', MUTETRACKS)
     }
     streams_objects.forEach((object) => {
       object.connectStreams()
