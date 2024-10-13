@@ -5,7 +5,7 @@ const init = () =>{
   const streams = [];
   const analyserNodes = [];
   const MUTETRACKS = [];
-  const finalstream = new MediaStreamAudioSourceNode();
+  let finalstream;
   let firstSTREAM, speaker, PEERID, peer, socket;
 
 
