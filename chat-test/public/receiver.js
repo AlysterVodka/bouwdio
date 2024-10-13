@@ -61,6 +61,7 @@ individual_stream.prototype.connectStreams = function(){
     this.destination.disconnect();
     // console.log("All streams disconnected from the destination.");
   }
+  return
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
     // console.log("this POSITION, ", this.Position)
