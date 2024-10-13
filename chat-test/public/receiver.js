@@ -49,7 +49,11 @@ individual_stream.prototype.updateSTREAMS = function(streams){
   console.log(trackPosition, " is trackposition based on index of object")
   // console.log(streams == this.STREAMS, "check if streams matches streams")
   // console.log("UPDATED VERSION")
-  console.log("muting ", MUTETRACKS)
+  this.connectStreams()
+}
+
+individual_stream.prototype.connectStreams = function(){
+  console.log("CONNECTING STREAMS, WITHOUT ", MUTETRACKS)
   const connectedNodes = this.destination.numberOfInputs;
   console.log('connected nodes: ', connectedNodes)
   if (connectedNodes > 0) {
@@ -365,6 +369,7 @@ function renderStreams(object, i){
       console.log('Adding to list, ', mutebutton.dataset.userId)
       MUTETRACKS.push(mutebutton.dataset.userId)
     }
+    object.connectStreams()
     console.log(MUTETRACKS)
   })
 
