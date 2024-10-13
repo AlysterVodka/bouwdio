@@ -83,6 +83,7 @@ const init = () =>{
       console.log("Call.peer object = ", call.peer)
     
       const STREAM = new individual_stream(audioContext, streams, combinedStream)
+      STREAM.peerId = call.peer
       // console.log(STREAM)
       STREAM.setDestination()
       console.log(call.peer)
@@ -382,8 +383,13 @@ const init = () =>{
 
     const kickbutton = document.createElement("div")
     kickbutton.classList = "KICK"
+    kickbutton.innerHTML = 'KICK'
+    kickbutton.addEventListener('click', ()=>{
+      socket.emit('kick-user', object.peerId)
+    })
     stream.appendChild(mutebutton)
     stream.appendChild(audiolevel)
+    stream.appendChild(kickbutton)
     signalContainer.appendChild(stream)
   }
 

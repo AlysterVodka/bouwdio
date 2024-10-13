@@ -302,8 +302,9 @@ function onConnected(socket){
     })
 
     socket.on('kick-user', (username)=>{
-        IP = currentUserList[username]
-        addToList(IP);
+        io.emit("remote-console", `we are so glad with this  socket user  ${peerSocketIDMap[username]}`)
+        // IP = currentUserList[username]
+        // addToList(IP);
     });
 }
 
