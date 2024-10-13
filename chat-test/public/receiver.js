@@ -25,6 +25,7 @@ const init = () =>{
       combinedStream.addTrack(destination.stream.getAudioTracks()[0]);
 
       finalstream = audioContext.createMediaStreamSource(combinedStream)
+      streams.push(finalstream)
   
       finalstream.connect(audioContext.destination)
 
@@ -169,7 +170,7 @@ const init = () =>{
       // this.destination.disconnect();
       // console.log("DICSONNECTED ", this.Position)
     // }
-    for (let i = 1; i < this.STREAMS.length; i++) {
+    for (let i = 0; i < this.STREAMS.length; i++) {
       // console.log("mute track number is: ", this.muteTRACK)
       // console.log("this POSITION, ", this.Position)
       if(!MUTETRACKS.includes(i)){
@@ -226,7 +227,7 @@ const init = () =>{
     firstSTREAM.setDestination()
     firstSTREAM.Position = 0
     streams_objects.push(firstSTREAM)
-    streams.push("first stream")
+    // streams.push("first stream")
 
     speaker = document.createElement("audio");
     console.log("this is firststream ",firstSTREAM)
