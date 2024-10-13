@@ -63,6 +63,7 @@ individual_stream.prototype.connectStreams = function(){
   }
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
+    console.log("this POSITION, ", this.position)
     if(this.Position != 0){
       if(!MUTETRACKS.includes(i)){
         console.log('HOST IS FALSE for index, ', i)
