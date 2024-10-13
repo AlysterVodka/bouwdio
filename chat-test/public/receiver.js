@@ -65,7 +65,7 @@ individual_stream.prototype.connectStreams = function(){
     // console.log("mute track number is: ", this.muteTRACK)
     // console.log("this POSITION, ", this.Position)
     if(this.Position != 0){
-      console.log('this position, ', this.position)
+      console.log('this position, ', this.Position)
       console.log('mutetracks includes the number  ', i, ' MUTRTRACKS = ', MUTETRACKS)
       if(!MUTETRACKS.includes(i)){
         console.log("THIS SHOULDN't HAPPEN")
