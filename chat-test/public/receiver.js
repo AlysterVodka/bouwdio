@@ -90,7 +90,6 @@ individual_stream.prototype.connectStreams = function(){
             analyserNode.connect(this.destination);
 
             monitorAudioLevel(analyserNode, i)
-
           }
         }
     }
@@ -380,7 +379,8 @@ function renderStreams(object, i){
       console.log('added: ',userID ,'NEW MUTELIST, ', MUTETRACKS)
     }
     streams_objects.forEach((object) => {
-      object.connectStreams()
+      object.destination.disconnect()
+      // object.connectStreams()
     })
     // console.log(MUTETRACKS)
   })
