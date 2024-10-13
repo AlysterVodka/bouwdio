@@ -59,9 +59,8 @@ individual_stream.prototype.connectStreams = function(){
   if (connectedNodes > 0) {
     // Disconnect everything connected to audioContext.destination
     this.destination.disconnect();
-    // console.log("All streams disconnected from the destination.");
+    console.log("DICSONNECTED ", this.Position)
   }
-  return
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
     // console.log("this POSITION, ", this.Position)
