@@ -387,10 +387,8 @@ function renderStreams(object, i){
       MUTETRACKS.push(userID)
       console.log('added: ',userID ,'NEW MUTELIST, ', MUTETRACKS)
     }
-    streams_objects.forEach((object) => {
-      object.disconnect(userID)
+    object.disconnect(userID)
       // object.connectStreams()
-    })
     // console.log(MUTETRACKS)
   })
 
