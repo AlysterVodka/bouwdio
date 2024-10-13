@@ -80,6 +80,7 @@ const init = () =>{
     peer.on("call", (call) => {
       // console.log("call is being forwarded");
       // Answer the call and send the local stream
+      console.log("Call.peer object = ", call.peer)
     
       const STREAM = new individual_stream(audioContext, streams, combinedStream)
       // console.log(STREAM)
@@ -141,6 +142,7 @@ const init = () =>{
 
   function individual_stream(AUDIOcontext, STREAMS, finalSTREAM) {
     this.STREAMS = STREAMS;
+    this.peerId;
     this.Position = 0;
     this.destination = 0;
     this.AUDIOcontext = AUDIOcontext
@@ -298,6 +300,7 @@ const init = () =>{
   }
 
   function addToStream(remoteStream, peerId, STREAM) {
+
     streams_objects.push(STREAM)
     trackPosition =  streams_objects.indexOf(STREAM)
     STREAM.Position = trackPosition
@@ -376,6 +379,9 @@ const init = () =>{
     volume.id = `volume${i}`
     volume.classList = "VOLUME"
     audiolevel.appendChild(volume)
+
+    const kickbutton = document.createElement("div")
+    kickbutton.classList = "KICK"
     stream.appendChild(mutebutton)
     stream.appendChild(audiolevel)
     signalContainer.appendChild(stream)
