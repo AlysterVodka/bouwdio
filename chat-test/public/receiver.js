@@ -365,6 +365,8 @@ function renderStreams(object, i){
   mutebutton.addEventListener('click', ()=>{
     if(MUTETRACKS.includes(mutebutton.dataset.userId)){
       console.log('ALRLEADY IN LIST, ', mutebutton.dataset.userId)
+      removeItem(MUTETRACKS, mutebutton.dataset.userId)
+      console.log('NEW MUTELIST, ', MUTETRACKS)
     } else{
       console.log('Adding to list, ', mutebutton.dataset.userId)
       MUTETRACKS.push(mutebutton.dataset.userId)
@@ -398,3 +400,11 @@ function renderStreams(object, i){
 //   console.log(audioElement);
 //   document.body.appendChild(audioElement); // Add to DOM
 // }
+
+
+function removeItem(listObject, item){
+  const index = listObject.indexOf(item);
+  if (index > -1) { // only splice array when item is found
+    listObject.splice(index, 1); // 2nd parameter means remove one item only
+  }
+}
