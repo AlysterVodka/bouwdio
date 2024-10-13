@@ -58,7 +58,7 @@ individual_stream.prototype.connectStreams = function(){
   console.log('connected nodes: ', connectedNodes)
   if (connectedNodes > 0) {
     // Disconnect everything connected to audioContext.destination
-    audioContext.destination.disconnect();
+    this.destination.disconnect();
     console.log("All streams disconnected from the destination.");
   }
   for (let i = 1; i < this.STREAMS.length; i++) {
