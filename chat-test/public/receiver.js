@@ -46,7 +46,7 @@ individual_stream.prototype.setDestination = function() {
 
 individual_stream.prototype.updateSTREAMS = function(streams){
   this.STREAMS = streams
-  console.log(trackPosition, " is trackposition based on index of object")
+  console.log("STREAMS updated for each streamobject")
   // console.log(streams == this.STREAMS, "check if streams matches streams")
   // console.log("UPDATED VERSION")
   this.connectStreams()
@@ -55,7 +55,7 @@ individual_stream.prototype.updateSTREAMS = function(streams){
 individual_stream.prototype.connectStreams = function(){
   console.log("CONNECTING STREAMS, WITHOUT ", MUTETRACKS)
   const connectedNodes = this.destination.numberOfInputs;
-  console.log('connected nodes: ', connectedNodes)
+  console.log('connected nodes should be ZERO, NOW IS = ', connectedNodes)
   if (connectedNodes > 0) {
     // Disconnect everything connected to audioContext.destination
     this.destination.disconnect();
@@ -63,10 +63,10 @@ individual_stream.prototype.connectStreams = function(){
   }
   for (let i = 1; i < this.STREAMS.length; i++) {
     // console.log("mute track number is: ", this.muteTRACK)
-    console.log("this POSITION, ", this.Position)
+    // console.log("this POSITION, ", this.Position)
     if(this.Position != 0){
       if(!MUTETRACKS.includes(i)){
-        console.log('HOST IS FALSE for index, ', i)
+        // console.log('HOST IS FALSE for index, ', i)
         if(i != this.Position){
           if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
               this.STREAMS[i].connect(this.destination)
@@ -76,7 +76,7 @@ individual_stream.prototype.connectStreams = function(){
     }
     else{
         if(!MUTETRACKS.includes(i)){
-          console.log('HOST IS TRUE for index, ', i)
+          // console.log('HOST IS TRUE for index, ', i)
           if(this.STREAMS[i] instanceof MediaStreamAudioSourceNode){
             const analyserNode = this.AUDIOcontext.createAnalyser();
             analyserNodes[i] = analyserNode;
@@ -141,7 +141,7 @@ function firstStream(){
   // Play the audio after creation
 
   // console.log("source object audio stream : ", audioElement.srcObject.getAudioTracks())
-  console.log("audioelement created");
+  // console.log("audioelement created");
   console.log(speaker);
   document.body.appendChild(speaker);
 
@@ -205,7 +205,7 @@ function refreshAudio(){
   if (audioContext.state === 'suspended') {
     console.log("audiocontext was suspended")
     audioContext.resume().then(() => {
-      console.log("AudioContext resumed after user interaction.");
+      console.log("AudioContext RESUMED");
     });
   if(speaker.paused){
     speaker.play().then(() => {
@@ -213,7 +213,7 @@ function refreshAudio(){
     }).catch(error => {
       console.log("Error playing audio:", error);
     });
-    console.log(speaker)
+    // console.log(speaker)
   }
   }
 
@@ -238,7 +238,7 @@ function addToStream(remoteStream, peerId, STREAM) {
   // console.log("audiotracks amount:", remoteStream.getAudioTracks().length);
   trackPosition =  streams_objects.indexOf(STREAM)
   STREAM.Position = trackPosition
-  console.log(STREAM.Position, " is trackposition based on index of object")
+  // console.log(STREAM.Position, " is trackposition based on index of object")
   socket.emit("track-updated", [peerId, trackPosition])
 
   if (remoteStream.getAudioTracks().length === 0) {
@@ -366,17 +366,18 @@ function renderStreams(object, i){
   mutebutton.setAttribute('data-user-id', i);
   mutebutton.addEventListener('click', ()=>{
     if(MUTETRACKS.includes(mutebutton.dataset.userId)){
-      console.log('ALRLEADY IN LIST, ', mutebutton.dataset.userId)
+      // console.log('ALRLEADY IN LIST, ', mutebutton.dataset.userId)
       removeItem(MUTETRACKS, mutebutton.dataset.userId)
-      console.log('NEW MUTELIST, ', MUTETRACKS)
+      console.log('removed: ',mutebutton.dataset.userId ,'NEW MUTELIST, ', MUTETRACKS)
     } else{
-      console.log('Adding to list, ', mutebutton.dataset.userId)
+      // console.log('Adding to list, ', mutebutton.dataset.userId)
       MUTETRACKS.push(mutebutton.dataset.userId)
+      console.log('added: ',mutebutton.dataset.userId ,'NEW MUTELIST, ', MUTETRACKS)
     }
     streams_objects.forEach((object) => {
       object.connectStreams()
     })
-    console.log(MUTETRACKS)
+    // console.log(MUTETRACKS)
   })
 
   stream.classList = "stream_object"
