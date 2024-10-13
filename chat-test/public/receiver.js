@@ -275,13 +275,13 @@ function addToStream(remoteStream, peerId, STREAM) {
         STREAM.Position = index
         element.updateSTREAMS(streams)
         renderStreams(element, index)
-        console.log(`this is stream ${index}: `, element)
+        // console.log(`this is stream ${index}: `, element)
         // console.log("another streamin the loop:", element)
       })
 
-      console.log("stream_objects + streams inside: ", streams_objects)
-      console.log("audioelement : ", speaker)
-      console.log("audioelement audiotracks: ", speaker.srcObject.getAudioTracks())
+      // console.log("stream_objects + streams inside: ", streams_objects)
+      // console.log("audioelement : ", speaker)
+      // console.log("audioelement audiotracks: ", speaker.srcObject.getAudioTracks())
       // console.log("destination duaio 222 : ")
       // console.log('Microphone audio track added to the empty stream');
   }
@@ -325,9 +325,9 @@ peer.on("call", (call) => {
   call.answer(STREAM.destination.stream);
 
   call.on('close', function() {
-    console.log("closing stremobjects list ",streams_objects)
+    // console.log("closing stremobjects list ",streams_objects)
     console.log("close call: ", streams_objects.indexOf(STREAM))
-    console.log("closing stream list", streams)
+    // console.log("closing stream list", streams)
     removeStream(streams_objects.indexOf(STREAM))
     // You can trigger additional actions here, like notifying the user
   });
@@ -351,7 +351,8 @@ function removeStream(index){
   streams_objects.forEach((object, index)=>{
     trackPosition =  streams_objects.indexOf(object)
     console.log("new mute position aqcuired : ", trackPosition)
-    object.updateSTREAMS(streams, trackPosition)
+    object.Position = trackPosition
+    object.updateSTREAMS(streams)
     renderStreams(object, index)
   })
 }
@@ -360,7 +361,7 @@ function removeStream(index){
 function renderStreams(object, i){
   let stream = document.createElement('div')
   stream.innerHTML =
-  `<div id="stream_id">${object}</div>`
+  `<div id="stream_id">${object.position}</div>`
   let mutebutton = document.createElement('div')
   mutebutton.setAttribute('data-user-id', i);
   mutebutton.addEventListener('click', ()=>{
