@@ -23,7 +23,7 @@ const init = () => {
   let localStream, peerId, peer, socket, MATERIAL, isMouseDown;
   const activeCalls = {};
 
-  const drawinginitiated = false;
+  let drawinginitiated = false;
 
   MATERIAL = 'wood'; // Set the default material to 'wood';
   isMouseDown = false;
