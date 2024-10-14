@@ -440,6 +440,7 @@ const initDrawing = () =>{
 
         // Append the div to the grid container
         gridContainer.appendChild(div);
+        socket.emit("request_drawing")
       };
     }
   }
