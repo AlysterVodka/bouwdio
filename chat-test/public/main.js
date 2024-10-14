@@ -143,6 +143,12 @@ const init = () => {
 
     socket = io();
 
+    socket.on('not-welcome', ()=>{
+      alert('You have been kicked from the chatroom.');
+      window.location.href = '/'
+      return
+    })
+
     socket.on("connect", () => {
       // Inform server about socket/peer connection
       // console.log("SocketID: " + socket.id);

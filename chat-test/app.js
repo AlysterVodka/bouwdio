@@ -183,7 +183,13 @@ io.use((socket, next) => {
     if(!url.includes('/host') && !url.includes('/rec')){
     
         let userIP = socket.handshake.address;  // Get IP address
+        console.log(list)
         let id = socket.id;  // Assuming username is passed as a query parameter
+        if(list.includes(IP))
+        {
+            console.log('INCLUDES')
+            io.to(id).emit('not-welcome')
+        }
 
         io.emit('socket-connected', id)
         setKeyValue(id, [userIP, 0, 0]);
@@ -306,7 +312,9 @@ function onConnected(socket){
     socket.on('kick-user', (username)=>{
         io.emit("remote-console", `we are so glad with this  socket user  ${peerSocketIDMap[username]}`)
         if(users[peerSocketIDMap[username]]){
-            io.emit("remote-console", `socket found`)
+            let IP = currentUserList[username]
+            io.emit("remote-console", `socket found, IP = ${IP}`)
+            addToList(IP);
             users[peerSocketIDMap[username]].disconnect()
         }
         // IP = currentUserList[username]
