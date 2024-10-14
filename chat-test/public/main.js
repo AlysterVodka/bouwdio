@@ -238,6 +238,7 @@ const init = () => {
 
     socket.on("DRAWING",(data) =>{
       if(drawinginitiated == false){
+        console.log("drawing initiated")
         drawinginitiated = true
       }
       // Loop through the dictionary and create divs
