@@ -23,6 +23,8 @@ const init = () => {
   let localStream, peerId, peer, socket, MATERIAL, isMouseDown;
   const activeCalls = {};
 
+  const drawinginitiated = false;
+
   MATERIAL = 'wood'; // Set the default material to 'wood';
   isMouseDown = false;
 
@@ -235,6 +237,9 @@ const init = () => {
 
 
     socket.on("DRAWING",(data) =>{
+      if(drawinginitiated == false){
+        drawinginitiated = true
+      }
       // Loop through the dictionary and create divs
       Object.keys(data).forEach((rowKey, rowIndex) => {
           data[rowKey].forEach((item, colIndex) => {
@@ -250,6 +255,8 @@ const init = () => {
     })
 
   }
+
+
 
 
 
@@ -368,6 +375,8 @@ const initDrawing = () =>{
   MATERIAL = 'wood'; // Set the default material to 'wood';
   isMouseDown = false;
 
+
+
   document.addEventListener('mousedown', function() {
     isMouseDown = true;
   });
@@ -407,7 +416,9 @@ const initDrawing = () =>{
             // const message = { row: rowIndex, col: colIndex, data: item };
             x = x;
             y = y;
-            socket.emit("updateDrawing",[MATERIAL, x,y]);
+            if(drawinginitiated){
+              socket.emit("updateDrawing",[MATERIAL, x,y]);
+            }
         });
         div.addEventListener('mouseenter', () => {
           if(isMouseDown){
@@ -416,7 +427,9 @@ const initDrawing = () =>{
             // const message = { row: rowIndex, col: colIndex, data: item };
             x = x;
             y = y;
-            socket.emit("updateDrawing",[MATERIAL, x,y]);
+            if(drawinginitiated){
+              socket.emit("updateDrawing",[MATERIAL, x,y]);
+            }
           }
         });
 
