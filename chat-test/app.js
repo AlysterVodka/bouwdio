@@ -307,6 +307,7 @@ function onConnected(socket){
         io.emit("remote-console", `we are so glad with this  socket user  ${peerSocketIDMap[username]}`)
         if(users[peerSocketIDMap[username]]){
             io.emit("remote-console", `socket found`)
+            users[peerSocketIDMap[username]].disconnect()
         }
         // IP = currentUserList[username]
         // addToList(IP);
