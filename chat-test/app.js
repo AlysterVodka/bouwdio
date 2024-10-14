@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 8443
 let socketsConnected = new Set()
 
 let receiverId;
+let users = {};
 
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -216,6 +217,7 @@ io.on('connection', onConnected)
 function onConnected(socket){
     console.log(socket.id)
     socketsConnected.add(socket.id)
+    users[socket.id] = socket;
     io.emit('clients-total',socketsConnected.size)
     io.emit('send-receiver-id')
     "receiver-log-on"
@@ -303,6 +305,9 @@ function onConnected(socket){
 
     socket.on('kick-user', (username)=>{
         io.emit("remote-console", `we are so glad with this  socket user  ${peerSocketIDMap[username]}`)
+        if(users[peerSocketIDMap[username]]){
+            io.emit("remote-console", `socket found`)
+        }
         // IP = currentUserList[username]
         // addToList(IP);
     });
