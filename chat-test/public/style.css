@@ -351,9 +351,12 @@ body, html {
   flex: 1 1 calc(25% - 10px);
   height: auto;
   aspect-ratio: 1/1;
-  background-color: var(--button-grey);
+  background-image: url('assets/images/bulldozer.png');
+  background-color: var(--header-grey);
   border: var(--thumbnail-line-width) solid var(--line-color);
-  background-size: cover;
+  background-size: 90%;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
   display: flex;
   align-items: flex-end;
