@@ -147,6 +147,12 @@ const init = () => {
       socket.emit("peer-connected", [socket.id, peerId]);
     });
 
+    socket.on('disconnect', () => {
+      alert('You have been kicked from the chatroom.');
+      // Redirect to login or home page, for example
+      window.location.href = '/';
+    });
+
 
     socket.on("receiver-peer-present", (pID) => {
       console.log("New receiver peer connected: " + pID);
