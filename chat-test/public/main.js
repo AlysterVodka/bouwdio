@@ -145,6 +145,8 @@ const init = () => {
 
     socket = io();
 
+    console.log("socket initialized")
+
     socket.on('not-welcome', ()=>{
       console.log('NOT WELCOME')
       alert('You have been kicked from the chatroom.');
