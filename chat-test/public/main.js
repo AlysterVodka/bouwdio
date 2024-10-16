@@ -203,8 +203,9 @@ const init = () => {
     });
 
     socket.on('mouses', (data)=>{
+      console.log(data)
       for(let key in data){
-        console.log(data[key][3])
+        // console.log(data[key][3])
       }
     })
 
