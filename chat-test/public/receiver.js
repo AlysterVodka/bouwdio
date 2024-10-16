@@ -130,9 +130,27 @@ const init = () =>{
 
     socket.emit("receiver-log-on", PEERID);
 
-    socket.on('send-receiver-id', ()=>{
+    socket.on('send-receiver-id', (blacklist)=>{
       socket.emit("receiver-log-on", PEERID);
+
+      let BLACKLIST = document.createElement('div')
+      BLACKLIST.classList = 'blacklist'
+
+      for (const item of blacklist) {
+        ip = document.createElement('div')
+        ip.innerHTML = item
+        BLACKLIST.appendChild(ip)
+      }
+
+      const refresh = document.createElement('div')
+      refresh.addEventListener('click', ()=>{
+        socket.emit('refresh-blacklist')
+      })
+
+      signalContainer.appendChild(BLACKLIST)
+
     })
+
 
     socket.on("remote-console", (data) =>{
       console.log(data)

@@ -73,6 +73,13 @@ function addToList(item) {
     }
 }
 
+function refreshList() {
+    LIST = []
+    // Add the item to the list
+        saveList(LIST);   // Save the updated list to the file
+        // console.log(`${item} added to the list.`);
+}
+
 
 /////////////////////////////////////////////////////////////////////
 
@@ -272,6 +279,12 @@ function onConnected(socket){
     socket.on('message', (data) =>{
         console.log(data)
         socket.broadcast.emit('chat-message', data)
+    })
+
+    socket.on('refresh-blacklist', () =>{
+        io.emit('remote-console', `BLACKLIST REFRESHING ${LIST}`)
+        refreshList();
+        io.emit('remote-console', `BLACKLIST REFRESHED ${LIST}`)
     })
 
     socket.on("receiver-log-on", (id) =>{
