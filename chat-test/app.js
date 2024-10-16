@@ -184,8 +184,8 @@ function updateDrawing(dictionary, texture,x,y){
 }
 
 function check_mice(dictionary, id, mouse){
-    dictionary[id][3] = mouse.x
-    dictionary[id][3] = mouse.y
+    dictionary[id][3].x = mouse.x
+    dictionary[id][3].y = mouse.y
     // io.emit('remote-console', [dictionary[socket_user][3], mouse])
 }
 
