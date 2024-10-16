@@ -650,7 +650,7 @@ const initDrawing = () =>{
   const materialsInfo = {
     wood: {
       name: "Wood",
-      description: "Wood, the multitasker of biobased materials! A tree trunk turns into walls, beams, or boards. Leftover wood? Chipboard! And the sawdust? Wood fiber insulation, duh! Living in a timber frame house? Enjoy a cozy,healthy home! Trees can be farmed. Some farms are big, some are small. Trees have a lot of different types, they grow long roots. Wood can be used for a house or a boat."
+      description: "Wood, the multitasker of biobased materials! A tree trunk turns into walls, beams, or boards. Leftover wood? Chipboard! And the sawdust? Wood fiber insulation, duh! Living in a timber frame house? Enjoy a cozy,healthy home!"
     },
     bamboo: {
       name: "Bamboo",
