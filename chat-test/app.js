@@ -184,8 +184,8 @@ function updateDrawing(dictionary, texture,x,y){
 }
 
 function check_mice(dictionary, socket_user, mouse){
-    dictionary[id][4].style.left = `${mouse.x}px`
-    dictionary[id][4].style.right = `${mouse.y}px`
+    // dictionary[id][4].style.left = `${mouse.x}px`
+    // dictionary[id][4].style.right = `${mouse.y}px`
     // io.emit('remote-console', [dictionary[socket_user][3], mouse])
 }
 
@@ -317,6 +317,11 @@ function onConnected(socket){
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
     })
 
+    socket.on('mouse', (mouse)=>{
+        check_mice(dictionary, socket.id, mouse)
+        // io.emit('mouses', dictionary)
+    })
+
     socket.on("track-updated", (data)=>{
         io.emit("remote-console", `socket id map : ${data[0]}, track position : ${data[1]}, peertsocketid : ${peerSocketIDMap[data[0]]}`)
         updatetrackpos(peerSocketIDMap[data[0]], data[1])
@@ -346,10 +351,7 @@ function onConnected(socket){
         // addToList(IP);
     });
 
-    socket.on('mouse', (mouse)=>{
-        check_mice(dictionary, socket.id, mouse)
-        io.emit('mouses', dictionary)
-    })
+
 }
 
 
