@@ -49,3 +49,16 @@ body{
     background-color: greenyellow;
     height:100%;
 }
+
+.KICK{
+    
+}
+
+.blacklist{
+    position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 50%;
+  border: 1px solid black;
+  width: 30%;
+}
