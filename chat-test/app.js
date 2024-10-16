@@ -205,6 +205,8 @@ io.use((socket, next) => {
             io.emit("remote-console", `IP recognised  ${userIP}`)
             // console.log('INCLUDES')
             io.to(id).emit('not-welcome')
+            socket.disconnect(true);
+            return;
         } else{
 
             io.emit('socket-connected', id)
