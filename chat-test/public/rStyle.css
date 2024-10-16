@@ -64,7 +64,7 @@ body{
 }
 
 .REFRESH{
-    position: relative;
+    position: absolute;
   top: -20px;
   left: -0px;
   width: fit-content;
