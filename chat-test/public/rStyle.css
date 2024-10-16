@@ -62,3 +62,14 @@ body{
   border: 1px solid black;
   width: 30%;
 }
+
+.REFRESH{
+    position: relative;
+  top: -20px;
+  left: -0px;
+  width: fit-content;
+}
+
+.REFRESH:hover{
+    cursor: pointer;
+}

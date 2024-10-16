@@ -156,6 +156,8 @@ const init = () =>{
         socket.emit('refresh-blacklist')
       })
 
+      refresh.innerHTML = 'REFRESH'
+
       BLACKLIST.appendChild(refresh)
 
       document.body.appendChild(BLACKLIST)
