@@ -234,8 +234,8 @@ function onConnected(socket){
     socketsConnected.add(socket.id)
     users[socket.id] = socket;
     io.emit('clients-total',socketsConnected.size)
-    io.emit('send-receiver-id')
-    "receiver-log-on"
+    io.emit('send-receiver-id', (LIST))
+    // "receiver-log-on"
 
     io.emit("remote-console", "this is a test message")
 

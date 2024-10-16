@@ -131,15 +131,18 @@ const init = () =>{
     socket.emit("receiver-log-on", PEERID);
 
     socket.on('send-receiver-id', (blacklist)=>{
+      console.log(blacklist)
       socket.emit("receiver-log-on", PEERID);
 
       let BLACKLIST = document.createElement('div')
       BLACKLIST.classList = 'blacklist'
 
-      for (const item of blacklist) {
-        ip = document.createElement('div')
-        ip.innerHTML = item
-        BLACKLIST.appendChild(ip)
+      if(blacklist){
+        for (const item of blacklist) {
+          ip = document.createElement('div')
+          ip.innerHTML = item
+          BLACKLIST.appendChild(ip)
+        }
       }
 
       const refresh = document.createElement('div')
