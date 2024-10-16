@@ -82,6 +82,10 @@ body, html {
   margin: 10px;
 }
 
+#audio-sign{
+  width:100%;
+}
+
 #security-camera img {
   display: block;  /* Zorg ervoor dat de afbeelding correct wordt weergegeven */
   width: 100px;  /* Stel de gewenste grootte in */
@@ -593,7 +597,7 @@ body, html {
   body{
     overflow: hidden;
   }
-  
+
   /* Styles for mobile devices */
   #onsite-building{
     visibility: hidden;
