@@ -241,7 +241,8 @@ function onConnected(socket){
     console.log(socket.id)
     socketsConnected.add(socket.id)
     users[socket.id] = socket;
-    io.emit('clients-total',socketsConnected.size)
+    io.emit("remote-console", users)
+    io.emit('clients-total',"users joined")
     io.emit('send-receiver-id')
 
 
