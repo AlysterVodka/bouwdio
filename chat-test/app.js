@@ -183,6 +183,10 @@ function updateDrawing(dictionary, texture,x,y){
     saveDictionary(dictionary, drawing)
 }
 
+function check_mice(dictionary, socket_user, mouse){
+    io.emit('remote-console', [dictionary[socket_user][3], mouse])
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 let currentUserList = {}
@@ -341,7 +345,7 @@ function onConnected(socket){
     });
 
     socket.on('mouse', (mouse)=>{
-        
+        check_mice(dictionary, socket.id, mouse)
     })
 }
 
