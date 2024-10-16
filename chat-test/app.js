@@ -127,7 +127,7 @@ start_drawing(DRAWING_dictionary)
 function setKeyValue(key, value) {
     if(!dictionary[key]){
         dictionary[key] = value;  // Set the key-value pair
-        io.emit('remote-console', [`this is the current userlist`, dictionary])
+        // io.emit('remote-console', [`this is the current userlist`, dictionary])
         // io.emit('remote-console', dictionary)
         saveDictionary(dictionary, current_users);  // Save the updated dictionary to the file
         io.emit('users-reloaded', dictionary)
@@ -208,9 +208,7 @@ io.use((socket, next) => {
         } else{
 
             io.emit('socket-connected', id)
-            let mouse = document.createElement('div')
-            mouse.classList = `mouse`
-            setKeyValue(id, [userIP, 0, 0, {x:0, y:0}, mouse]);
+            setKeyValue(id, [userIP, 0, 0, {x:0, y:0}]);
             console.log("this is the ip", userIP, "this is the username", id)
         }
 
@@ -350,6 +348,7 @@ function onConnected(socket){
 
     socket.on('mouse', (mouse)=>{
         check_mice(dictionary, socket.id, mouse)
+        io.emit('mouses', dictionary)
     })
 }
 

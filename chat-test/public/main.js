@@ -185,6 +185,12 @@ const init = () => {
       connectToReceiver(pID);
     });
 
+    socket.on('mouses', (data)=>{
+      for(let key in data){
+        console.log(data[key][3])
+      }
+    })
+
     
 
     document.addEventListener('mousemove', function(event) {
