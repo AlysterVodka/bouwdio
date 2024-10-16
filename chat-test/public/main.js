@@ -30,6 +30,8 @@ const init = () => {
 
   let peers = []; // Object to store connected peers
 
+  mouse = {x:0, y:0}
+
 
   ///////
 
@@ -145,6 +147,7 @@ const init = () => {
 
     socket = io();
 
+
     console.log("socket initialized")
 
     socket.on('not-welcome', ()=>{
@@ -180,6 +183,14 @@ const init = () => {
       }
       console.log("Connect to receiver peer");
       connectToReceiver(pID);
+    });
+
+    
+
+    document.addEventListener('mousemove', function(event) {
+      mouse.x = event.clientX; // X coordinate of the mouse relative to the viewport
+      mouse.y = event.clientY; // Y coordinate of the mouse relative to the viewport
+      socket.emit('mouse', mouse)
     });
 
 
