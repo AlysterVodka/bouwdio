@@ -55,6 +55,7 @@ const init = () => {
   })
   .catch((err) => {
     console.log("No microphone: " + err);
+    alert('microphone has had trouble starting, make sure it is not occupied by any other app and try to log on again')
   });
 
   /////////
@@ -130,12 +131,13 @@ const init = () => {
     // Peer error
     peer.on("error", (err) => {
         console.log("Peer error: " + err);
+        alert('Calling the server failed, please try again in a couple of seconds')
     });
 
     // Peer disconnect
     peer.on("disconnected", (call) => {
       if (!(pId in activeCalls)) {
-        info("Audio element was already removed");
+        console.log("Audio element was already removed");
         return;
       }
       delete activeCalls[pId];

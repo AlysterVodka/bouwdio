@@ -31,6 +31,12 @@ app.get("/host", (req, res) => {
     res.sendFile(path.join(__dirname, '/public/host.html'));
 });
 
+app.get("/kicked", (req, res) => {
+    console.log('request sent')
+    // Send the HTML file as the response
+    res.sendFile(path.join(__dirname, '/public/kicked.html'));
+});
+
 const io = require('socket.io')(server)
 
 ////////// CHECK IP /////////////////////////////////////
