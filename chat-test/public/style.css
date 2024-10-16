@@ -39,10 +39,12 @@ body, html {
 }
 
 .MOUSE{
+  margin-left: -10px;
+  margin-top: -6px;
   width:30px;
   height:30px;
   position:absolute;
-  z-index: 1;
+  z-index: 2000;
   /* border: 2px solid black; */
   background-image: url('assets/images/cursor.webp');
   background-size: cover;
