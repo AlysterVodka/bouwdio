@@ -319,7 +319,7 @@ function onConnected(socket){
 
     socket.on('mouse', (mouse)=>{
         check_mice(dictionary, socket.id, mouse)
-        // io.emit('mouses', dictionary)
+        io.emit('mouses', dictionary)
     })
 
     socket.on("track-updated", (data)=>{

@@ -16,6 +16,8 @@ const init = () => {
   allContent.style.display = "none"; // Verberg de content bij het opstarten
   pauseStatusWindow.style.display = "block";
 
+  const body = document.getElementsByTagName('body')
+
 
   ////// *** signal circle gebruik ik om aan te geven of de takening door "receiver" ontvangen wordt
   ///// *** receiver is de externe collector van alle tekeningen
@@ -31,6 +33,8 @@ const init = () => {
   let peers = []; // Object to store connected peers
 
   mouse = {x:0, y:0}
+
+  let MICE = []
 
 
   ///////
@@ -170,6 +174,19 @@ const init = () => {
       window.location.href = '/';
     });
 
+    socket.on("users-reloaded", (users)=>{
+      MICE = []
+      console.log(users)
+      for(let key in users){
+        let mouse = document.createElement('div')
+        mouse.classList = 'MOUSE'
+        mouse.style.left = `${users[key][3].x}px`
+        mouse.style.right = `${users[key][3].y}px`
+        body.appendChild(mouse)
+        MICE.push(mouse)
+      }
+    })
+
 
     socket.on("receiver-peer-present", (pID) => {
       console.log("New receiver peer connected: " + pID);
@@ -260,6 +277,14 @@ const init = () => {
     socket.on("remote-console", (data) =>{
       // console.log(data)
     });
+
+    socket.on('mouses', (mice)=>{
+      for(let key in mice){
+        let mouse = document.createElement('div')
+
+        mice[k]
+      }
+    })
 
 
     initDrawing();
