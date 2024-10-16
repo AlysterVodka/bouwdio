@@ -72,6 +72,7 @@ const init = () => {
   //// INIT PEER /////
 
   const initPeer = () => {
+    console.log("peer initializing")
 
     peer = new Peer(undefined, {
       host: "/",
@@ -96,6 +97,7 @@ const init = () => {
         peerId = pId;
         // info("Peer Connected: " + pId);
         // Initialize socket now peer is initialized
+        console.log("peer open")
         initSocket();
       });
 
@@ -121,7 +123,7 @@ const init = () => {
 
     // Peer error
     peer.on("error", (err) => {
-        // console.log("Peer error: " + err);
+        console.log("Peer error: " + err);
     });
 
     // Peer disconnect
