@@ -183,9 +183,9 @@ function updateDrawing(dictionary, texture,x,y){
     saveDictionary(dictionary, drawing)
 }
 
-function check_mice(dictionary, socket_user, mouse){
-    // dictionary[id][4].style.left = `${mouse.x}px`
-    // dictionary[id][4].style.right = `${mouse.y}px`
+function check_mice(dictionary, id, mouse){
+    dictionary[id][3] = mouse.x
+    dictionary[id][3] = mouse.y
     // io.emit('remote-console', [dictionary[socket_user][3], mouse])
 }
 
