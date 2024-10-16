@@ -187,6 +187,7 @@ io.use((socket, next) => {
         let id = socket.id;  // Assuming username is passed as a query parameter
         if(list.includes(IP))
         {
+            io.emit("remote-console", `IP recognised  ${IP}`)
             console.log('INCLUDES')
             io.to(id).emit('not-welcome')
         }
