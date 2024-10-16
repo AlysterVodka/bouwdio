@@ -144,6 +144,7 @@ const init = () => {
     socket = io();
 
     socket.on('not-welcome', ()=>{
+      console.log('NOT WELCOME')
       alert('You have been kicked from the chatroom.');
       window.location.href = '/'
       return
@@ -156,6 +157,7 @@ const init = () => {
     });
 
     socket.on('disconnect', () => {
+      console.log('DISCONNECTED')
       alert('You have been kicked from the chatroom.');
       // Redirect to login or home page, for example
       window.location.href = '/';
