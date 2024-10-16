@@ -184,7 +184,9 @@ function updateDrawing(dictionary, texture,x,y){
 }
 
 function check_mice(dictionary, socket_user, mouse){
-    io.emit('remote-console', [dictionary[socket_user][3], mouse])
+    dictionary[id][4].style.left = `${mouse.x}px`
+    dictionary[id][4].style.right = `${mouse.y}px`
+    // io.emit('remote-console', [dictionary[socket_user][3], mouse])
 }
 
 
@@ -206,7 +208,9 @@ io.use((socket, next) => {
         } else{
 
             io.emit('socket-connected', id)
-            setKeyValue(id, [userIP, 0, 0, {x:0, y:0}]);
+            let mouse = document.createElement('div')
+            mouse.classList = `mouse`
+            setKeyValue(id, [userIP, 0, 0, {x:0, y:0}, mouse]);
             console.log("this is the ip", userIP, "this is the username", id)
         }
 
