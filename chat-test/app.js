@@ -234,7 +234,7 @@ function onConnected(socket){
     socketsConnected.add(socket.id)
     users[socket.id] = socket;
     io.emit('clients-total',socketsConnected.size)
-    io.emit('send-receiver-id', (LIST))
+    io.emit('send-receiver-id')
     // "receiver-log-on"
 
     io.emit("remote-console", "this is a test message")
@@ -290,6 +290,7 @@ function onConnected(socket){
     socket.on("receiver-log-on", (id) =>{
         receiverId = id;
         io.emit("remote-console", `FROM SERVER, receiver had joined:${receiverId} `)
+        io.to(socket.id).emit('receive-black-list', (LIST))
         // remoteConsole(`FROMSERVER: receiver has joined, ID: ${receiverId}`)
         // console.log("receiver has joined, ID: ",receiverId)
     })
@@ -332,6 +333,7 @@ function onConnected(socket){
             addToList(IP);
             users[peerSocketIDMap[username]].disconnect()
         }
+        io.to(socket.id).emit('receive-black-list', (LIST))
         // IP = currentUserList[username]
         // addToList(IP);
     });

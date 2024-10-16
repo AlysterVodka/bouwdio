@@ -10,6 +10,8 @@ const init = () =>{
 
 
   const signalContainer = document.getElementById("signal-circle");
+  const BLACKLIST = document.createElement('div')
+  BLACKLIST.classList = 'blacklist'
 
 
 
@@ -130,12 +132,14 @@ const init = () =>{
 
     socket.emit("receiver-log-on", PEERID);
 
-    socket.on('send-receiver-id', (blacklist)=>{
-      console.log(blacklist)
+    socket.on('send-receiver-id', ()=>{
       socket.emit("receiver-log-on", PEERID);
+    })
 
-      let BLACKLIST = document.createElement('div')
-      BLACKLIST.classList = 'blacklist'
+    socket.on('receive-black-list', (blacklist) =>{
+      console.log(blacklist)
+
+      BLACKLIST.innerHTML = ''
 
       if(blacklist){
         for (const item of blacklist) {
