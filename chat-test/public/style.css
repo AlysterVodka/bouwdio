@@ -38,6 +38,15 @@ body, html {
   place-items: center;
 }
 
+#MOUSE{
+  width:30px;
+  height:30px;
+  position:absolute;
+  z-index: 1;
+  border: 2px solid black;
+  background-color: white;
+}
+
 #pause-status-window {
   display: flex;
   flex-direction: column;
