@@ -299,7 +299,7 @@ function onConnected(socket){
 
     socket.on("receiver-log-on", (id) =>{
         receiverId = id;
-        io.emit("remote-console", `FROM SERVER, receiver had joined:${receiverId} `)
+        // io.emit("remote-console", `FROM SERVER, receiver had joined:${receiverId} `)
         io.to(socket.id).emit('receive-black-list', (LIST))
         // remoteConsole(`FROMSERVER: receiver has joined, ID: ${receiverId}`)
         // console.log("receiver has joined, ID: ",receiverId)
@@ -312,7 +312,7 @@ function onConnected(socket){
             // io.emit("remote-console", `ids [0] , ${ids[0]}, ids [1] , ${ids[1]}`)
             peerSocketIDMap[ids[1]] = ids[0]
             // io.emit("remote-console", peerSocketIDMap)
-            io.emit("remote-console", `FROM SERVER: Peer connected    : ${ids[1]} `)
+            io.emit("remote-console", currentUserList)
             // console.log(`Peer connected: ${peerId}`);
             io.to(ids[0]).emit("receiver-peer-present", receiverId)
         }
