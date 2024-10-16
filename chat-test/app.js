@@ -247,7 +247,7 @@ function onConnected(socket){
 
     // "receiver-log-on"
 
-    io.emit("remote-console", "this is a test message")
+    io.emit("remote-console", users)
 
     socket.on('request_drawing', ()=>{
         if(DRAWING_dictionary){
@@ -346,7 +346,7 @@ function onConnected(socket){
 
     socket.on('kick-user', (username)=>{
         // io.emit("remote-console", "USER BEING KICKED")
-        io.emit("remote-console", dictionary[peerSocketIDMap[username]][0])
+        // io.emit("remote-console", dictionary[peerSocketIDMap[username]][0])
         io.emit("remote-console", users)
         if(users[peerSocketIDMap[username]]){
             let IP = dictionary[peerSocketIDMap[username]][0]
