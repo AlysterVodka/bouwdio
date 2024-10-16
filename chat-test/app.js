@@ -198,15 +198,14 @@ io.use((socket, next) => {
     if(!url.includes('/host') && !url.includes('/rec')){
     
         let userIP = socket.handshake.address;  // Get IP address
-        io.emit('remote-console', `THIS IS THE BLACKLIST ${LIST}`)
+        io.emit('remote-console', userIP)
         let id = socket.id;  // Assuming username is passed as a query parameter
         if(LIST.includes(userIP))
         {
             io.emit("remote-console", `IP recognised  ${userIP}`)
-            console.log('INCLUDES')
+            // console.log('INCLUDES')
             io.to(id).emit('not-welcome')
         } else{
-
             io.emit('socket-connected', id)
             setKeyValue(id, [userIP, 0, 0, {x:0, y:0}]);
             console.log("this is the ip", userIP, "this is the username", id)
