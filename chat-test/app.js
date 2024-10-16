@@ -185,16 +185,17 @@ io.use((socket, next) => {
         let userIP = socket.handshake.address;  // Get IP address
         io.emit('remote-console', `THIS IS THE BLACKLIST ${LIST}`)
         let id = socket.id;  // Assuming username is passed as a query parameter
-        // if(list.includes(IP))
-        // {
-        //     io.emit("remote-console", `IP recognised  ${IP}`)
-        //     console.log('INCLUDES')
-        //     io.to(id).emit('not-welcome')
-        // }
+        if(LIST.includes(userIP))
+        {
+            io.emit("remote-console", `IP recognised  ${userIP}`)
+            console.log('INCLUDES')
+            io.to(id).emit('not-welcome')
+        } else{
 
-        io.emit('socket-connected', id)
-        setKeyValue(id, [userIP, 0, 0]);
-        console.log("this is the ip", userIP, "this is the username", id)
+            io.emit('socket-connected', id)
+            setKeyValue(id, [userIP, 0, 0]);
+            console.log("this is the ip", userIP, "this is the username", id)
+        }
 
     // if (blacklist.includes(userIP) || blacklist.includes(username)) {
     //     console.log("User blocked:", userIP || username);
