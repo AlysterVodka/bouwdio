@@ -27,9 +27,9 @@ body, html {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('assets/images/constructiontape_seamless.jpg');
+  background-image: url('assets/images/test_pointillised.png');
   background-position: center;
-  background-size: 80vh;
+  background-size: 150vh;
   background-repeat: repeat;
   box-sizing: border-box;
   z-index: -2; /* Plaats het achter andere elementen */
@@ -83,17 +83,6 @@ body, html {
 }
 
 #security-camera img {
-  display: block;  /* Zorg ervoor dat de afbeelding correct wordt weergegeven */
-  width: 100px;  /* Stel de gewenste grootte in */
-  margin: 0 auto; /* Zorgt ervoor dat het element in het midden staat */
-  margin-top: 20px;  /* Pas de afstand aan tussen de camera en de bovenstaande tekst */
-  margin-bottom: 20px;  /* Pas de afstand aan tussen de camera en de Caution tekst */
-  height: auto;
-  justify-content: center;
-  align-items: center;
-}
-
-#audio-sign img {
   display: block;  /* Zorg ervoor dat de afbeelding correct wordt weergegeven */
   width: 100px;  /* Stel de gewenste grootte in */
   margin: 0 auto; /* Zorgt ervoor dat het element in het midden staat */
@@ -600,6 +589,11 @@ body, html {
 
 
 @media only screen and (max-width: 767px) {
+
+  body{
+    overflow: hidden;
+  }
+  
   /* Styles for mobile devices */
   #onsite-building{
     visibility: hidden;
