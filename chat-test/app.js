@@ -247,7 +247,7 @@ function onConnected(socket){
 
     // "receiver-log-on"
 
-    io.emit("remote-console", users)
+    io.emit("remote-console", Object.keys(users))
 
     socket.on('request_drawing', ()=>{
         if(DRAWING_dictionary){
