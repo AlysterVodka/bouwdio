@@ -241,7 +241,6 @@ function onConnected(socket){
     console.log(socket.id)
     socketsConnected.add(socket.id)
     users[socket.id] = socket;
-    io.emit("remote-console", users)
     io.emit('clients-total',socketsConnected.size)
     io.emit('send-receiver-id')
 
@@ -347,7 +346,7 @@ function onConnected(socket){
 
     socket.on('kick-user', (username)=>{
         // io.emit("remote-console", "USER BEING KICKED")
-        // io.emit("remote-console", dictionary[peerSocketIDMap[username]][0])
+        io.emit("remote-console", dictionary[])
         io.emit("remote-console", users)
         if(users[peerSocketIDMap[username]]){
             let IP = dictionary[peerSocketIDMap[username]][0]
