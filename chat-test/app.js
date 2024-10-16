@@ -199,7 +199,7 @@ function check_mice(dictionary, id, mouse){
 //////////////////////////////////////////////////////////////////////////////////////////////////
 let currentUserList = {}
 
-io.use(async(socket, next) => {
+io.use((socket, next) => {
     let url = socket.handshake.headers.referer;
     if(!url.includes('/host') && !url.includes('/rec')){
     
@@ -212,7 +212,7 @@ io.use(async(socket, next) => {
             // console.log('INCLUDES')
             socket.emit('not-welcome')
             // io.emit("remote-console", `not welcome message`)
-            await sleep(1000);
+            // await sleep(1000);
             // socket.disconnect(true);
             io.emit("remote-console", `disconnected forcibly message  `)
             return;
