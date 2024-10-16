@@ -185,12 +185,12 @@ io.use((socket, next) => {
         let userIP = socket.handshake.address;  // Get IP address
         console.log(list)
         let id = socket.id;  // Assuming username is passed as a query parameter
-        if(list.includes(IP))
-        {
-            io.emit("remote-console", `IP recognised  ${IP}`)
-            console.log('INCLUDES')
-            io.to(id).emit('not-welcome')
-        }
+        // if(list.includes(IP))
+        // {
+        //     io.emit("remote-console", `IP recognised  ${IP}`)
+        //     console.log('INCLUDES')
+        //     io.to(id).emit('not-welcome')
+        // }
 
         io.emit('socket-connected', id)
         setKeyValue(id, [userIP, 0, 0]);
