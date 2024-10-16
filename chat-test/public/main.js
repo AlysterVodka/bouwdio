@@ -16,7 +16,7 @@ const init = () => {
   allContent.style.display = "none"; // Verberg de content bij het opstarten
   pauseStatusWindow.style.display = "block";
 
-  const body = document.getElementsByTagName('body')
+  // const body = document.getElementsByTagName('body')
 
 
   ////// *** signal circle gebruik ik om aan te geven of de takening door "receiver" ontvangen wordt
@@ -184,7 +184,7 @@ const init = () => {
         mouse.classList = 'MOUSE'
         mouse.style.left = `${users[key][3].x}px`
         mouse.style.right = `${users[key][3].y}px`
-        body.appendChild(mouse)
+        document.body.appendChild(mouse)
         MICE.push(mouse)
       }
     })
