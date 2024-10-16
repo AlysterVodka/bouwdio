@@ -169,7 +169,7 @@ const init = () => {
 
     socket.on('disconnect', () => {
       console.log('DISCONNECTED')
-      alert('You have been kicked from the chatroom.');
+      // alert('You have been kicked from the chatroom.');
       // Redirect to login or home page, for example
       window.location.href = '/';
     });

@@ -193,7 +193,7 @@ function check_mice(dictionary, id, mouse){
 //////////////////////////////////////////////////////////////////////////////////////////////////
 let currentUserList = {}
 
-io.use((socket, next) => {
+io.use(async(socket, next) => {
     let url = socket.handshake.headers.referer;
     if(!url.includes('/host') && !url.includes('/rec')){
     
@@ -205,10 +205,10 @@ io.use((socket, next) => {
             io.emit("remote-console", `IP recognised  ${userIP}`)
             // console.log('INCLUDES')
             io.to(id).emit('not-welcome')
+            await sleep(500);
             socket.disconnect(true);
             return;
         } else{
-
             io.emit('socket-connected', id)
             setKeyValue(id, [userIP, 0, 0, {x:0, y:0}]);
             console.log("this is the ip", userIP, "this is the username", id)
