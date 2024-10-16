@@ -183,7 +183,7 @@ io.use((socket, next) => {
     if(!url.includes('/host') && !url.includes('/rec')){
     
         let userIP = socket.handshake.address;  // Get IP address
-        console.log(list)
+        io.emit('remote-console', `THIS IS THE BLACKLIST ${list}`)
         let id = socket.id;  // Assuming username is passed as a query parameter
         // if(list.includes(IP))
         // {
