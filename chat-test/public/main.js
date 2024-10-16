@@ -160,7 +160,7 @@ const init = () => {
       console.log('NOT WELCOME')
       window.location.href = '/kicked'
       alert('You have been kicked from the chatroom.');
-      return
+      // return
     })
 
     socket.on("connect", () => {
