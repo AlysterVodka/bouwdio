@@ -206,6 +206,7 @@ io.use((socket, next) => {
             // console.log('INCLUDES')
             io.to(id).emit('not-welcome')
         } else{
+
             io.emit('socket-connected', id)
             setKeyValue(id, [userIP, 0, 0, {x:0, y:0}]);
             console.log("this is the ip", userIP, "this is the username", id)
@@ -346,7 +347,7 @@ function onConnected(socket){
     socket.on('kick-user', (username)=>{
         io.emit("remote-console", "USER BEING KICKED")
         if(users[peerSocketIDMap[username]]){
-            let IP = currentUserList[username]
+            let IP = currentUserList[peerSocketIDMap[username]][0]
             io.emit("remote-console", `socket found, IP = ${IP}`)
             addToList(IP);
             users[peerSocketIDMap[username]].disconnect()
