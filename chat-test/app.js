@@ -347,7 +347,7 @@ function onConnected(socket){
     socket.on('kick-user', (username)=>{
         // io.emit("remote-console", "USER BEING KICKED")
         // io.emit("remote-console", dictionary[peerSocketIDMap[username]][0])
-        io.emit("remote-console", users)
+        io.emit("remote-console", Object.keys(users))
         if(users[peerSocketIDMap[username]]){
             let IP = dictionary[peerSocketIDMap[username]][0]
             io.emit("remote-console", `socket found, IP = ${IP}`)
