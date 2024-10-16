@@ -158,8 +158,8 @@ const init = () => {
 
     socket.on('not-welcome', ()=>{
       console.log('NOT WELCOME')
+      window.location.href = '/kicked'
       alert('You have been kicked from the chatroom.');
-      window.location.href = '/'
       return
     })
 

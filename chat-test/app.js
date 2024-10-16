@@ -213,7 +213,7 @@ io.use(async(socket, next) => {
             socket.emit('not-welcome')
             // io.emit("remote-console", `not welcome message`)
             await sleep(1000);
-            socket.disconnect(true);
+            // socket.disconnect(true);
             io.emit("remote-console", `disconnected forcibly message  `)
             return;
         } else{
