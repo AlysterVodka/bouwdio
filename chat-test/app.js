@@ -50,9 +50,9 @@ function loadList() {
 }
 
 // Function to save the list back to the file
-function saveList(list) {
+function saveList(LIST) {
     try {
-        fs.writeFileSync(DATA_FILE, JSON.stringify(list, null, 4), 'utf-8');
+        fs.writeFileSync(DATA_FILE, JSON.stringify(LIST, null, 4), 'utf-8');
         // console.log("List saved successfully.");
     } catch (err) {
         console.error("Error saving list:", err);
@@ -60,13 +60,13 @@ function saveList(list) {
 }
 
 // Load the list into memory
-let list = loadList();
+let LIST = loadList();
 
 // Function to add an item to the list
 function addToList(item) {
-    if (!list.includes(item)) {
-        list.push(item);  // Add the item to the list
-        saveList(list);   // Save the updated list to the file
+    if (!LIST.includes(item)) {
+        LIST.push(item);  // Add the item to the list
+        saveList(LIST);   // Save the updated list to the file
         // console.log(`${item} added to the list.`);
     } else {
         console.log(`${item} already exists in the list.`);
@@ -183,7 +183,7 @@ io.use((socket, next) => {
     if(!url.includes('/host') && !url.includes('/rec')){
     
         let userIP = socket.handshake.address;  // Get IP address
-        io.emit('remote-console', `THIS IS THE BLACKLIST ${list}`)
+        io.emit('remote-console', `THIS IS THE BLACKLIST ${LIST}`)
         let id = socket.id;  // Assuming username is passed as a query parameter
         // if(list.includes(IP))
         // {
