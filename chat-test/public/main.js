@@ -174,6 +174,8 @@ const init = () => {
       window.location.href = '/';
     });
 
+    socket.emit('send-user-list')
+
     socket.on("users-reloaded", (users)=>{
       MICE = []
       console.log(users)

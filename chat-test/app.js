@@ -243,6 +243,8 @@ function onConnected(socket){
     users[socket.id] = socket;
     io.emit('clients-total',socketsConnected.size)
     io.emit('send-receiver-id')
+
+
     // "receiver-log-on"
 
     io.emit("remote-console", "this is a test message")
@@ -315,6 +317,10 @@ function onConnected(socket){
             io.to(ids[0]).emit("receiver-peer-present", receiverId)
         }
         // socket.broadcast.emit('peer-connected', peerId);  // Notify all other peers about the new peer
+    })
+
+    socket.on('send-user-list', ()=>{
+        io.to(socket.id).emit('users-reloaded', dictionary)
     })
 
     socket.on('mouse', (mouse)=>{
