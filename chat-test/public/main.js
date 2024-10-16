@@ -278,14 +278,6 @@ const init = () => {
       // console.log(data)
     });
 
-    socket.on('mouses', (mice)=>{
-      for(let key in mice){
-        let mouse = document.createElement('div')
-
-        mice[k]
-      }
-    })
-
 
     initDrawing();
 
