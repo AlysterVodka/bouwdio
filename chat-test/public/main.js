@@ -650,35 +650,35 @@ const initDrawing = () =>{
   const materialsInfo = {
     wood: {
       name: "Wood",
-      description: "Wood placeholder text. This is some wood, it floats in water. Wood comes from a tree. Trees can be farmed. Some farms are big, some are small. Trees have a lot of different types, they grow long roots. Wood can be used for a house or a boat."
+      description: "Wood, the multitasker of biobased materials! A tree trunk turns into walls, beams, or boards. Leftover wood? Chipboard! And the sawdust? Wood fiber insulation, duh! Living in a timber frame house? Enjoy a cozy,healthy home!"
     },
     bamboo: {
       name: "Bamboo",
-      description: "Bamboo placeholder text."
+      description: "Bamboo is the superhero of biobased materials: it grows faster than you can brew coffee and is stronger than steel! From floors to furniture, it’s everywhere. With its warm look, it adds flair to any home, a true green wonder!"
     },
     hemp: {
       name: "Fiberhemp",
-      description: "Fiberhemp placeholder text."
+      description: "Hemp: the eco-superstar! Grows like a weed (literally), cleans soil, and makes everything from clothes to car parts. Strong, sustainable, and biodegradable. Only downside? Still confused with its “fun” cousin."
     },
     mycelium: {
       name: "Mycelium",
-      description: "Mycelium placeholder text."
+      description: "Mycelium: nature’s building block! This funky fungus grows on waste, is super strong, and biodegradable! Forget bricks—let’s make homes from mushrooms! It’s eco-friendly and ready to take over the construction world!"
     },
     lisdodde: {
       name: "Lisdodde",
-      description: "Lisdodde placeholder text."
+      description: "Reed mace, aka the 'brown cigar' by the ditch, is full of air pockets — making it a perfect eco-friendly insulator! It grows anywhere, stops soil sinking, and even hosts birds. Who knew a swamp plant could save the planet?"
     },
     grass: {
       name: "Mammoth Grass",
-      description: "Mammoth Grass placeholder text."
+      description: "Elephant grass: the Dutch eco-hero! Thrives in wet soils, traps CO₂, and chills for 20 years while you harvest. Its strong fibers are perfect for concrete, isolation, and even asphalt. A true green giant ready for any building challenge!"
     },
     straw: {
       name: "Hay",
-      description: "Hay placeholder text."
+      description: "Straw: the ultimate building material! This ancient eco-hero turns farm waste into isolated walls. It keeps homes warm, cool, and bug-proof. Who knew living in a haystack could be so practical and planet-friendly? Talk about a comfy upgrade!"
     },
     mat: {
       name: "Recycled Mat",
-      description: "Recycled Mat placeholder text."
+      description: "Recycling in construction turns trash into treasure! From old doors to funky floors, we save energy and materials with a twist. Who knew junk could be chic? Less waste, more style—creativity is the key to a greener future!"
     }
   };
   
