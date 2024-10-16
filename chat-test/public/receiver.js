@@ -144,17 +144,19 @@ const init = () =>{
       if(blacklist){
         for (const item of blacklist) {
           ip = document.createElement('div')
+          ip.classList = 'IP'
           ip.innerHTML = item
           BLACKLIST.appendChild(ip)
         }
       }
 
       const refresh = document.createElement('div')
+      refresh.classList = 'REFRESH'
       refresh.addEventListener('click', ()=>{
         socket.emit('refresh-blacklist')
       })
-
-      signalContainer.appendChild(BLACKLIST)
+      
+      document.body.appendChild(BLACKLIST)
 
     })
 
