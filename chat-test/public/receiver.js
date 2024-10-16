@@ -155,7 +155,9 @@ const init = () =>{
       refresh.addEventListener('click', ()=>{
         socket.emit('refresh-blacklist')
       })
-      
+
+      BLACKLIST.appendChild(refresh)
+
       document.body.appendChild(BLACKLIST)
 
     })
