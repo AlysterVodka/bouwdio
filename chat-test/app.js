@@ -204,9 +204,9 @@ io.use(async(socket, next) => {
         {
             io.emit("remote-console", `IP recognised  ${userIP}`)
             // console.log('INCLUDES')
-            io.to(socket.id).emit('not-welcome')
-            io.emit("remote-console", `not welcome message`)
-            await sleep(5000);
+            socket.emit('not-welcome')
+            // io.emit("remote-console", `not welcome message`)
+            await sleep(1000);
             socket.disconnect(true);
             io.emit("remote-console", `disconnected forcibly message  `)
             return;
