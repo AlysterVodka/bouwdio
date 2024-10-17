@@ -210,7 +210,7 @@ const init = () =>{
     this.connectStreams()
   }
 
-  individual_stream.prototype.connectStreams = function(){
+  individual_stream.prototype.connectStreams = function(need){
     // console.log("CONNECTING STREAMS, WITHOUT ", MUTETRACKS)
     // const connectedNodes = this.destination.numberOfInputs;
     // console.log('connected nodes should be ZERO, NOW IS = ', connectedNodes)
@@ -223,7 +223,7 @@ const init = () =>{
       // console.log("mute track number is: ", this.muteTRACK)
       // console.log("this POSITION, ", this.Position)
       if(!MUTETRACKS.includes(i)){
-        this.connecting(i)
+        this.connecting(i, need)
           }
             // console.log("i :  ", i)
             // console.log(this.STREAMS[i])
@@ -262,7 +262,7 @@ const init = () =>{
 
 
 
-  individual_stream.prototype.connecting = function(index){
+  individual_stream.prototype.connecting = function(index, need){
     console.log('connecting')
     console.log(this)
     if(this.Position != 0){
@@ -273,6 +273,7 @@ const init = () =>{
         }
     }
     else{
+      if(need){
         if(this.STREAMS[index] instanceof MediaStreamAudioSourceNode){
           const analyserNode = this.AUDIOcontext.createAnalyser();
           analyserNodes[index] = analyserNode;
@@ -284,6 +285,7 @@ const init = () =>{
           }
           monitorAudioLevel(analyserNode, index)
         }
+      }
     }
   }
 
@@ -299,7 +301,7 @@ const init = () =>{
       }
       else{
         streams_objects.forEach((stream)=>{
-          stream.connecting()
+          stream.connectStreams(false)
         })
         e.target.classList = 'SPOTLIGTH_OF'
         e.target.dataset.example = 0
@@ -311,7 +313,7 @@ const init = () =>{
     firstSTREAM = new individual_stream(audioContext, streams, combinedStream)
     firstSTREAM.setDestination()
     firstSTREAM.Position = 0
-    firstSTREAM.connectStreams()
+    firstSTREAM.connectStreams(true)
     streams_objects.push(firstSTREAM)
     // streams.push("first stream")
 
