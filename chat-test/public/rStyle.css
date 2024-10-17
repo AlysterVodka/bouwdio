@@ -77,3 +77,10 @@ body{
 #SPOTLIGHT{
     position:absolute;
 }
+
+.SPOTLIGHT_ON{
+    border: 2px solid #ffecc6;
+  color: darkblue;
+  background-color: #ffde30;
+  box-shadow: yellow 0px 0px 20px 10px;
+}

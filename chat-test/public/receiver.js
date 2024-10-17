@@ -250,10 +250,13 @@ const init = () =>{
 
   individual_stream.prototype.highlight = function()
 {
-  this.STREAMS.forEach((stream) =>{
-    stream.disconnect();
-    console.log(stream)
-  })
+  this.STREAMS.forEach((stream, index) => {
+    // Only disconnect streams after the first one (index > 0)
+    if (index > 0) {
+      stream.disconnect();
+      console.log(stream);
+    }
+  });
 }
 
 const SPOTLIGHTBUTTON = document.getElementById('SPOTLIGHT')
