@@ -256,12 +256,22 @@ const init = () =>{
   })
 }
 
-document.getElementById('SPOTLIGHT').addEventListener('click', (e)=>{
-  e.target.dataset.example = 1
-  streams_objects.forEach((stream)=>{
-    stream.highlight()
-
-  })
+const SPOTLIGHTBUTTON = document.getElementById('SPOTLIGHT')
+SPOTLIGHTBUTTON.addEventListener('click', (e)=>{
+    if(e.target.dataset.example = 0){
+      streams_objects.forEach((stream)=>{
+        stream.highlight()
+      })
+      e.target.classList = 'SPOTLIGTH_ON'
+      e.target.dataset.example = 1
+    }
+    else{
+      streams_objects.forEach((stream)=>{
+        stream.connecting()
+      })
+      e.target.classList = 'SPOTLIGTH_OF'
+      e.target.dataset.example = 0
+    }
 })
 
 
