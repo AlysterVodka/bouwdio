@@ -457,11 +457,13 @@ const initDrawing = () =>{
             x = x;
             y = y;
             if(drawinginitiated){
+              if (MATERIAL === "eraser") {
               socket.emit("updateDrawing",["eraser", x,y]);
             }
             // else toegevoegd door Esther voor ERASER
             else {
               socket.emit("updateDrawing", [MATERIAL, x, y]);
+            }
             }
         });
         div.addEventListener('mouseenter', () => {
@@ -472,12 +474,14 @@ const initDrawing = () =>{
             x = x;
             y = y;
             if(drawinginitiated){
+              if (MATERIAL === "eraser"){
               socket.emit("updateDrawing",["eraser", x,y]);
             }
             // else toegevoegd door Esther voor ERASER
             else {
               socket.emit("updateDrawing", [MATERIAL, x, y]);
             }
+          }
           }
         });
 
