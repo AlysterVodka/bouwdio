@@ -613,6 +613,10 @@ const initDrawing = () =>{
       }
     });
   });
+
+  micSelect.addEventListener('change',  (e) => {
+    console.log(e.target.value)
+  })
   
   // Functionaliteit voor "Click to Connect"-knop in het pauzevenster
   document.getElementById("click-to-connect-button").addEventListener("click", function () {
@@ -628,9 +632,6 @@ const initDrawing = () =>{
       return; // Blokkeer toegang tot de ervaring totdat de naam is aangepast
     }
 
-    document.getElementById('microphoneSelect').addEventListener('change',  () => {
-      console.log(micSelect.target.value)
-    })
   
     // Zelfde logica als hierboven om de applicatie uit pauze te halen
     allContent.style.display = "block"; // Toon de content
