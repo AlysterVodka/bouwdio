@@ -42,21 +42,8 @@ let viewportHeight = window.innerHeight;
 
   ///////
 
-  navigator.mediaDevices.enumerateDevices()
-  .then(devices => {
-    console.log(devices)
-    const microphones = devices.filter(device => device.kind === "audioinput");
-    console.log(microphones)
-    // Choose the first microphone for demonstration purposes
-    let microphoneId
-    if(microphones[1].deviceId){
-      microphoneId = microphones[1].deviceId;
-    }
-
-    if (microphoneId) {
-      navigator.mediaDevices.getUserMedia({
-        audio: { deviceId: microphoneId }
-      })
+  navigator.mediaDevices
+  .getUserMedia({ audio: true })
   .then((stream) => {
       console.log("Microphone access granted");
       localStream = stream;
@@ -73,7 +60,6 @@ let viewportHeight = window.innerHeight;
     console.log("No microphone: " + err);
     alert('microphone has had trouble starting, make sure it is not occupied by any other app and try to log on again')
   });
-}})
 
   /////////
 
