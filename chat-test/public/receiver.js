@@ -262,7 +262,7 @@ const init = () =>{
 
 
 
-  individual_stream.prototype.connecting = function(index, need){
+  individual_stream.prototype.connecting = function(index){
     console.log('connecting')
     console.log(this)
     if(this.Position != 0){
@@ -273,7 +273,6 @@ const init = () =>{
         }
     }
     else{
-      if(need){
         if(this.STREAMS[index] instanceof MediaStreamAudioSourceNode){
           const analyserNode = this.AUDIOcontext.createAnalyser();
           analyserNodes[index] = analyserNode;
@@ -285,7 +284,6 @@ const init = () =>{
           }
           monitorAudioLevel(analyserNode, index)
         }
-      }
     }
   }
 
@@ -300,8 +298,11 @@ const init = () =>{
         e.target.dataset.example = 1
       }
       else{
-        streams_objects.forEach((stream)=>{
-          stream.connectStreams(false)
+        streams_objects.forEach((stream, index)=>{
+          if (index > 0) {
+            stream.connectStreams()
+          }
+            // console.log(stream);
         })
         e.target.classList = 'SPOTLIGTH_OF'
         e.target.dataset.example = 0
