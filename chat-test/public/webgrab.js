@@ -82,11 +82,11 @@ const init = () => {
       });
     })
 
-    document.addEventListener('mousemove', function(event) {
-      mouse.x = event.clientX; // X coordinate of the mouse relative to the viewport
-      mouse.y = event.clientY; // Y coordinate of the mouse relative to the viewport
-      socket.emit('mouse', mouse)
-    });
+    // document.addEventListener('mousemove', function(event) {
+    //   mouse.x = event.clientX; // X coordinate of the mouse relative to the viewport
+    //   mouse.y = event.clientY; // Y coordinate of the mouse relative to the viewport
+    //   // socket.emit('mouse', mouse)
+    // });
 
 
     // function connectToPeer(pID) {
