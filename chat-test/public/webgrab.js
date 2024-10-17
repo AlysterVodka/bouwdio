@@ -78,8 +78,6 @@ const init = () => {
 
   //// INIT PEER /////
 
-  initSocket();
-
   const initPeer = () => {
     console.log("peer initializing")
 
@@ -154,10 +152,7 @@ const init = () => {
   const initSocket = () =>{
 
     socket = io();
-
-
     console.log("socket initialized")
-
     // socket.on('not-welcome', ()=>{
     //   console.log('NOT WELCOME')
     //   window.location.href = '/kicked'
@@ -308,6 +303,8 @@ const init = () => {
     })
 
   }
+
+  initSocket();
 
 
 
