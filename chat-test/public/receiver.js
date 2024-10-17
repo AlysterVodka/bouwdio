@@ -257,7 +257,7 @@ const init = () =>{
 }
 
 document.getElementById('SPOTLIGHT').addEventListener('click', (e)=>{
-  e.dataset.example = 1
+  e.target.dataset.example = 1
   streams_objects.forEach((stream)=>{
     stream.highlight()
 
