@@ -11,6 +11,7 @@ const init = () => {
   const messageForm = document.getElementById("message-form");
   const messageInput = document.getElementById("message-input");
   const gridContainer = document.getElementById('grid');
+  const micSelect = document.getElementById('microphoneSelect');
 
   let viewportWidth = window.innerWidth;
 let viewportHeight = window.innerHeight;
@@ -603,7 +604,6 @@ const initDrawing = () =>{
   */
 
   navigator.mediaDevices.enumerateDevices().then(devices => {
-    const micSelect = document.getElementById('microphoneSelect');
     devices.forEach(device => {
       if (device.kind === 'audioinput') {
         const option = document.createElement('option');
@@ -637,9 +637,10 @@ const initDrawing = () =>{
     audioStreamActive = true;
     micStreamActive = true;
 
-
+    const selectedMicId = micSelect.target.value;
     navigator.mediaDevices
-    .getUserMedia({ audio: true })
+    .getUserMedia({ audio: { deviceId: { exact: selectedMicId } }
+    })
     .then((stream) => {
         console.log("Microphone access granted");
         localStream = stream;

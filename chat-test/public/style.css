@@ -630,17 +630,4 @@ body, html {
     width: 50vh;
   }
 
-  #name-input-window{
-    visibility:hidden;
-    position:absolute;
-    left:100%;
-
-  }
-
-  #click-to-connect-button{
-    visibility:hidden;
-    position:absolute;
-    left:100%;
-  }
-
 }
