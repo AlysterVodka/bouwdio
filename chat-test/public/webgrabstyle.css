@@ -211,8 +211,8 @@ body, html {
 
 #grid {
   display: grid;
-  grid-template-columns: repeat(30, 40px);
-  grid-template-rows: repeat(20, 40px);
+  grid-template-columns: repeat(30, 20px);
+  grid-template-rows: repeat(20, 20px);
   background-image: url(./assets/images/test_pointillised.png);
   background-size: contain; /* Adjust size of grid background */
   width: fit-content;
@@ -263,8 +263,8 @@ body, html {
 
 #grid {
   display: grid;
-  grid-template-columns: repeat(30, 40px);
-  grid-template-rows: repeat(20, 40px);
+  grid-template-columns: repeat(30, 20px);
+  grid-template-rows: repeat(20, 20px);
   gap: 0px;
   background-image: url(./assets/images/test_pointillised.png);
   filter: hue-rotate(173deg);
@@ -272,8 +272,8 @@ body, html {
 }
 
 .grid-item {
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   border: 1px solid #0000007b;
   background-color: #b5b5b5d1;
   filter: hue-rotate(-173deg);
