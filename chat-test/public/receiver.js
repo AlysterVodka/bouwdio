@@ -264,7 +264,7 @@ const init = () =>{
 
   individual_stream.prototype.connecting = function(index){
     console.log('connecting')
-    console.log(THIS)
+    console.log(this)
     if(this.Position != 0){
         if(index != this.Position){
           if(this.STREAMS[index] instanceof MediaStreamAudioSourceNode){
