@@ -263,8 +263,8 @@ body, html {
 
 #grid {
   display: grid;
-  grid-template-columns: repeat(30, 20px);
-  grid-template-rows: repeat(20, 20px);
+  grid-template-columns: repeat(30, 40px);
+  grid-template-rows: repeat(20, 40px);
   gap: 0px;
   background-image: url(./assets/images/test_pointillised.png);
   filter: hue-rotate(173deg);
