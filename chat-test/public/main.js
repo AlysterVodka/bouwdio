@@ -601,6 +601,18 @@ const initDrawing = () =>{
     }
   });
   */
+
+  navigator.mediaDevices.enumerateDevices().then(devices => {
+    const micSelect = document.getElementById('microphoneSelect');
+    devices.forEach(device => {
+      if (device.kind === 'audioinput') {
+        const option = document.createElement('option');
+        option.value = device.deviceId;
+        option.text = device.label || `Microphone ${device.deviceId}`;
+        micSelect.appendChild(option);
+      }
+    });
+  });
   
   // Functionaliteit voor "Click to Connect"-knop in het pauzevenster
   document.getElementById("click-to-connect-button").addEventListener("click", function () {
