@@ -263,7 +263,7 @@ const init = () =>{
 
 
   individual_stream.prototype.connecting = function(index){
-    console.log(connecting)
+    console.log('connecting')
     console.log(THIS)
     if(this.Position != 0){
         if(index != this.Position){
