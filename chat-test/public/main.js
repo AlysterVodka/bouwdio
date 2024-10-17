@@ -42,8 +42,17 @@ let viewportHeight = window.innerHeight;
 
   ///////
 
-  navigator.mediaDevices
-  .getUserMedia({ audio: true })
+  navigator.mediaDevices.enumerateDevices()
+  .then(devices => {
+    console.log(devices)
+    const microphones = devices.filter(device => device.kind === "audioinput");
+    // Choose the first microphone for demonstration purposes
+    const microphoneId = microphones.length > 0 ? microphones[1].deviceId : null;
+
+    if (microphoneId) {
+      navigator.mediaDevices.getUserMedia({
+        audio: { deviceId: microphoneId }
+      })
   .then((stream) => {
       console.log("Microphone access granted");
       localStream = stream;
@@ -60,6 +69,7 @@ let viewportHeight = window.innerHeight;
     console.log("No microphone: " + err);
     alert('microphone has had trouble starting, make sure it is not occupied by any other app and try to log on again')
   });
+}})
 
   /////////
 
@@ -187,8 +197,8 @@ let viewportHeight = window.innerHeight;
       for(let key in users){
         let mouse = document.createElement('div')
         mouse.classList = 'MOUSE'
-        mouse.style.left = `${users[key][3].x}px`
-        mouse.style.right = `${users[key][3].y}px`
+        mouse.style.left = `${users[key][3].x*viewportWidth}px`
+        mouse.style.right = `${users[key][3].y*viewportHeight}px`
         document.body.appendChild(mouse)
         MICE.push(mouse)
       }
@@ -212,8 +222,8 @@ let viewportHeight = window.innerHeight;
     socket.on('mouses', (data)=>{
       // console.log(data)
       Object.keys(data).forEach((key, index) => {
-        MICE[index].style.left = `${data[key][3].x}px`
-        MICE[index].style.top = `${data[key][3].y}px`
+        MICE[index].style.left = `${data[key][3].x*viewportWidth}px`
+        MICE[index].style.top = `${data[key][3].y*viewportHeight}px`
       });
     })
 
