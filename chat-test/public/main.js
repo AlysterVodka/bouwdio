@@ -457,7 +457,7 @@ const initDrawing = () =>{
             x = x;
             y = y;
             if(drawinginitiated){
-              socket.emit("updateDrawing",[MATERIAL, x,y]);
+              socket.emit("updateDrawing",["eraser", x,y]);
             }
             // else toegevoegd door Esther voor ERASER
             else {
@@ -472,7 +472,7 @@ const initDrawing = () =>{
             x = x;
             y = y;
             if(drawinginitiated){
-              socket.emit("updateDrawing",[MATERIAL, x,y]);
+              socket.emit("updateDrawing",["eraser", x,y]);
             }
             // else toegevoegd door Esther voor ERASER
             else {
