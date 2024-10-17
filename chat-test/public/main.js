@@ -14,7 +14,8 @@ const init = () => {
   const micSelect = document.getElementById('microphoneSelect');
 
   let viewportWidth = window.innerWidth;
-let viewportHeight = window.innerHeight;
+  let viewportHeight = window.innerHeight;
+  let selectedMicId
 
 
   ///
@@ -616,6 +617,8 @@ const initDrawing = () =>{
 
   micSelect.addEventListener('change',  (e) => {
     console.log(e.target.value)
+    selectedMicId = e.target.value
+
   })
   
   // Functionaliteit voor "Click to Connect"-knop in het pauzevenster
@@ -641,8 +644,6 @@ const initDrawing = () =>{
     // Zet de audio/microfoon aan
     audioStreamActive = true;
     micStreamActive = true;
-
-    const selectedMicId = micSelect.target.value;
 
     navigator.mediaDevices
     .getUserMedia({ audio: { deviceId: { exact: selectedMicId } }
