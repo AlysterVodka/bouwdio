@@ -9,6 +9,9 @@ const init = () => {
   const messageInput = document.getElementById("message-input");
   const gridContainer = document.getElementById('grid');
 
+  let viewportWidth = window.innerWidth;
+let viewportHeight = window.innerHeight;
+
 
   ///
   const allContent = document.getElementById("all-content"); /// container voor gehele pagina [voor verbergen]
@@ -215,8 +218,8 @@ const init = () => {
     })
 
     document.addEventListener('mousemove', function(event) {
-      mouse.x = event.clientX; // X coordinate of the mouse relative to the viewport
-      mouse.y = event.clientY; // Y coordinate of the mouse relative to the viewport
+      mouse.x = event.clientX / viewportWidth;; // X coordinate of the mouse relative to the viewport
+      mouse.y = event.clientY / viewportHeight;; // Y coordinate of the mouse relative to the viewport
       socket.emit('mouse', mouse)
     });
 
