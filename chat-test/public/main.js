@@ -1,6 +1,9 @@
 // console.log("is UPDATED !!!!!")
 const init = () => {
 
+
+  frontEndImplementation()
+
   const clientsTotal = document.getElementById("clients-total");
   //// **** dit zijn de chat functionaliteiten*/
   const messageContainer = document.getElementById("message-container");
@@ -41,25 +44,6 @@ let viewportHeight = window.innerHeight;
 
 
   ///////
-
-  navigator.mediaDevices
-  .getUserMedia({ audio: true })
-  .then((stream) => {
-      console.log("Microphone access granted");
-      localStream = stream;
-
-      // remove mic notification
-      //// ->>> DIT IS VOOR ESTHER'S PAUSE-ELEMENT
-      // const micElem = document.getElementById("mic");
-      // if (micElem) micElem.remove();
-
-      // initialize peer only when mic stream is ready
-      initPeer();
-  })
-  .catch((err) => {
-    console.log("No microphone: " + err);
-    alert('microphone has had trouble starting, make sure it is not occupied by any other app and try to log on again')
-  });
 
   /////////
 
@@ -640,6 +624,27 @@ const initDrawing = () =>{
     // Zet de audio/microfoon aan
     audioStreamActive = true;
     micStreamActive = true;
+
+
+    navigator.mediaDevices
+    .getUserMedia({ audio: true })
+    .then((stream) => {
+        console.log("Microphone access granted");
+        localStream = stream;
+
+        // remove mic notification
+        //// ->>> DIT IS VOOR ESTHER'S PAUSE-ELEMENT
+        // const micElem = document.getElementById("mic");
+        // if (micElem) micElem.remove();
+
+        // initialize peer only when mic stream is ready
+        initPeer();
+    })
+    .catch((err) => {
+      console.log("No microphone: " + err);
+      alert('microphone has had trouble starting, make sure it is not occupied by any other app and try to log on again')
+    });
+
   
     // Start de video met geluid
     const iframe = document.getElementById('onsite-video');
@@ -823,8 +828,6 @@ const initDrawing = () =>{
       }
     });
   }
-
-  frontEndImplementation()
 
 }
 
