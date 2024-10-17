@@ -254,7 +254,7 @@ const init = () =>{
     // Only disconnect streams after the first one (index > 0)
     if (index > 0) {
       stream.disconnect();
-      console.log(stream);
+      // console.log(stream);
     }
   });
 }
@@ -280,6 +280,8 @@ SPOTLIGHTBUTTON.addEventListener('click', (e)=>{
 
 
   individual_stream.prototype.connecting = function(index){
+    console.log(connecting)
+    console.log(THIS)
     if(this.Position != 0){
         if(index != this.Position){
           if(this.STREAMS[index] instanceof MediaStreamAudioSourceNode){
