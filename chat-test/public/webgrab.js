@@ -147,6 +147,78 @@ const init = () => {
 
   }
 
+  const initDrawing = () =>{
+    // console.log('initdrawing is called')
+    MATERIAL = 'wood'; // Set the default material to 'wood';
+    isMouseDown = false;
+  
+    document.addEventListener('mousedown', function() {
+      isMouseDown = true;
+    });
+  
+    // Listen for mouse up events
+    document.addEventListener('mouseup', function() {
+        isMouseDown = false;
+    });
+  
+    for (const element of document.getElementsByClassName("material")) {
+      // console.log(element)
+      // Get the ID of the current element
+      const elementId = element.id;
+  
+      // Add an event listener (e.g., 'mousedown' event)
+      element.addEventListener('mousedown', () => {
+          // Do something with the ID (for example, log it to the console or send it to a server)
+          // console.log('Element with ID:', elementId, 'was clicked.');
+          MATERIAL = elementId
+          // If using a socket to send the ID, you can emit the ID here
+          // socket.emit('material-clicked', { id: elementId });
+      });
+    }
+  
+  
+  
+    for (let x = 0; x <= 19; x++) {
+      // For each key, assign an array with 20 values (y = 1 to 20)
+      for (let y = 0; y <= 29; y++) {
+          const div = document.createElement('div');
+          div.classList.add('grid-item');
+          div.id = `${x}-${y}`
+  
+          // Attach mousedown event for socket message
+          div.addEventListener('mousedown', () => {
+              // Send a message through the socket
+              // const message = { row: rowIndex, col: colIndex, data: item };
+              x = x;
+              y = y;
+              if(drawinginitiated){
+                socket.emit("updateDrawing",[MATERIAL, x,y]);
+              }
+          });
+          div.addEventListener('mouseenter', () => {
+            if(isMouseDown){
+              // console.log(isMouseDown)
+              // Send a message through the socket
+              // const message = { row: rowIndex, col: colIndex, data: item };
+              x = x;
+              y = y;
+              if(drawinginitiated){
+                socket.emit("updateDrawing",[MATERIAL, x,y]);
+              }
+            }
+          });
+  
+          // Optionally, you can store some info in the div's dataset for reference
+          div.dataset.row = x;
+          div.dataset.col = y;
+  
+          // Append the div to the grid container
+          gridContainer.appendChild(div);
+          socket.emit("request_drawing")
+        };
+      }
+    }
+
 
 
   const initSocket = () =>{
@@ -420,77 +492,7 @@ const init = () => {
   ///////////////////////////
   ////  initiate drawing ////
   ///////////////////////////
-const initDrawing = () =>{
-  // console.log('initdrawing is called')
-  MATERIAL = 'wood'; // Set the default material to 'wood';
-  isMouseDown = false;
 
-  document.addEventListener('mousedown', function() {
-    isMouseDown = true;
-  });
-
-  // Listen for mouse up events
-  document.addEventListener('mouseup', function() {
-      isMouseDown = false;
-  });
-
-  for (const element of document.getElementsByClassName("material")) {
-    // console.log(element)
-    // Get the ID of the current element
-    const elementId = element.id;
-
-    // Add an event listener (e.g., 'mousedown' event)
-    element.addEventListener('mousedown', () => {
-        // Do something with the ID (for example, log it to the console or send it to a server)
-        // console.log('Element with ID:', elementId, 'was clicked.');
-        MATERIAL = elementId
-        // If using a socket to send the ID, you can emit the ID here
-        // socket.emit('material-clicked', { id: elementId });
-    });
-  }
-
-
-
-  for (let x = 0; x <= 19; x++) {
-    // For each key, assign an array with 20 values (y = 1 to 20)
-    for (let y = 0; y <= 29; y++) {
-        const div = document.createElement('div');
-        div.classList.add('grid-item');
-        div.id = `${x}-${y}`
-
-        // Attach mousedown event for socket message
-        div.addEventListener('mousedown', () => {
-            // Send a message through the socket
-            // const message = { row: rowIndex, col: colIndex, data: item };
-            x = x;
-            y = y;
-            if(drawinginitiated){
-              socket.emit("updateDrawing",[MATERIAL, x,y]);
-            }
-        });
-        div.addEventListener('mouseenter', () => {
-          if(isMouseDown){
-            // console.log(isMouseDown)
-            // Send a message through the socket
-            // const message = { row: rowIndex, col: colIndex, data: item };
-            x = x;
-            y = y;
-            if(drawinginitiated){
-              socket.emit("updateDrawing",[MATERIAL, x,y]);
-            }
-          }
-        });
-
-        // Optionally, you can store some info in the div's dataset for reference
-        div.dataset.row = x;
-        div.dataset.col = y;
-
-        // Append the div to the grid container
-        gridContainer.appendChild(div);
-        socket.emit("request_drawing")
-      };
-    }
-  }
 
   // Listen for mouse down events
 
