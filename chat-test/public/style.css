@@ -102,7 +102,7 @@ body, html {
 
 #security-camera img {
   display: block;  /* Zorg ervoor dat de afbeelding correct wordt weergegeven */
-  width: 140px;  /* Stel de gewenste grootte in */
+  width: 180px;  /* Stel de gewenste grootte in */
   margin: 0 auto; /* Zorgt ervoor dat het element in het midden staat */
   margin-top: 20px;  /* Pas de afstand aan tussen de camera en de bovenstaande tekst */
   margin-bottom: 20px;  /* Pas de afstand aan tussen de camera en de Caution tekst */
