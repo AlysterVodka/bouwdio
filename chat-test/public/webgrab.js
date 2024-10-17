@@ -52,8 +52,8 @@ const init = () => {
       for(let key in users){
         let mouse = document.createElement('div')
         mouse.classList = 'MOUSE'
-        mouse.style.left = `${users[key][3].x}px`
-        mouse.style.right = `${users[key][3].y}px`
+        mouse.style.left = `${users[key][3].x*2}px`
+        mouse.style.right = `${users[key][3].y*2}px`
         document.body.appendChild(mouse)
         MICE.push(mouse)
       }
@@ -77,8 +77,8 @@ const init = () => {
     socket.on('mouses', (data)=>{
       // console.log(data)
       Object.keys(data).forEach((key, index) => {
-        MICE[index].style.left = `${data[key][3].x}px`
-        MICE[index].style.top = `${data[key][3].y}px`
+        MICE[index].style.left = `${data[key][3].x*2}px`
+        MICE[index].style.top = `${data[key][3].y*2}px`
       });
     })
 
