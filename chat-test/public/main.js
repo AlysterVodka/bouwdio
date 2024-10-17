@@ -240,6 +240,7 @@ const init = () => {
 
     //   handleCall(call);
     // }
+    
     function connectToReceiver(peerId) {
       if (!localStream) {
         // console.error("No local stream available to connect to peer:", peerId);
