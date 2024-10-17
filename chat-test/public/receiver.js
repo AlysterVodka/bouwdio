@@ -259,7 +259,7 @@ const init = () =>{
 const SPOTLIGHTBUTTON = document.getElementById('SPOTLIGHT')
 SPOTLIGHTBUTTON.dataset.example = 0
 SPOTLIGHTBUTTON.addEventListener('click', (e)=>{
-    if(e.target.dataset.example = 0){
+    if(e.target.dataset.example == 0){
       streams_objects.forEach((stream)=>{
         stream.highlight()
       })
