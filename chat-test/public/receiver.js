@@ -248,16 +248,19 @@ const init = () =>{
     }
   }
 
-  individual_stream.prototype.highlight = function(index)
+  individual_stream.prototype.highlight = function()
 {
   this.STREAMS.forEach((stream) =>{
+    stream.disconnect();
     console.log(stream)
   })
 }
 
-document.getElementById('SPOTLIGHT').addEventListener('click', ()=>{
+document.getElementById('SPOTLIGHT').addEventListener('click', (e)=>{
+  e.dataset.example = 1
   streams_objects.forEach((stream)=>{
     stream.highlight()
+
   })
 })
 
