@@ -210,7 +210,7 @@ const init = () =>{
     this.connectStreams()
   }
 
-  individual_stream.prototype.connectStreams = function(need){
+  individual_stream.prototype.connectStreams = function(){
     // console.log("CONNECTING STREAMS, WITHOUT ", MUTETRACKS)
     // const connectedNodes = this.destination.numberOfInputs;
     // console.log('connected nodes should be ZERO, NOW IS = ', connectedNodes)
@@ -223,7 +223,7 @@ const init = () =>{
       // console.log("mute track number is: ", this.muteTRACK)
       // console.log("this POSITION, ", this.Position)
       if(!MUTETRACKS.includes(i)){
-        this.connecting(i, need)
+        this.connecting(i)
           }
             // console.log("i :  ", i)
             // console.log(this.STREAMS[i])
@@ -266,6 +266,8 @@ const init = () =>{
     console.log('connecting')
     console.log(this)
     if(this.Position != 0){
+      console.log("THIS POSITION IS NOT NULL")
+      console.log(this,position)
         if(index != this.Position){
           if(this.STREAMS[index] instanceof MediaStreamAudioSourceNode){
               this.STREAMS[index].connect(this.destination)
