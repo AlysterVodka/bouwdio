@@ -46,8 +46,12 @@ let viewportHeight = window.innerHeight;
   .then(devices => {
     console.log(devices)
     const microphones = devices.filter(device => device.kind === "audioinput");
+    console.log(microphones)
     // Choose the first microphone for demonstration purposes
-    const microphoneId = microphones.length > 0 ? microphones[1].deviceId : null;
+    let microphoneId
+    if(microphones[1].deviceId){
+      microphoneId = microphones[1].deviceId;
+    }
 
     if (microphoneId) {
       navigator.mediaDevices.getUserMedia({
