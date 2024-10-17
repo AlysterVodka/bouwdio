@@ -627,6 +627,10 @@ const initDrawing = () =>{
       }, 2000);
       return; // Blokkeer toegang tot de ervaring totdat de naam is aangepast
     }
+
+    document.getElementById('microphoneSelect').addEventListener('change',  () => {
+      console.log(micSelect.value)
+    })
   
     // Zelfde logica als hierboven om de applicatie uit pauze te halen
     allContent.style.display = "block"; // Toon de content
