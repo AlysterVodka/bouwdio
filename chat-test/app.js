@@ -28,7 +28,7 @@ app.get("/rec", (req, res) => {
 app.get("/host", (req, res) => {
     console.log('request sent')
     // Send the HTML file as the response
-    res.sendFile(path.join(__dirname, '/public/host.html'));
+    res.sendFile(path.join(__dirname, '/public/webgrab.html'));
 });
 
 app.get("/kicked", (req, res) => {

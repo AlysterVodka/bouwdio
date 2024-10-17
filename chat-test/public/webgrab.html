@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOUWDIO PC</title>
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+</head>
+<body>
+      <div id="online-building-window">
+             <div id="online-building-header">Online Building</div>
+      <div id="grid">
+      </div>
+      <div id="materials">
+          <div class="material" id="wood" data-image-url="assets/images/wood1.png" style="background-image: url('assets/images/wood1.png');"><p>Wood</p></div>
+          <div class="material" id="bamboo" data-image-url="assets/images/bamboo.png" style="background-image: url('assets/images/bamboo.png');"><p>Bamboo</p></div>
+          <div class="material" id="hemp" data-image-url="assets/images/fiberhemp.png" style="background-image: url('assets/images/fiberhemp.png');"><p>Fiberhemp</p></div>
+          <div class="material" id="mycelium" data-image-url="assets/images/cork.jpg" style="background-image: url('assets/images/cork.jpg');"><p>Mycelium</p></div>
+          <div class="material" id="lisdodde" data-image-url="assets/images/lisdodde.jpg" style="background-image: url('assets/images/lisdodde.jpg');"><p>Reed Mace</p></div>
+          <div class="material" id="grass" data-image-url="assets/images/mammothgrass.jpg" style="background-image: url('assets/images/mammothgrass.jpg');"><p>Elephant grass</p></div>
+          <div class="material" id="straw" data-image-url="assets/images/stro-hooi.jpg" style="background-image: url('assets/images/stro-hooi.jpg');"><p>Straw</p></div>
+          <div class="material" id="mat" data-image-url="assets/images/recycledmat.jpg" style="background-image: url('assets/images/recycledmat.jpg');"><p>Recycled</p></div>
+          <div id="eraser-button" onclick="setEraser()"><p></p></div>
+
+      </div>
+      
+      </div>
+
+<div class="signal-circle" id="signal-circle"></div>
+<!-- Link JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"
+integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ=="
+crossorigin="anonymous"
+referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.4/peerjs.min.js"
+integrity="sha512-iFU+yF1keEaLDC9HEwPfLMSRaS0unBHE14GEgx6pQKJXjp5v0tvX8xpfp2lgJ62XEjbYp/M5C3CAmej/PWXMyA=="
+crossorigin="anonymous"
+referrerpolicy="no-referrer"></script>
+<script src="webgrab.js"></script>
+
+</body>
+</html>
