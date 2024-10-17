@@ -630,4 +630,14 @@ body, html {
     width: 50vh;
   }
 
+  #security-camera img {
+    display:none;
+    visibility: hidden;
+  }
+
+  #gone{
+    visibility:hidden;
+    display:none;
+  }
+
 }
