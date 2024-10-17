@@ -662,18 +662,18 @@ const init = () => {
   
   // Functie om de naam bij de muis te tonen bij hover op het tekenraster
   gridContainer.addEventListener('mouseenter', () => {
-    mouseNameElement.style.display = 'block';
+    // mouseNameElement.style.display = 'block';
   });
   
   // Verplaats de naam met de muisbeweging
   gridContainer.addEventListener('mousemove', (e) => {
-    mouseNameElement.style.left = `${e.pageX + 10}px`; // Plaats de naam 10px naast de cursor
-    mouseNameElement.style.top = `${e.pageY + 10}px`;  // Plaats de naam 10px onder de cursor
+    // mouseNameElement.style.left = `${e.pageX + 10}px`; // Plaats de naam 10px naast de cursor
+    // mouseNameElement.style.top = `${e.pageY + 10}px`;  // Plaats de naam 10px onder de cursor
   });
   
   // Verberg de naam wanneer de muis het raster verlaat
   gridContainer.addEventListener('mouseleave', () => {
-    mouseNameElement.style.display = 'none';
+    // mouseNameElement.style.display = 'none';
   });
   
   
