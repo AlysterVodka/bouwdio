@@ -459,6 +459,10 @@ const initDrawing = () =>{
             if(drawinginitiated){
               socket.emit("updateDrawing",[MATERIAL, x,y]);
             }
+            // else toegevoegd door Esther voor ERASER
+            else {
+              socket.emit("updateDrawing", [MATERIAL, x, y]);
+            }
         });
         div.addEventListener('mouseenter', () => {
           if(isMouseDown){
@@ -469,6 +473,10 @@ const initDrawing = () =>{
             y = y;
             if(drawinginitiated){
               socket.emit("updateDrawing",[MATERIAL, x,y]);
+            }
+            // else toegevoegd door Esther voor ERASER
+            else {
+              socket.emit("updateDrawing", [MATERIAL, x, y]);
             }
           }
         });
@@ -766,7 +774,28 @@ const initDrawing = () =>{
     });
   });
   
+  // NIEUWE GUM - ERASER STUFF VAN ESTHER //
+
+  document.getElementById("eraser-button").addEventListener("click", () => {
+    // Deselecteer alle andere materialen
+    document.querySelectorAll(".material").forEach((el) => {
+      el.classList.remove("selected");
+      const imgUrl = el.getAttribute("data-image-url"); // Herstel de originele achtergrond
+      el.style.backgroundImage = `url(${imgUrl})`;
+      el.style.backgroundColor = ""; // Verwijder de zwarte achtergrondkleur
+    });
   
+    // Markeer de gum als geselecteerd
+    const eraser = document.getElementById("eraser-button");
+    eraser.classList.add("selected");
+    eraser.style.backgroundColor = "black"; // Gum is geselecteerd
+  
+    // Zet de gummodus in werking door de MATERIAL variabele aan te passen
+    MATERIAL = "eraser"; // Speciale waarde voor gum
+  });
+
+  // EINDE NIEUWE GUM STUFF VAN ESTHER //
+
     // document.querySelectorAll(".material").forEach((material) => {
     //   material.addEventListener("click", () => {
     //     // Herstel alle knoppen naar hun oorspronkelijke materiaalpreview en verwijder selectie van gum
