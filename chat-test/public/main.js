@@ -2,7 +2,7 @@
 const init = () => {
 
 
-  frontEndImplementation()
+
 
   const clientsTotal = document.getElementById("clients-total");
   //// **** dit zijn de chat functionaliteiten*/
@@ -16,6 +16,8 @@ const init = () => {
   let viewportWidth = window.innerWidth;
   let viewportHeight = window.innerHeight;
   let selectedMicId
+
+  frontEndImplementation()
 
 
   ///
