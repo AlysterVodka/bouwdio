@@ -629,7 +629,7 @@ const initDrawing = () =>{
     }
 
     document.getElementById('microphoneSelect').addEventListener('change',  () => {
-      console.log(micSelect.value)
+      console.log(micSelect.target.value)
     })
   
     // Zelfde logica als hierboven om de applicatie uit pauze te halen
@@ -642,6 +642,7 @@ const initDrawing = () =>{
     micStreamActive = true;
 
     const selectedMicId = micSelect.target.value;
+
     navigator.mediaDevices
     .getUserMedia({ audio: { deviceId: { exact: selectedMicId } }
     })
