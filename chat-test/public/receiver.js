@@ -248,6 +248,20 @@ const init = () =>{
     }
   }
 
+  individual_stream.prototype.highlight = function(index)
+{
+  this.STREAMS.forEach((stream) =>{
+    console.log(stream)
+  })
+}
+
+document.getElementById('SPOTLIGHT').addEventListener('click', ()=>{
+  streams_objects.forEach((stream)=>{
+    stream.highlight()
+  })
+})
+
+
   individual_stream.prototype.connecting = function(index){
     if(this.Position != 0){
         if(index != this.Position){

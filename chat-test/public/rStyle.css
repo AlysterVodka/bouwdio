@@ -73,3 +73,7 @@ body{
 .REFRESH:hover{
     cursor: pointer;
 }
+
+#SPOTLIGHT{
+    position:absolute;
+}

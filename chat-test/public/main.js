@@ -2,8 +2,6 @@
 const init = () => {
 
 
-
-
   const clientsTotal = document.getElementById("clients-total");
   //// **** dit zijn de chat functionaliteiten*/
   const messageContainer = document.getElementById("message-container");
