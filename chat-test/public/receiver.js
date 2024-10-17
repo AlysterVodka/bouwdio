@@ -267,7 +267,7 @@ const init = () =>{
     console.log(this)
     if(this.Position != 0){
       console.log("THIS POSITION IS NOT NULL")
-      console.log(this,position)
+      console.log(this.Position)
         if(index != this.Position){
           if(this.STREAMS[index] instanceof MediaStreamAudioSourceNode){
               this.STREAMS[index].connect(this.destination)
