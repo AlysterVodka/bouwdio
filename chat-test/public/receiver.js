@@ -259,24 +259,7 @@ const init = () =>{
   });
 }
 
-const SPOTLIGHTBUTTON = document.getElementById('SPOTLIGHT')
-SPOTLIGHTBUTTON.dataset.example = 0
-SPOTLIGHTBUTTON.addEventListener('click', (e)=>{
-    if(e.target.dataset.example == 0){
-      streams_objects.forEach((stream)=>{
-        stream.highlight()
-      })
-      e.target.classList = 'SPOTLIGTH_ON'
-      e.target.dataset.example = 1
-    }
-    else{
-      streams_objects.forEach((stream)=>{
-        stream.connecting()
-      })
-      e.target.classList = 'SPOTLIGTH_OF'
-      e.target.dataset.example = 0
-    }
-})
+
 
 
   individual_stream.prototype.connecting = function(index){
@@ -303,6 +286,25 @@ SPOTLIGHTBUTTON.addEventListener('click', (e)=>{
         }
     }
   }
+
+  const SPOTLIGHTBUTTON = document.getElementById('SPOTLIGHT')
+  SPOTLIGHTBUTTON.dataset.example = 0
+  SPOTLIGHTBUTTON.addEventListener('click', (e)=>{
+      if(e.target.dataset.example == 0){
+        streams_objects.forEach((stream)=>{
+          stream.highlight()
+        })
+        e.target.classList = 'SPOTLIGTH_ON'
+        e.target.dataset.example = 1
+      }
+      else{
+        streams_objects.forEach((stream)=>{
+          stream.connecting()
+        })
+        e.target.classList = 'SPOTLIGTH_OF'
+        e.target.dataset.example = 0
+      }
+  })
 
 
   const firstStream = () => {
