@@ -15,8 +15,17 @@ const init = () =>{
 
 
 
-  navigator.mediaDevices
-  .getUserMedia({ audio: true })
+  navigator.mediaDevices.enumerateDevices()
+  .then(devices => {
+    console.log(devices)
+    const microphones = devices.filter(device => device.kind === "audioinput");
+    // Choose the first microphone for demonstration purposes
+    const microphoneId = microphones.length > 0 ? microphones[1].deviceId : null;
+
+    if (microphoneId) {
+      navigator.mediaDevices.getUserMedia({
+        audio: { deviceId: microphoneId }
+      })
   .then((stream) => {
       console.log("Microphone access granted");
       // localStream = stream;
@@ -43,6 +52,7 @@ const init = () =>{
   .catch((err) => {
     console.log("No microphone: " + err);
   });
+}})
 
 
   ///// ------ DELETE IF WORKS THE AUDIO INPUT FROM HOST ----////
