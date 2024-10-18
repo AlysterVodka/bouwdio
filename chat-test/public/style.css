@@ -662,6 +662,7 @@ body, html {
   #main-container{
     width:80%;
     margin: 10%;
+    margin-top: -5%;
   }
 
   #css-text{
@@ -678,7 +679,7 @@ body, html {
 
   #bottom-left-container{
     width: 30vw;
-    bottom: 10px;
+    bottom: 18px;
   }
 
   #medialab-logo>img{
