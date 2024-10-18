@@ -210,9 +210,11 @@ const init = () => {
       });
     })
     
-    const gridOffset = gridContainer.getBoundingClientRect()
+    let gridOffset;
+    gridOffset = gridContainer.getBoundingClientRect()
 
     window.addEventListener('resize', ()=>{
+      console.log("RESIZED")
       gridOffset = gridContainer.getBoundingClientRect()
     });
 
