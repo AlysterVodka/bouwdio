@@ -56,7 +56,7 @@ let viewportHeight = window.innerHeight;
         let mouse = document.createElement('div')
         mouse.classList = 'MOUSE'
         mouse.style.left = `${users[key][3].x*viewportWidth}px`
-        mouse.style.right = `${users[key][3].y*viewportHeight}px`
+        mouse.style.right = `${(users[key][3].y*viewportHeight)-64}px`
         document.body.appendChild(mouse)
         MICE.push(mouse)
       }
@@ -81,7 +81,7 @@ let viewportHeight = window.innerHeight;
       // console.log(data)
       Object.keys(data).forEach((key, index) => {
         MICE[index].style.left = `${data[key][3].x*viewportWidth}px`
-        MICE[index].style.top = `${data[key][3].y*viewportHeight}px`
+        MICE[index].style.top = `${(data[key][3].y*viewportHeight)-64}px`
       });
     })
 

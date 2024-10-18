@@ -20,6 +20,10 @@
   --thumbnail-line-width: 3px;
 }
 
+#all-content{
+  display: none;
+}
+
 
 
 body, html {
