@@ -82,7 +82,7 @@ let viewportHeight = window.innerHeight;
       // console.log(data)
       Object.keys(data).forEach((key, index) => {
         MICE[index].style.left = `${data[key][3].x*gridOffset.width}px`
-        MICE[index].style.top = `${(data[key][3].y*gridOffset.height)-64}px`
+        MICE[index].style.top = `${(data[key][3].y*gridOffset.height)}px`
       });
     })
 
