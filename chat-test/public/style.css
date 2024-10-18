@@ -24,6 +24,12 @@
   display: none;
 }
 
+#microphoneSelect{
+  border: 2px solid black;
+  background: white;
+  width: 100%;
+}
+
 
 
 body, html {
