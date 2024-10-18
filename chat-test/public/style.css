@@ -30,7 +30,12 @@
   width: 100%;
 }
 
-#css-text{
+
+#laptopversion{
+  display:visible;
+}
+
+#mobile-version{
   display: none;
 }
 
@@ -690,6 +695,14 @@ body, html {
     bottom: 0;
     width:40vw;
     right: 11px;
+  }
+
+  #laptopversion{
+    display:none;
+  }
+
+  #mobile-version{
+    display: visible;
   }
 
 }
