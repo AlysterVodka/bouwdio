@@ -434,6 +434,10 @@ const initDrawing = () =>{
       isMouseDown = false;
   });
 
+  document.getElementById('eraser-button').addEventListener('click', (e)=>{
+    MATERIAL = ''
+  })
+
   for (const element of document.getElementsByClassName("material")) {
     // console.log(element)
     // Get the ID of the current element
@@ -447,6 +451,8 @@ const initDrawing = () =>{
         // If using a socket to send the ID, you can emit the ID here
         // socket.emit('material-clicked', { id: elementId });
     });
+
+
   }
 
 
