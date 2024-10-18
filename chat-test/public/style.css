@@ -676,4 +676,19 @@ body, html {
     height: auto;
   }
 
+  #bottom-left-container{
+    width: 30vw;
+    bottom: 10px;
+  }
+
+  #medialab-logo>img{
+    padding:0;
+  }
+
+  #bottom-right-container{
+    bottom: 0;
+    width:40vw;
+    right: 11px;
+  }
+
 }
