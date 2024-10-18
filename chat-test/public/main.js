@@ -203,7 +203,7 @@ const init = () => {
     });
 
     socket.on('mouses', (data)=>{
-      // console.log(data)
+      console.log(data)
       Object.keys(data).forEach((key, index) => {
         MICE[index].style.left = `${data[key][3].x*gridContainer.width}px`
         MICE[index].style.top = `${data[key][3].y*gridContainer.height}px`
