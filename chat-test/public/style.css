@@ -674,9 +674,7 @@ body, html {
     display: flex;
   }
 
-  #chat-info #default-text{
-    display: none; /* Standaard zichtbaar */
-  }
+
 
   #chat-window{
     height: auto;
