@@ -32,11 +32,11 @@
 
 
 #laptopversion{
-  display:visible;
+  visibility: visible;
 }
 
 #mobile-version{
-  display: none;
+  visibility: hidden;
 }
 
 
@@ -696,11 +696,11 @@ body, html {
   }
 
   #laptopversion{
-    display:none;
+    visibility: hidden;
   }
 
   #mobile-version{
-    display: visible;
+    visibility: visible;
   }
 
 }
