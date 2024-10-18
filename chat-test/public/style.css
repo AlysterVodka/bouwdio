@@ -30,6 +30,10 @@
   width: 100%;
 }
 
+#css-text{
+  display: none;
+}
+
 
 
 body, html {
@@ -653,6 +657,19 @@ body, html {
   #all-content{
     display: none;
     width:100%;
+  }
+
+  #main-container{
+    width:80%;
+    margin: 10%;
+  }
+
+  #css-text{
+    display: flex;
+  }
+
+  #default-text {
+    display: none; /* Standaard zichtbaar */
   }
 
 }
