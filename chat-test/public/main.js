@@ -180,8 +180,8 @@ const init = () => {
       for(let key in users){
         let mouse = document.createElement('div')
         mouse.classList = 'MOUSE'
-        mouse.style.left = `${users[key][3].x*gridContainer.width}px`
-        mouse.style.right = `${users[key][3].y*gridContainer.height}px`
+        mouse.style.left = `${users[key][3].x*gridOffset.width}px`
+        mouse.style.right = `${users[key][3].y*gridOffset.height}px`
         gridContainer.appendChild(mouse)
         MICE.push(mouse)
       }
@@ -205,16 +205,18 @@ const init = () => {
     socket.on('mouses', (data)=>{
       console.log(data)
       Object.keys(data).forEach((key, index) => {
-        MICE[index].style.left = `${data[key][3].x*gridContainer.width}px`
-        MICE[index].style.top = `${data[key][3].y*gridContainer.height}px`
+        MICE[index].style.left = `${data[key][3].x*gridOffset.width}px`
+        MICE[index].style.top = `${data[key][3].y*gridOffset.height}px`
       });
     })
-
+    
+    const gridOffset = gridContainer.getBoundingClientRect()
 
     document.addEventListener('mousemove', function(event) {
+      console.log(gridContainer.left)
 
-      mouse.x = (event.clientX - gridContainer.left) / gridContainer.width; // X coordinate of the mouse relative to the viewport
-      mouse.y = (event.clientY - gridContainer.top) / gridContainer.height; // Y coordinate of the mouse relative to the viewport
+      mouse.x = (event.clientX - gridOffset.left) / gridOffset.width; // X coordinate of the mouse relative to the viewport
+      mouse.y = (event.clientY - gridOffset.top) / gridOffset.height; // Y coordinate of the mouse relative to the viewport
       socket.emit('mouse', mouse)
     });
 

@@ -47,6 +47,7 @@ let viewportHeight = window.innerHeight;
     //   window.location.href = '/';
     // });
 
+    const gridoffset = gridContainer.getBoundingClientRect()
     socket.emit('send-user-list')
 
     socket.on("users-reloaded", (users)=>{
@@ -55,8 +56,8 @@ let viewportHeight = window.innerHeight;
       for(let key in users){
         let mouse = document.createElement('div')
         mouse.classList = 'MOUSE'
-        mouse.style.left = `${users[key][3].x*gridContainer.width}px`
-        mouse.style.right = `${(users[key][3].y*gridContainer.height)}px`
+        mouse.style.left = `${users[key][3].x*gridoffset.width}px`
+        mouse.style.right = `${(users[key][3].y*gridoffset.height)}px`
         gridContainer.appendChild(mouse)
         MICE.push(mouse)
       }
@@ -80,8 +81,8 @@ let viewportHeight = window.innerHeight;
     socket.on('mouses', (data)=>{
       // console.log(data)
       Object.keys(data).forEach((key, index) => {
-        MICE[index].style.left = `${data[key][3].x*viewportWidth}px`
-        MICE[index].style.top = `${(data[key][3].y*viewportHeight)-64}px`
+        MICE[index].style.left = `${data[key][3].x*gridOffset.width}px`
+        MICE[index].style.top = `${(data[key][3].y*gridOffset.height)-64}px`
       });
     })
 
