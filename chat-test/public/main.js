@@ -1,14 +1,18 @@
 // console.log("is UPDATED !!!!!")
+
+const nameInput = document.getElementById("name-input");
+nameInput.addEventListener('focus', function() {
+  this.value = '';  // Clears the input field's value when clicked or focused
+});
+
+
 const init = () => {
 
 
   const clientsTotal = document.getElementById("clients-total");
   //// **** dit zijn de chat functionaliteiten*/
   const messageContainer = document.getElementById("message-container");
-  const nameInput = document.getElementById("name-input");
-  nameInput.addEventListener('focus', function() {
-    this.value = '';  // Clears the input field's value when clicked or focused
-  });
+
   const messageForm = document.getElementById("message-form");
   const messageInput = document.getElementById("message-input");
   const gridContainer = document.getElementById('grid');
