@@ -180,9 +180,9 @@ const init = () => {
       for(let key in users){
         let mouse = document.createElement('div')
         mouse.classList = 'MOUSE'
-        mouse.style.left = `${users[key][3].x*viewportWidth}px`
-        mouse.style.right = `${users[key][3].y*viewportHeight}px`
-        document.body.appendChild(mouse)
+        mouse.style.left = `${users[key][3].x*gridContainer.width}px`
+        mouse.style.right = `${users[key][3].y*gridContainer.height}px`
+        gridContainer.appendChild(mouse)
         MICE.push(mouse)
       }
     })
@@ -205,14 +205,16 @@ const init = () => {
     socket.on('mouses', (data)=>{
       // console.log(data)
       Object.keys(data).forEach((key, index) => {
-        MICE[index].style.left = `${data[key][3].x*viewportWidth}px`
-        MICE[index].style.top = `${data[key][3].y*viewportHeight}px`
+        MICE[index].style.left = `${data[key][3].x*gridContainer.width}px`
+        MICE[index].style.top = `${data[key][3].y*gridContainer.height}px`
       });
     })
 
+
     document.addEventListener('mousemove', function(event) {
-      mouse.x = event.clientX / viewportWidth;; // X coordinate of the mouse relative to the viewport
-      mouse.y = event.clientY / viewportHeight;; // Y coordinate of the mouse relative to the viewport
+
+      mouse.x = (event.clientX - gridContainer.left) / gridContainer.width; // X coordinate of the mouse relative to the viewport
+      mouse.y = (event.clientY - gridContainer.top) / gridContainer.height; // Y coordinate of the mouse relative to the viewport
       socket.emit('mouse', mouse)
     });
 
@@ -451,8 +453,6 @@ const initDrawing = () =>{
         // If using a socket to send the ID, you can emit the ID here
         // socket.emit('material-clicked', { id: elementId });
     });
-
-
   }
 
 

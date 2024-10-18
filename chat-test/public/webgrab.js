@@ -55,9 +55,9 @@ let viewportHeight = window.innerHeight;
       for(let key in users){
         let mouse = document.createElement('div')
         mouse.classList = 'MOUSE'
-        mouse.style.left = `${users[key][3].x*viewportWidth}px`
-        mouse.style.right = `${(users[key][3].y*viewportHeight)-64}px`
-        document.body.appendChild(mouse)
+        mouse.style.left = `${users[key][3].x*gridContainer.width}px`
+        mouse.style.right = `${(users[key][3].y*gridContainer.height)}px`
+        gridContainer.appendChild(mouse)
         MICE.push(mouse)
       }
     })
