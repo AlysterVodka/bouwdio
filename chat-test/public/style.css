@@ -634,8 +634,8 @@ body, html {
   /* Styles for mobile devices */
   #onsite-building{
     /* visibility: hidden; */
-    position: absolute;
-    left: 100%;
+    /* position: absolute; */
+    /* left: 100%; */
   }
 
   #online-building-window{
