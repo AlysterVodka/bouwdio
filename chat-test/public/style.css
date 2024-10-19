@@ -636,6 +636,11 @@ body, html {
     /* visibility: hidden; */
     /* position: absolute; */
     /* left: 100%; */
+    position: absolute;
+    top: 50%;
+    /* left: 54vw; */
+    width: 80%;
+    height: auto;
   }
 
   #online-building-window{
