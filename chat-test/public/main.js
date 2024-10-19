@@ -13,6 +13,8 @@ const init = () => {
   //// **** dit zijn de chat functionaliteiten*/
   const messageContainer = document.getElementById("message-container");
 
+  const iframe = document.getElementById('onsite-video');
+
   const messageForm = document.getElementById("message-form");
   const messageInput = document.getElementById("message-input");
   const gridContainer = document.getElementById('grid');
@@ -644,6 +646,7 @@ const initDrawing = () =>{
   
   // Functionaliteit voor "Click to Connect"-knop in het pauzevenster
   document.getElementById("click-to-connect-button").addEventListener("click", function () {
+    iframe.contentWindow.document.querySelector('video').play();
     const nameInput = document.getElementById('name-input');
     const userName = nameInput.value.trim();
   
@@ -688,7 +691,7 @@ const initDrawing = () =>{
 
   
     // Start de video met geluid
-    const iframe = document.getElementById('onsite-video');
+    
     iframe.src = iframe.src.replace('autoplay=0&mute=1', 'autoplay=1&mute=0&controls=0');
   
     // Update mouseNameElement met de ingevoerde naam
