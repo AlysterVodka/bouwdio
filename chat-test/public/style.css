@@ -633,7 +633,8 @@ body, html {
 
   /* Styles for mobile devices */
   #onsite-building{
-    visibility: hidden;
+    /* visibility: hidden; */
+    position: absolute;
     left: 100%;
   }
 
