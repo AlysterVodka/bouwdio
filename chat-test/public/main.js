@@ -647,6 +647,10 @@ const initDrawing = () =>{
   // Functionaliteit voor "Click to Connect"-knop in het pauzevenster
   document.getElementById("click-to-connect-button").addEventListener("click", function () {
     // iframe.contentWindow.document.querySelector('video').play();
+    if(iframe){
+      iframe.scrollIntoView();
+    }
+
     const nameInput = document.getElementById('name-input');
     const userName = nameInput.value.trim();
   
