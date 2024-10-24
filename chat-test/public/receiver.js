@@ -8,6 +8,8 @@ const init = () =>{
   let finalstream;
   let firstSTREAM, speaker, PEERID, peer, socket;
 
+  let muted = false;
+
 
   const signalContainer = document.getElementById("signal-circle");
   const BLACKLIST = document.createElement('div')

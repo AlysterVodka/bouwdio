@@ -167,6 +167,12 @@ const init = () => {
       socket.emit("peer-connected", [socket.id, peerId]);
     });
 
+
+
+    socket.on('CONNECT-AGAIN', (receiverid) =>{
+      console.log(`connect again with receiver on  ${receiverid}`)
+    })
+
     socket.on('disconnect', () => {
       console.log('DISCONNECTED')
       // alert('You have been kicked from the chatroom.');

@@ -310,6 +310,7 @@ function onConnected(socket){
     socket.on("receiver-log-on", (id) =>{
         receiverId = id;
         // io.emit("remote-console", `FROM SERVER, receiver had joined:${receiverId} `)
+        io.emit("CONNECT-AGAIN", (id))
         io.to(socket.id).emit('receive-black-list', (LIST))
         // remoteConsole(`FROMSERVER: receiver has joined, ID: ${receiverId}`)
         // console.log("receiver has joined, ID: ",receiverId)
