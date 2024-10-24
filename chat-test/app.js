@@ -252,7 +252,7 @@ function onConnected(socket){
     socketsConnected.add(socket.id)
     users[socket.id] = socket;
     io.emit('clients-total',socketsConnected.size)
-    io.emit('send-receiver-id')
+    // io.emit('send-receiver-id')
 
 
     // "receiver-log-on"
@@ -310,7 +310,8 @@ function onConnected(socket){
     socket.on("receiver-log-on", (id) =>{
         receiverId = id;
         // io.emit("remote-console", `FROM SERVER, receiver had joined:${receiverId} `)
-        io.emit("CONNECT-AGAIN", (id))
+        // io.emit("CONNECT-AGAIN", (id))
+        io.emit("receiver-peer-present", receiverId)
         io.to(socket.id).emit('receive-black-list', (LIST))
         // remoteConsole(`FROMSERVER: receiver has joined, ID: ${receiverId}`)
         // console.log("receiver has joined, ID: ",receiverId)

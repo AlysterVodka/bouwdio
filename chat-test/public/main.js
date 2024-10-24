@@ -170,7 +170,11 @@ const init = () => {
 
 
     socket.on('CONNECT-AGAIN', (receiverid) =>{
+      if (activeCalls[receiverid]) {
+        return;
+      }
       console.log(`connect again with receiver on  ${receiverid}`)
+      connectToReceiver(receiverid);
     })
 
     socket.on('disconnect', () => {
@@ -258,9 +262,10 @@ const init = () => {
     function connectToReceiver(peerId) {
       if (!localStream) {
         // console.error("No local stream available to connect to peer:", peerId);
+        console.log("somehow localstream is deactivated")
         return;
       }
-    
+      console.log("WOKRING UNTILLR HERE YESYESYES")
       // socket.emit('show-collector-id');
       const call = peer.call(peerId, localStream);
       // console.log(`calling receiver peer ${peerId}`);
