@@ -8,7 +8,7 @@ const init = () =>{
   let finalstream;
   let firstSTREAM, speaker, PEERID, peer, socket;
 
-  let muted = false;
+  let IF_spotlight = false;
 
 
   const signalContainer = document.getElementById("signal-circle");
@@ -225,8 +225,11 @@ const init = () =>{
       // console.log("mute track number is: ", this.muteTRACK)
       // console.log("this POSITION, ", this.Position)
       if(!MUTETRACKS.includes(i)){
-        this.connecting(i)
+        console.log(IF_spotlight)
+        if(!IF_spotlight){
+          this.connecting(i)
           }
+        }
             // console.log("i :  ", i)
             // console.log(this.STREAMS[i])
         }
@@ -301,16 +304,16 @@ const init = () =>{
           stream.highlight()
         })
         e.target.classList = 'SPOTLIGTH_ON'
+        IF_spotlight = true
         e.target.dataset.example = 1
       }
       else{
         streams_objects.forEach((stream, index)=>{
-          if (index > 0) {
-            stream.connectStreams()
-          }
+          stream.connectStreams()
             // console.log(stream);
         })
         e.target.classList = 'SPOTLIGTH_OF'
+        IF_spotlight = false
         e.target.dataset.example = 0
       }
   })
