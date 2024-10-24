@@ -300,20 +300,20 @@ const init = () =>{
   SPOTLIGHTBUTTON.dataset.example = 0
   SPOTLIGHTBUTTON.addEventListener('click', (e)=>{
       if(e.target.dataset.example == 0){
+        IF_spotlight = true
         streams_objects.forEach((stream)=>{
           stream.highlight()
         })
         e.target.classList = 'SPOTLIGTH_ON'
-        IF_spotlight = true
         e.target.dataset.example = 1
       }
       else{
+        IF_spotlight = false
         streams_objects.forEach((stream, index)=>{
-          stream.connectStreams()
+            stream.connectStreams()
             // console.log(stream);
         })
         e.target.classList = 'SPOTLIGTH_OF'
-        IF_spotlight = false
         e.target.dataset.example = 0
       }
   })
